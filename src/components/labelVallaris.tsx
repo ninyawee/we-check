@@ -23,17 +23,17 @@ const LabelVallaris = ({
   return (
     <Fragment>
       <Stack
-        direction={"row"}
+        direction={"column"}
         alignItems={"center"}
         spacing={1.5}
         sx={{
           position: "absolute",
           zIndex: 1,
-          right: 8,
-          bottom: -8,
+          left: 0,
+          top: '74px',
         }}
       >
-        <a
+        {/* <a
           href="https://www.vote62.com/volunteer/"
           target="_blank"
           rel="noreferrer"
@@ -48,7 +48,7 @@ const LabelVallaris = ({
               backgroundPosition: "center",
             }}
           ></div>
-        </a>
+        </a> */}
 
         {hideLogo ? null : (
           <a href="https://vallarismaps.com/" target="_blank" rel="noreferrer">
@@ -61,9 +61,7 @@ const LabelVallaris = ({
             >
               <div
                 style={{
-                  backgroundImage: `url(${
-                    color ? "/logoBlack.svg" : "/logo-white.svg"
-                  })`,
+                  backgroundImage: `url("/logo-white.svg")`,
                   backgroundSize: `contain`,
                   width: iconSize,
                   height: iconSize,
@@ -72,7 +70,7 @@ const LabelVallaris = ({
                   marginRight: 4,
                 }}
               ></div>
-              {contain.width && contain.width < 500 ? null : (
+              {/* {contain.width && contain.width < 500 ? null : (
                 <div ref={textSize.ref}>
                   <Typography
                     variant={titleSize}
@@ -96,7 +94,7 @@ const LabelVallaris = ({
                     Geographic solution on cloud
                   </Typography>
                 </div>
-              )}
+              )} */}
             </div>
           </a>
         )}

@@ -8,6 +8,10 @@ import { useResizeDetector } from "react-resize-detector";
 import LabelVallaris from "../components/labelVallaris";
 import FormSubmit from "../components/formSubmit";
 import { AnimatePresence, motion } from "framer-motion";
+import TopNav from "../components/topNav"
+import BottomDrawer from "../components/bottomDrawer"
+import LocationInfoForm from "../components/forms/locationInfoForm";
+import IntroductionPanel from "../components/panels/introductionPanel";
 
 const index: NextPage = () => {
   const [map, setMap] = useState<maplibregl.Map | null>(null);
@@ -43,7 +47,6 @@ const index: NextPage = () => {
       var deltaDistance = 200;
 
       // degrees the map rotates when the left or right arrow is clicked
-
       map.on("click", (e) => {
         const features = e.target.queryRenderedFeatures(e.point, {
           layers: ["Elect_Place"],
@@ -78,7 +81,7 @@ const index: NextPage = () => {
       //   console.log(features);
       // });
     }
-    return () => {};
+    return () => { };
   }, [map]);
 
   const onClose = () => {
@@ -88,6 +91,7 @@ const index: NextPage = () => {
 
   return (
     <Fragment>
+      <TopNav />
       <Meta title={"จับโกง 66"} />
       <Box
         component={"div"}
@@ -105,29 +109,11 @@ const index: NextPage = () => {
           contain={contain}
           color="black"
         />
+        <BottomDrawer open={open} onClose={onClose}>
+          <LocationInfoForm/>
+        </BottomDrawer>
 
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0 }}
-              animate={{ height: "61.8%" }}
-              exit={{ height: 0 }}
-              transition={{
-                type: "keyframes",
-                duration: 0.19,
-              }}
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                zIndex: 1,
-              }}
-            >
-              <FormSubmit featureSelected={featureSelected} onClose={onClose} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <IntroductionPanel active={!open}/>
       </Box>
     </Fragment>
   );
