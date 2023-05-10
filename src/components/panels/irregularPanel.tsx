@@ -8,7 +8,7 @@ const IrregularPanel: FC<{}> = () => {
     padding: '12px',
     margin: '0 0 0 2rem'
   }}>
-    <Stack direction={"column"} justifyContent="center" alignItems="center">
+    <Stack direction={"column"} justifyContent="center" alignItems="center" textAlign={"center"}>
       <div>1</div>
       <div>ความผิดปกติ</div>
     </Stack>

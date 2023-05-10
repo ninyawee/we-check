@@ -14,7 +14,7 @@ const BottomDrawer: FC<{
     PaperProps={{
       elevation: 0,
       sx: {
-        background: 'transparent'
+        background: 'transparent',
       }
     }}
     onClose={onClose}>
@@ -33,7 +33,6 @@ const BottomDrawer: FC<{
       color: 'white',
       borderTopLeftRadius: '5%',
       borderTopRightRadius: '5%',
-      padding: '1rem 0'
     }}>
       {children}
     </Box>
