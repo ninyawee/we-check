@@ -1,4 +1,4 @@
-import { Box, Slide, Stack } from "@mui/material";
+import { Box, Slide, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 
 const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
@@ -15,21 +15,21 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
     }}>
       <Stack direction="column" justifyContent="space-between" sx={{
         width: '100%',
-        maxWidth: '760px',
         position: 'relative',
         padding: '18px 0',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        color: 'white'
       }}>
         <Stack direction="row" alignItems="center" margin="0.3rem 0">
-          <div style={{ width: '24px', height: '24px', margin: '0 1rem', borderRadius: '100%', background: '#10C487' }}></div>
-          <div style={{ fontSize: '1rem', color: 'white' }}>ยังไม่มีรายงานสถานการณ์</div>
+          <div style={{ width: '24px', height: '24px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#10C487' }}></div>
+          <Typography fontSize={"0.8rem"}>มีข้อมูลสถานการณ์ในหน่วย</Typography>
         </Stack>
         <Stack direction="row" alignItems="center" margin="0.3rem 0">
-          <div style={{ width: '24px', height: '24px', margin: '0 1rem', borderRadius: '100%', background: '#C10000' }}></div>
-          <div style={{ fontSize: '1rem', color: 'white' }}>ยังไม่มีรายงานสถานการณ์</div>
+          <div style={{ width: '24px', height: '24px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#C10000' }}></div>
+          <Typography fontSize={"0.8rem"}>ยังไม่มีข้อมูลสถานการณ์ในหน่วย</Typography>
         </Stack>
 
-        <div style={{ fontSize: '1rem', color: '#A4A4A4', margin: '0.5rem 1rem 0 1rem' }}>คลิกหน่วยเลือกตั้งเพื่อดูรายละเอียด</div>
+        <Typography fontSize={"0.8rem"} color={"#A4A4A4"} margin={"0.5rem 1rem 0 1rem"}>คลิกหน่วยเลือกตั้งเพื่อดูรายละเอียด</Typography>
         <div style={{
           position: 'absolute',
           height: '80%',

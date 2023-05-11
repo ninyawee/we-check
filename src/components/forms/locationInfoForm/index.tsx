@@ -1,8 +1,10 @@
 import { ArrowForwardIos, Close } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
 import { FC } from "react";
-import IrregularPanel from "../panels/irregularPanel";
-import HorizontalLine from "../horizontalLine";
+import ReportInfoBar from "./reportInfoBar";
+import VolunteerInfoBar from "./volunteerInfoBar";
+import IrregularPanel from "../../panels/irregularPanel";
+import HorizontalLine from "../../horizontalLine";
 
 const LocationInfoForm: FC<{}> = () => {
   return <Stack
@@ -32,23 +34,9 @@ const LocationInfoForm: FC<{}> = () => {
     </Stack>
     <Stack direction="column" justifyContent="space-between" alignItems="start">
       <HorizontalLine />
-      <Stack direction="row" width={"100%"} justifyContent={"space-between"} padding={"1rem"}>
-        <Stack direction="row" alignItems={"center"}>
-          <Close color="error" sx={{ marginRight: '0.5rem' }} />
-          <div>ยังไม่มีอาสาสมัครประจำหน่วย</div>
-        </Stack>
-        <Stack direction="row" alignItems={"center"} color={"#0FAD77"}>
-          <div>สมัคร</div>
-          <ArrowForwardIos />
-        </Stack>
-      </Stack>
+      <VolunteerInfoBar/>
       <HorizontalLine />
-      <Stack direction="row" width={"100%"} justifyContent={"space-between"} padding={"1rem"}>
-        <Stack direction="row" alignItems={"center"}>
-          <Close color="error" sx={{ marginRight: '0.5rem' }} />
-          <div>ยังไม่มีรายงานสถานการณ์ทั่วไปของหน่วยนี้</div>
-        </Stack>
-      </Stack>
+      <ReportInfoBar/>
       <HorizontalLine />
     </Stack>
 

@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 
 const IrregularPanel: FC<{}> = () => {
@@ -6,10 +6,11 @@ const IrregularPanel: FC<{}> = () => {
     border: 'red 1px solid',
     borderRadius: '12px',
     padding: '12px',
-    margin: '0 0 0 2rem'
+    fontSize: '0.8rem',
+    margin: '0 0 0 1rem'
   }}>
     <Stack direction={"column"} justifyContent="center" alignItems="center" textAlign={"center"}>
-      <div>1</div>
+      <Typography fontSize="1.5rem">1</Typography>
       <div>ความผิดปกติ</div>
     </Stack>
   </Box>
