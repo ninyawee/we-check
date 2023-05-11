@@ -23,7 +23,7 @@ const index: NextPage = () => {
     const mapInit = new maplibreGl.Map({
       container: "map-elec",
       style:
-        "https://b-2.i-bitz.world/core/api/styles/1.0-beta/styles/6457177500396d5f324d20da?api_key=h9dGryOcvABZey18q86OAHhUJYEJPgn9mDBJd6RoWwycNjTE6lQ5k3Zy8kMVh4Fj",
+        "https://b-2.i-bitz.world/core/api/styles/1.0-beta/styles/645d06c156c910f59461af20?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
       attributionControl: false,
     });
 
@@ -49,7 +49,7 @@ const index: NextPage = () => {
       // degrees the map rotates when the left or right arrow is clicked
       map.on("click", (e) => {
         const features = e.target.queryRenderedFeatures(e.point, {
-          layers: ["Elect_Place"],
+          layers: ["ELECT_PLACE_OLD_POI"],
         });
 
         if (features.length) {
