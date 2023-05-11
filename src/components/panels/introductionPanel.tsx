@@ -7,7 +7,7 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
       borderRadius: "5% 5% 0 0",
       display: 'flex',
       justifyContent: 'center',
-      position: 'absolute',
+      position: 'fixed',
       bottom: 0,
       zIndex: 2,
       width: '100%',
