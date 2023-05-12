@@ -29,7 +29,7 @@ const theme = createTheme({
       main: "#ffd542",
     },
     error: {
-      main: red.A400,
+      main: '#C10000',
     },
     background: {
       default: "#f1f5f4",

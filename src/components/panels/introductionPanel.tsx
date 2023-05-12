@@ -2,9 +2,11 @@ import { ArrowForwardIos } from "@mui/icons-material";
 import { Box, Slide, Stack, Typography, useMediaQuery } from "@mui/material";
 import { FC, Fragment, useState } from "react";
 import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
+import AppInfoDialog from "../dialogs/appInfoDialog";
 
 const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
   const [coverageInfoDialogOpen, setCoverageInfoDialogOpen] = useState<boolean>(false)
+  const [appInfoDialogOpen, setAppInfoDialogOpen] = useState<boolean>(false)
   const matchDesktop = useMediaQuery('(min-width:600px)')
 
   function viewCoverageInfoClick() {
@@ -16,6 +18,7 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
   }
 
   return <Fragment>
+    <AppInfoDialog open={appInfoDialogOpen} onClose={() => setAppInfoDialogOpen(false)}/>
     <CoverageInfoDialog open={coverageInfoDialogOpen} onClose={() => setCoverageInfoDialogOpen(false)} />
     {matchDesktop ?
       <></> :
@@ -72,7 +75,7 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
               <Typography fontSize={"0.85rem"}>หน่วยเลือกตั้งปิดเสร็จสมบูรณ์แล้ว</Typography>
             </Stack>
 
-            <Typography fontSize={"1rem"} color={"#A4A4A4"} margin={"0.25rem 0 0.5rem 1rem"} sx={{ textDecoration: 'underline' }}>เรียนรู้เพิ่มเติม</Typography>
+            <Typography fontSize={"1rem"} color={"#A4A4A4"} margin={"0.25rem 0 0.5rem 1rem"} sx={{ textDecoration: 'underline' }} onClick={() => setAppInfoDialogOpen(true)}>เรียนรู้เพิ่มเติม</Typography>
             <div style={{
               position: 'absolute',
               height: '70%',
