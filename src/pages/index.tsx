@@ -28,7 +28,7 @@ const index: NextPage = () => {
     const mapInit = new maplibreGl.Map({
       container: "map-elec",
       style:
-        "https://b-2.i-bitz.world/core/api/styles/1.0-beta/styles/645d06c156c910f59461af20?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
+        "https://cdn-cloud.vallarismaps.com/core/api/styles/1.0-beta/styles/645e436dfa69d95b2a30092a?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
       attributionControl: false,
       bounds: [[96.526051, 0.745161], [106.633472, 22.875701]],
     });
@@ -55,7 +55,7 @@ const index: NextPage = () => {
       // degrees the map rotates when the left or right arrow is clicked
       map.on("click", (e) => {
         const features = e.target.queryRenderedFeatures(e.point, {
-          layers: ["ELECT_PLACE_OLD_POI"],
+          layers: ["ELECT_PLACE_POI"],
         });
 
         if (features.length) {
@@ -64,8 +64,8 @@ const index: NextPage = () => {
 
           e.target.easeTo({
             center: [
-              features[0].properties.longitude,
-              features[0].properties.latitude,
+              features[0].geometry.coordinates[0],
+              features[0].geometry.coordinates[1],
             ],
             zoom: 14,
             duration: 800,
