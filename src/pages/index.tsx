@@ -61,21 +61,22 @@ const index: NextPage = () => {
         if (features.length) {
           setOpen(true);
           setFeatureSelected(features[0].properties);
+          if (features[0].geometry.type === 'Point') {
+            e.target.easeTo({
+              center: [
+                features[0].geometry.coordinates[0],
+                features[0].geometry.coordinates[1],
+              ],
+              zoom: 14,
+              duration: 800,
+              easing: function (t) {
+                return t;
+              },
 
-          e.target.easeTo({
-            center: [
-              features[0].geometry.coordinates[0],
-              features[0].geometry.coordinates[1],
-            ],
-            zoom: 14,
-            duration: 800,
-            easing: function (t) {
-              return t;
-            },
-
-            essential: true,
-            offset: [0, -deltaDistance],
-          });
+              essential: true,
+              offset: [0, -deltaDistance],
+            });
+          }
         } else {
           setOpen(false);
           setFeatureSelected(null);
