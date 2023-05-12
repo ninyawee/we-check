@@ -1,55 +1,53 @@
-import { ArrowForwardIos, Close } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import { FC, Fragment, useState } from "react";
-import ReportInfoBar from "./reportInfoBar";
 import VolunteerInfoBar from "./volunteerInfoBar";
-import IrregularPanel from "../../panels/irregularPanel";
 import HorizontalLine from "../../horizontalLine";
 import IrregularInfoDialog from "../../dialogs/irregularInfoDialog";
+import IrregularInfoBar from "./irregularInfoBar";
+import IrregularBar from "./irregularBar";
 
-const LocationInfoForm: FC<{
-  onRegister: () => void
-}> = ({ onRegister }) => {
+const LocationInfoForm: FC= () => {
   const [irregularInfoOpen, setIrregularInfoOpen] = useState(false)
 
   function handleReportClick() {
-    window.location.href = 'https://www.electionwatchth.org/public-election-report?unit=1234567890'
+    window.open('https://www.electionwatchth.org/public-election-report?unit=1234567890')
   }
 
-  function handleIrregularPanelClick () {
-    setIrregularInfoOpen(true)
+  function handleNavigateClick() {
+    window.open('https://www.google.co.th/maps/')
   }
 
   return <Fragment>
-    <IrregularInfoDialog open={irregularInfoOpen} onClose={() => setIrregularInfoOpen(false)}/>
+    <IrregularInfoDialog open={irregularInfoOpen} onClose={() => setIrregularInfoOpen(false)} />
     <Stack
       width={"100%"}
       direction={"column"}
       justifyContent={"space-between"}>
-      <Stack direction={"row"} justifyContent={"space-between"} padding={"1rem"}>
+      <Stack direction={"row"} justifyContent={"space-between"} padding={"1rem"} position={"relative"}>
         <Stack direction={"column"} justifyContent={"space-between"} maxWidth={"60%"}>
           <Typography fontSize={"1.1rem"} sx={{ wordWrap: 'break-word' }}>อาคารประชุมใหญ่โรงเรียน xxx</Typography>
-          <Stack direction={"row"} fontSize="0.9rem">
+          <Stack direction={"row"} fontSize="0.9rem" marginBottom={"1rem"}>
             <Typography color="#A4A4A4">
               อุทัยธานี เขต1 หน่วย 3
             </Typography>
-            <Typography color="#0FAD77" marginLeft="1rem">
-              เปิดอยู่
-            </Typography>
-          </Stack>
-
-          <Stack direction="row" alignItems={"center"} fontSize={"1rem"} fontWeight={"light"}>
-            <Typography>ดูบน Google map</Typography>
-            <ArrowForwardIos sx={{ marginLeft: "0.25rem" }} />
           </Stack>
         </Stack>
-        <IrregularPanel onClick={handleIrregularPanelClick}/>
+        <div style={{
+          height: '80%',
+          position: 'absolute',
+          right: 0,
+          bottom: 0
+        }}>
+          <img src="/assets/location-bg.png" width="auto" height="100%" alt="location"/>
+        </div>
       </Stack>
       <Stack direction="column" justifyContent="space-between" alignItems="start">
         <HorizontalLine />
-        <VolunteerInfoBar onRegister={onRegister} />
+        <IrregularInfoBar/>
         <HorizontalLine />
-        <ReportInfoBar />
+        <IrregularBar/>
+        <HorizontalLine />
+        <VolunteerInfoBar onNavigate={handleNavigateClick}/>
         <HorizontalLine />
       </Stack>
 

@@ -30,7 +30,7 @@ const LabelVallaris = ({
           position: "absolute",
           zIndex: 1,
           left: 0,
-          top: '74px',
+          top: 0,
         }}
       >
         {/* <a
