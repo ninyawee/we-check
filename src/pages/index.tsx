@@ -5,12 +5,7 @@ import maplibreGl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Box } from "@mui/material";
 import { useResizeDetector } from "react-resize-detector";
-import LabelVallaris from "../components/labelVallaris";
-import FormSubmit from "../components/formSubmit";
-import { AnimatePresence, motion } from "framer-motion";
-import TopNav from "../components/topNav"
-import BottomDrawer from "../components/bottomDrawer"
-import LocationInfoForm from "../components/forms/locationInfoForm";
+import LocationPanel from "../components/panels/locationPanel";
 import IntroductionPanel from "../components/panels/introductionPanel";
 
 const index: NextPage = () => {
@@ -76,11 +71,6 @@ const index: NextPage = () => {
           setFeatureSelected(null);
         }
       });
-      // map.on("touchstart", (e) => {
-      //   console.log("touchj");
-      //   const features = e.target.queryRenderedFeatures(e.point);
-      //   console.log(features);
-      // });
     }
     return () => { };
   }, [map]);
@@ -92,8 +82,7 @@ const index: NextPage = () => {
 
   return (
     <Fragment>
-      <TopNav />
-      <Meta title={"จับโกง 66"} />
+      <Meta title={"We Check"} />
       <Box
         component={"div"}
         id="map-elec"
@@ -103,17 +92,7 @@ const index: NextPage = () => {
           width: "100%",
         }}
       >
-        <LabelVallaris
-          iconSize={"2.2rem"}
-          titleSize="subtitle1"
-          descSize={12}
-          contain={contain}
-          color="black"
-        />
-        <BottomDrawer open={open} onClose={onClose}>
-          <LocationInfoForm/>
-        </BottomDrawer>
-
+        <LocationPanel open={open} onClose={onClose}/>
         <IntroductionPanel active={!open}/>
       </Box>
     </Fragment>
