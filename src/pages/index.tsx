@@ -25,6 +25,7 @@ const index: NextPage = () => {
       style:
         "https://b-2.i-bitz.world/core/api/styles/1.0-beta/styles/645d06c156c910f59461af20?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
       attributionControl: false,
+      bounds :[[96.526051,0.745161],[106.633472,22.875701]],
     });
 
     setMap(mapInit);
