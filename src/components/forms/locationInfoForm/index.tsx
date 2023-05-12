@@ -2,13 +2,10 @@ import { Button, Stack, Typography } from "@mui/material";
 import { FC, Fragment, useState } from "react";
 import VolunteerInfoBar from "./volunteerInfoBar";
 import HorizontalLine from "../../horizontalLine";
-import IrregularInfoDialog from "../../dialogs/irregularInfoDialog";
 import IrregularInfoBar from "./irregularInfoBar";
 import IrregularBar from "./irregularBar";
 
 const LocationInfoForm: FC= () => {
-  const [irregularInfoOpen, setIrregularInfoOpen] = useState(false)
-
   function handleReportClick() {
     window.open('https://www.electionwatchth.org/public-election-report?unit=1234567890')
   }
@@ -18,7 +15,6 @@ const LocationInfoForm: FC= () => {
   }
 
   return <Fragment>
-    <IrregularInfoDialog open={irregularInfoOpen} onClose={() => setIrregularInfoOpen(false)} />
     <Stack
       width={"100%"}
       direction={"column"}
