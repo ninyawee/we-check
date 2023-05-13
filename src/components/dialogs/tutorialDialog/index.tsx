@@ -62,11 +62,11 @@ const TutorialDialog: FC<{
     </DialogContent>
     <DialogActions>
       <Stack direction="column" justifyContent="center" width={"100%"}>
-        <Button fullWidth variant="text" sx={{ color: 'white' }} onClick={handleSecondaryButton}>
-          {tutorialState === 0 ? 'ปิดหน้าต่าง' : 'กลับ'}
-        </Button>
-        <Button fullWidth variant="contained" sx={{ color: 'white' }} onClick={handlePrimaryButton}>
+        <Button fullWidth variant="contained" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handlePrimaryButton}>
           {tutorialState === 2 ? `ปิดหน้าต่าง` : 'ถัดไป'}
+        </Button>
+        <Button fullWidth variant="text" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handleSecondaryButton}>
+          {tutorialState === 0 ? 'ปิดหน้าต่าง' : 'กลับ'}
         </Button>
       </Stack>
     </DialogActions>

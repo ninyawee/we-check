@@ -60,12 +60,12 @@ const AppInfoDialog: FC<{
     </DialogContent>
     <DialogActions>
       <Stack direction="column" justifyContent="center" width={"100%"}>
-        {infoState === 0 && <Button fullWidth variant="text" sx={{ color: 'white' }} onClick={handleSecondaryButton}>
-          ปิดหน้าต่าง
-        </Button>}
-        <Button fullWidth variant="contained" sx={{ color: 'white' }} onClick={handlePrimaryButton}>
+        <Button fullWidth variant="contained" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handlePrimaryButton}>
           {infoState === 1 ? `ปิดหน้าต่าง` : 'ถัดไป'}
         </Button>
+        {infoState === 0 && <Button fullWidth variant="text" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handleSecondaryButton}>
+          ปิดหน้าต่าง
+        </Button>}
       </Stack>
     </DialogActions>
   </Dialog>

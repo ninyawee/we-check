@@ -22,7 +22,7 @@ const IrregularInfoDialog: FC<{
     maxWidth={'md'}
     open={open}
     PaperProps={{ sx: { background: '#090909' } }}>
-    <DialogContent sx={{ padding: 0 }}>
+    <DialogContent sx={{ padding: 0, minHeight: '60vh' }}>
       <Stack direction="column" justifyContent={"space-between"}>
         <Stack direction="row" position={"relative"} padding="1rem" width={"100%"}>
           <Stack direction="column" position={"relative"} padding="1rem" maxWidth={"70%"}>
@@ -42,7 +42,7 @@ const IrregularInfoDialog: FC<{
         </Stack>
         {incidentList.length === 0 ? <Fragment>
           <HorizontalLine />
-          <Stack direction="column" padding={"1rem"} alignItems={"center"}>
+          <Stack direction="column" padding={"1rem"} alignItems={"center"} justifyContent={"center"} height="40vh">
             <Typography color="white" fontSize={"1.2rem"}>ยังไม่มีรายงานความผิดปกติ</Typography>
           </Stack>
         </Fragment> : incidentList.map((incident, index) => <Fragment key={index}>
@@ -56,16 +56,14 @@ const IrregularInfoDialog: FC<{
         <Button
           variant="contained"
           color="error"
-          size="large"
-          sx={{ margin: "0 1.5rem", padding: "1rem 0.5rem" }}
+          sx={{ color: 'white', height: '52px', fontSize: '1rem' }}
           onClick={handleNavigateClick}>
           <NearMe sx={{ transform: 'scaleX(-1)', marginRight: '0.5rem' }} />
           พาฉันไปที่หน่วยเลือกตั้งนี้
         </Button>
         <Button
           variant="text"
-          size="large"
-          sx={{ margin: "0 1.5rem", padding: "1rem 0.5rem", color: 'white' }}
+          sx={{ color: 'white', height: '52px', fontSize: '1rem' }}
           onClick={onClose}>
           ปิดหน้าต่าง
         </Button>
