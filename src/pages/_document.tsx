@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import GoogleAnalytic from "../script/ga4";
 
 export default function Document() {
   return (
@@ -6,9 +7,23 @@ export default function Document() {
       <Head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
 
         <meta property="og:url" content="https://wecheck66th.com" />
@@ -17,6 +32,7 @@ export default function Document() {
         <meta property="og:description" content="ติดตาม และรายงานความผิดปกติในหน่วยเลือกตั้งทั่วประเทศไปกับเรา" />
         <meta property="og:image" content="/wecheck66.png" />
 
+        <GoogleAnalytic />
         <title>We Check 66</title>
       </Head>
       <body>
