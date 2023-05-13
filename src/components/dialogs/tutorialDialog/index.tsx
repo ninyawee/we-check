@@ -62,7 +62,10 @@ const TutorialDialog: FC<{
     </DialogContent>
     <DialogActions>
       <Stack direction="column" justifyContent="center" width={"100%"} padding="0 1rem">
-        <Button fullWidth variant="contained" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handlePrimaryButton}>
+        <Button fullWidth variant="contained" sx={{
+          color: 'white', height: '52px', fontSize: '1rem', background: "url('/assets/dot.png') #10C487",
+          backgroundSize: 'cover'
+        }} onClick={handlePrimaryButton}>
           {tutorialState === 2 ? `ปิดหน้าต่าง` : 'ถัดไป'}
         </Button>
         <Button fullWidth variant="text" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handleSecondaryButton}>

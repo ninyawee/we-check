@@ -125,12 +125,12 @@ const IntroductionPanel: FC<{
                   >
                     <Typography
                       fontSize={"1rem"}
-                      margin={"0.25rem 0 0.5rem 1rem"}
+                      margin={"0.25rem 0 0.25rem 1rem"}
                       color="primary"
                     >
                       เรียนรู้เพิ่มเติม
                     </Typography>
-                    <ArrowForwardIos color="primary" />
+                    <ArrowForwardIos color="primary" sx={{ marginRight: '0.5rem' }} />
                   </Stack>
                 </Stack>
                 <Stack direction="row" alignItems="center" height="2rem">
@@ -216,9 +216,14 @@ const IntroductionPanel: FC<{
                     />
                   </div>
                 </Stack>
-                <Typography onClick={reportLocationClick}>
-                  แจ้งหน่วยผิด / ตกหล่น
-                </Typography>
+                <Stack
+                  className="clickable"
+                  direction="row">
+                  <Typography onClick={reportLocationClick}>
+                    แจ้งหน่วยผิด / ตกหล่น
+                  </Typography>
+                  <ArrowForwardIos sx={{ color: '#A4A4A4' }} />
+                </Stack>
               </Stack>
             </Stack>
           </Box>

@@ -56,7 +56,8 @@ const IrregularInfoDialog: FC<{
         <Button
           variant="contained"
           color="error"
-          sx={{ color: 'white', height: '52px', fontSize: '1rem' }}
+          sx={{ color: 'white', height: '52px', fontSize: '1rem', background: "url('/assets/dot.png') #C10000",
+          backgroundSize: 'cover' }}
           onClick={handleNavigateClick}>
           <NearMe sx={{ transform: 'scaleX(-1)', marginRight: '0.5rem' }} />
           พาฉันไปที่หน่วยเลือกตั้งนี้

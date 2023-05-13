@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
-import Meta from "../components/meta";
 import maplibreGl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Box, useMediaQuery } from "@mui/material";
@@ -122,7 +121,6 @@ const index: NextPage = () => {
 
   return (
     <Fragment>
-      <Meta title={"We Check"} />
       {(matchDesktop && !isDesktopConfirm) && <DeviceNotSupportPanel/>}
       <Box
         component={"div"}
