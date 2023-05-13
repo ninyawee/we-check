@@ -13,6 +13,7 @@ import { getGeolocation, pulsingDot } from "../config/map";
 import { useLocationStore } from "../store/location.store";
 import { ILocation } from "../interfaces/location.interface";
 import DeviceNotSupportPanel from "../components/panels/deviceNotSupportPanel";
+import { useLayoutStore } from "../store/layout.store";
 
 const tutorialStorageKey = "tutorial";
 
@@ -28,6 +29,7 @@ const index: NextPage = () => {
   }>({ trigger: false, loading: false });
   const matchDesktop = useMediaQuery('(min-width:900px)')
   const { setSelectedLocation } = useLocationStore()
+  const { isDesktopConfirm } = useLayoutStore()
 
   useLayoutEffect(() => {
     const viewStatus = localStorage.getItem(tutorialStorageKey) === "true";
@@ -78,7 +80,6 @@ const index: NextPage = () => {
         if (features.length) {
           setOpen(true);
           setFeatureSelected(features[0].properties);
-          console.log(features[0].properties)
           setSelectedLocation(features[0].properties as ILocation)
           if (features[0].geometry.type === "Point") {
             e.target.easeTo({
@@ -122,7 +123,7 @@ const index: NextPage = () => {
   return (
     <Fragment>
       <Meta title={"We Check"} />
-      {matchDesktop && <DeviceNotSupportPanel/>}
+      {(matchDesktop && !isDesktopConfirm) && <DeviceNotSupportPanel/>}
       <Box
         component={"div"}
         id="map-elec"

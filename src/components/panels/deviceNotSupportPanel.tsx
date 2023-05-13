@@ -1,7 +1,9 @@
-import { Stack, Typography } from "@mui/material";
+import { useLayoutStore } from "@/src/store/layout.store";
+import { Button, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 
 const DeviceNotSupportPanel: FC = () => {
+  const { setIsDesktopConfirm } = useLayoutStore()
   return <Stack direction={"column"} width={"100%"} height="100vh" justifyContent={"center"} position={"fixed"} top={0} left={0} zIndex={10} sx={{ background: '#090909' }}>
     <Stack direction="row" justifyContent={"center"}>
       <div style={{
@@ -14,6 +16,14 @@ const DeviceNotSupportPanel: FC = () => {
     <Stack direction="column" alignItems={"center"} marginTop={"6rem"}>
       <Typography fontSize={"2rem"} fontWeight={"bold"} color={"white"}>We Check 66</Typography>
       <Typography fontSize={"2rem"} fontWeight={"bold"} color={"primary"}>สามารถใช้งานได้บนบราวเซอร์ของโทรศัพท์</Typography>
+
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          fontSize: '1.5rem',
+          marginTop: '1.5rem'
+        }} onClick={() => setIsDesktopConfirm(true)}>เข้าใช้งานในเวอร์ชั่นโทรศัพท์</Button>
     </Stack>
 
     <Stack direction="column" alignItems={"center"} position="fixed" bottom={"1rem"} left={"50%"} sx={{ transform: 'translate(-50%, -50%)' }}>
