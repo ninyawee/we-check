@@ -55,8 +55,9 @@ const IntroductionPanel: FC<{
               background: "#090909",
             }}
           >
+            <OSM />
+            <Typography fontSize={"0.8rem"} color="#A4A4A4" position="absolute" top={"-2.8rem"} left={"1rem"}>ข้อมูลจะอัปเดตทุก 1นาที</Typography>
             <Stack direction={"row"} justifyContent={"space-between"}>
-              <OSM />
               <div
                 className="clickable"
                 style={{
@@ -112,8 +113,8 @@ const IntroductionPanel: FC<{
                         background: "#10C487",
                       }}
                     ></div>
-                    <Typography fontSize={"0.85rem"}>
-                      ได้รับการรายงานแล้ว
+                    <Typography fontSize={"1rem"}>
+                      มีการรายงานสถานการณ์ในหน่วย
                     </Typography>
                   </Stack>
                   <Stack
@@ -142,7 +143,7 @@ const IntroductionPanel: FC<{
                       background: "#C10000",
                     }}
                   ></div>
-                  <Typography fontSize={"0.85rem"}>ขาดการรายงาน</Typography>
+                  <Typography fontSize={"1rem"}>ขาดการรายงาน</Typography>
                 </Stack>
                 <Stack
                   direction="row"
@@ -159,7 +160,7 @@ const IntroductionPanel: FC<{
                       background: "#A4A4A4",
                     }}
                   ></div>
-                  <Typography fontSize={"0.85rem"}>
+                  <Typography fontSize={"1rem"}>
                     รายงาน และนับคะแนนเสร็จสิ้น
                   </Typography>
                 </Stack>

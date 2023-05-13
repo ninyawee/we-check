@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const SecondTutorial: FC = () => {
   return <Stack direction="column" margin="2rem 0" color={"white"} fontSize={"1rem"}>
-    <Typography fontSize="1.2rem" color={"primary"}>
+    <Typography fontSize="1.5rem" fontWeight={"bold"} color={"primary"}>
       ฉันอยากไปสังเกตการณ์ <br />
       หน้าหน่วยเลือกตั้ง
     </Typography>
