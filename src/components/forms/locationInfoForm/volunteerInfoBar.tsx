@@ -20,7 +20,7 @@ const VolunteerInfoBar: FC<{
           <Typography fontSize={"0.9rem"}>ต้องการคนสังเกตการณ์ที่หน่วยนี้</Typography>
         </Stack>
     }
-    <Stack direction="row" alignItems={"center"} color={"#0FAD77"} onClick={onNavigate}>
+    <Stack className="clickable" direction="row" alignItems={"center"} color={"#0FAD77"} onClick={onNavigate}>
       <Typography fontSize={"0.9rem"}>พาฉันไปที่นี่</Typography>
       <ArrowForwardIos />
     </Stack>

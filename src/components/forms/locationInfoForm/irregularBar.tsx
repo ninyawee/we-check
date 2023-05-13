@@ -23,7 +23,7 @@ const IrregularBar: FC = () => {
           <Check color="primary" sx={{ marginRight: '0.5rem' }} />
           <Typography fontSize={"1rem"}>ความผิดปกติ: 0</Typography>
         </Stack>}
-      <Stack direction="row" onClick={() => setIrregularInfoDialog(true)}>
+      <Stack className="clickable" direction="row" onClick={() => setIrregularInfoDialog(true)}>
         <Typography fontSize={"0.9rem"}>ดูเพิ่มเติม</Typography>
         <ArrowForwardIos />
       </Stack>

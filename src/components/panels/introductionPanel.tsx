@@ -55,7 +55,7 @@ const IntroductionPanel: FC<{ active?: boolean, locationLoading: boolean, onMyLo
                   <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#10C487' }}></div>
                   <Typography fontSize={"0.85rem"}>มีข้อมูลสถานการณ์ในหน่วย</Typography>
                 </Stack>
-                <Stack direction="row" alignItems="center" onClick={() => setAppInfoDialogOpen(true)}>
+                <Stack className="clickable" direction="row" alignItems="center" onClick={() => setAppInfoDialogOpen(true)}>
                   <Typography fontSize={"1rem"} margin={"0.25rem 0 0.5rem 1rem"} color="primary">เรียนรู้เพิ่มเติม</Typography>
                   <ArrowForwardIos color="primary" />
                 </Stack>
