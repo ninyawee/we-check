@@ -40,7 +40,7 @@ const index: NextPage = () => {
     const mapInit = new maplibreGl.Map({
       container: "map-elec",
       style:
-        "https://cdn-cloud.vallarismaps.com/core/api/styles/1.0-beta/styles/645e436dfa69d95b2a30092a?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
+        "https://cdn-cloud.vallarismaps.com/core/api/styles/1.0-beta/styles/645f47d6efba77c17e6bce0b?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
       attributionControl: false,
       bounds: [
         [96.526051, 0.745161],
