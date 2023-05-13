@@ -2,13 +2,13 @@ import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
 
 const FirstAppInfo: FC = () => {
-  return <Stack direction="column" margin="2rem 0" color={"white"} fontSize={"1rem"}>
+  return <Stack direction="column" margin="2rem 0 0 0" color={"white"} fontSize={"1rem"}>
     <Typography textAlign={"center"} fontSize="1.25rem" fontWeight={"bold"} marginBottom={"1rem"}>
       ความหมายของสีหน่วยเลือกตั้ง
     </Typography>
     <Stack direction="row" alignItems="center" margin={"1rem 0"}>
       <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 0', borderRadius: '100%', background: '#10C487' }}></div>
-      <Typography fontSize={"0.8rem"} fontWeight={"bold"}>มีข้อมูลสถานการณ์ในหน่วย</Typography>
+      <Typography fontSize={"0.8rem"} fontWeight={"bold"}>หน่วยที่ได้รับการรายงานแล้ว</Typography>
     </Stack>
     <Stack direction="row" alignItems="center" margin={"1rem 0 0.25rem 0"}>
       <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 0', borderRadius: '100%', background: '#C10000' }}></div>

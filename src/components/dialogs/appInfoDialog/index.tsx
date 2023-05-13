@@ -36,7 +36,7 @@ const AppInfoDialog: FC<{
     maxWidth={'md'}
     open={open}
     PaperProps={{ sx: { background: '#090909' } }}>
-    <DialogContent>
+    <DialogContent sx={{ paddingBottom: 0 }}>
       <Stack direction="column" minHeight="60vh" justifyContent={"space-between"}>
         <Stack direction="column">
           <Stack direction="row" justifyContent="center" alignItems="center">
