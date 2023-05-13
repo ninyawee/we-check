@@ -26,7 +26,7 @@ export const pulsingDot = (m: any) => {
       context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
 
       // change color
-      context.fillStyle = "rgba(178, 200, 40," + (1 - t) + ")";
+      context.fillStyle = "rgba(16, 196, 135," + (1 - t) + ")";
       context.fill();
 
       // draw inner circle
@@ -34,7 +34,7 @@ export const pulsingDot = (m: any) => {
       context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
 
       // change color
-      context.fillStyle = "rgba(178, 199, 86, 1)";
+      context.fillStyle = "rgba(16, 196, 135, 1)";
       context.strokeStyle = "white";
       context.lineWidth = 2 + 4 * (1 - t);
       context.fill();
