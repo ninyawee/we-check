@@ -1,7 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
 import React, { Fragment } from "react";
-import { useResizeDetector } from "react-resize-detector";
 
 interface ILabel {
   iconSize: string | number;
@@ -19,7 +18,6 @@ const LabelVallaris = ({
   color,
   hideLogo,
 }: ILabel) => {
-  const textSize = useResizeDetector();
   return (
     <Fragment>
       <Stack
@@ -70,50 +68,30 @@ const LabelVallaris = ({
                   marginRight: 4,
                 }}
               ></div>
-              {/* {contain.width && contain.width < 500 ? null : (
-                <div ref={textSize.ref}>
-                  <Typography
-                    variant={titleSize}
-                    style={{
-                      fontFamily: "K2D-Bold",
-                      lineHeight: "unset",
-                      marginBottom: -6,
-                      color: color ? color : "white",
-                    }}
-                  >
-                    Vallaris Maps
-                  </Typography>
-                  <Typography
-                    variant={"caption"}
-                    style={{
-                      fontFamily: "K2D-Light",
-                      color: color ? color : "white",
-                      fontSize: "8px",
-                    }}
-                  >
-                    Geographic solution on cloud
-                  </Typography>
-                </div>
-              )} */}
             </div>
           </a>
         )}
       </Stack>
 
-      <a
-        href="https://www.openstreetmap.org/copyright"
-        target="_blank"
-        rel="noreferrer"
-        style={{
+      <Stack
+        sx={{
           position: "absolute",
           zIndex: 1,
           bottom: 0,
           left: 8,
           fontSize: 10,
+          color: "white",
         }}
       >
-        © <span style={{ fontWeight: "bold" }}>OpenStreetMap</span> contributors
-      </a>
+        <a
+          href="https://www.openstreetmap.org/copyright"
+          target="_blank"
+          rel="noreferrer"
+        >
+          © <span style={{ fontWeight: "bold" }}>OpenStreetMap</span>{" "}
+          contributors
+        </a>
+      </Stack>
     </Fragment>
   );
 };
