@@ -28,13 +28,14 @@ const IrregularInfoDialog: FC<{
           <Stack direction="column" position={"relative"} padding="1rem" maxWidth={"70%"}>
             <Typography color="error" fontSize={"1.6rem"} fontWeight={"bold"}>ความผิดปกติ</Typography>
             <Typography color="white" fontSize={"0.9rem"}>
-              {`${selectedLocation?.provinceName} เขต ${selectedLocation?.divisionNumber} หน่วย${selectedLocation?.unitNumber}`}</Typography>
+              {`${selectedLocation?.provinceName} เขต ${selectedLocation?.divisionNumber} หน่วย ${selectedLocation?.unitNumber}`}</Typography>
           </Stack>
           <div style={{
             width: '8rem',
             position: 'absolute',
             right: 0,
-            top: 0
+            top: '50%',
+            transform: 'translateY(-50%)'
           }}>
             <img src="/assets/irregular-bg.png" height={"auto"} width={"100%"} alt="Irregular" />
           </div>

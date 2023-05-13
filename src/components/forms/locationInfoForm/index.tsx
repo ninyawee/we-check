@@ -32,7 +32,7 @@ const LocationInfoForm: FC= () => {
           </Stack>
         </Stack>
         <div style={{
-          height: '80%',
+          height: '55%',
           position: 'absolute',
           right: 0,
           bottom: 0,
