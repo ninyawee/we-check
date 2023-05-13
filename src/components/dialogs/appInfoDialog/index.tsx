@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, Stack } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import FirstAppInfo from "./first";
 import SecondAppInfo from "./second";
 
@@ -24,6 +24,12 @@ const AppInfoDialog: FC<{
       setInfoState(infoState - 1)
     }
   }
+
+  useEffect(() => {
+    if (open) {
+      setInfoState(0)
+    }
+  }, [open])
 
   return <Dialog
     fullWidth

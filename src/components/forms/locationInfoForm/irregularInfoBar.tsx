@@ -1,26 +1,15 @@
 import { Stack, Typography } from "@mui/material";
-import { FC, useLayoutEffect, useRef, useState } from "react";
+import { FC } from "react";
 
 const IrregularInfoBar: FC = () => {
-  const intervalRef = useRef<any>()
-  const [currentTime, setCurrentTime] = useState<Date>(new Date())
-
-  useLayoutEffect(() => {
-    intervalRef.current = setInterval(onTimeTick, 1000)
-    return () => {
-      clearInterval(intervalRef.current)
-    }
-  })
-
-  function onTimeTick () {
-    setCurrentTime(new Date())
-  }
-
-  const currentTimeStr = currentTime.toLocaleTimeString()
-
-  return <Stack direction="row" fontSize={"0.8rem"} color="white">
-    <Typography padding="0.5rem 1rem" borderRight={"2px solid #272727"} minWidth={"8rem"}>เวลา {currentTimeStr.slice(0, currentTimeStr.length - 3)}</Typography>
-    <Typography padding="0.5rem 1rem">ยังไม่มีรายงานความผิดปกติ</Typography>
+  return <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
+    <Typography component={'span'} padding="0.5rem 1rem">
+      การรายงาน
+      <Typography component={'span'} color="error">&ensp;ไม่ครบถ้วน&ensp;</Typography>
+      <Typography component={'span'} color="#A4A4A4">( ครั้งล่าสุด</Typography>
+      <Typography component={'span'} fontWeight={"bold"} color="#A4A4A4">&ensp;10&ensp;</Typography>
+      <Typography component={'span'} color="#A4A4A4">นาทีที่แล้ว )</Typography>
+    </Typography>
   </Stack>
 }
 

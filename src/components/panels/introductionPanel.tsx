@@ -1,24 +1,19 @@
-import { ArrowForwardIos } from "@mui/icons-material";
-import { Box, Slide, Stack, Typography, useMediaQuery } from "@mui/material";
+import { Box, CircularProgress, Slide, Stack, Typography, useMediaQuery } from "@mui/material";
 import { FC, Fragment, useState } from "react";
 import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
 import AppInfoDialog from "../dialogs/appInfoDialog";
 
-const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
+const IntroductionPanel: FC<{ active?: boolean, locationLoading: boolean, onMyLocationTrigger: () => void }> = ({ active, locationLoading, onMyLocationTrigger }) => {
   const [coverageInfoDialogOpen, setCoverageInfoDialogOpen] = useState<boolean>(false)
   const [appInfoDialogOpen, setAppInfoDialogOpen] = useState<boolean>(false)
-  const matchDesktop = useMediaQuery('(min-width:600px)')
+  const matchDesktop = useMediaQuery('(min-width:900px)')
 
   function viewCoverageInfoClick() {
     setCoverageInfoDialogOpen(true)
   }
 
-  function viewMyLocationClick () {
-
-  }
-
   return <Fragment>
-    <AppInfoDialog open={appInfoDialogOpen} onClose={() => setAppInfoDialogOpen(false)}/>
+    <AppInfoDialog open={appInfoDialogOpen} onClose={() => setAppInfoDialogOpen(false)} />
     <CoverageInfoDialog open={coverageInfoDialogOpen} onClose={() => setCoverageInfoDialogOpen(false)} />
     {matchDesktop ?
       <></> :
@@ -38,8 +33,10 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
             position: 'absolute',
             top: '-3rem',
             right: '1rem'
-          }} onClick={viewMyLocationClick}>
-            <img src="/assets/my-location.png" width="100%" height="auto" alt="MyLocation" />
+          }} onClick={onMyLocationTrigger}>
+            {locationLoading ? <CircularProgress size={40}/> :
+              <img src="/assets/my-location.png" width="100%" height="auto" alt="MyLocation" />
+            }
           </div>
           <Stack direction="column" justifyContent="space-between" sx={{
             width: '100%',
@@ -53,18 +50,6 @@ const IntroductionPanel: FC<{ active?: boolean }> = ({ active }) => {
                 <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#10C487' }}></div>
                 <Typography fontSize={"0.85rem"}>มีข้อมูลสถานการณ์ในหน่วย</Typography>
               </Stack>
-              {/* <Stack
-                className="clickable"
-                direction="row"
-                alignItems={"center"}
-                fontSize={"1rem"}
-                marginRight={"1rem"}
-                fontWeight={"light"}
-                color="#0FB87F"
-                onClick={viewCoverageInfoClick}>
-                <Typography fontSize={"1rem"}>ดูภาพรวม</Typography>
-                <ArrowForwardIos sx={{ marginLeft: "0.25rem" }} />
-              </Stack> */}
             </Stack>
             <Stack direction="row" alignItems="center" margin="0.3rem 0">
               <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#C10000' }}></div>

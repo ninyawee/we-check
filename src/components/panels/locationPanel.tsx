@@ -14,7 +14,7 @@ const LocationPanel: FC<{
   onClose: () => void
 }> = ({ open, onClose }) => {
   const [currentState, setCurrentState] = useState<LocationFormState>(LocationFormState.Location)
-  const matchDesktop = useMediaQuery('(min-width:600px)')
+  const matchDesktop = useMediaQuery('(min-width:900px)')
 
   function handleRegisterClick() {
     setCurrentState(LocationFormState.Register)

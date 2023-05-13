@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, Stack } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import FirstTutorial from "./first";
 import SecondTutorial from "./second";
 import ThirdTutorial from "./third";
@@ -25,6 +25,12 @@ const TutorialDialog: FC<{
       setTutorialState(tutorialState - 1)
     }
   }
+
+  useEffect(() => {
+    if (open) {
+      setTutorialState(0)
+    }
+  }, [open])
 
   return <Dialog
     fullWidth

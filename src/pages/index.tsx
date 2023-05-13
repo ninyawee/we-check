@@ -3,14 +3,16 @@ import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import Meta from "../components/meta";
 import maplibreGl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useResizeDetector } from "react-resize-detector";
 import LabelVallaris from "../components/labelVallaris";
 import LocationPanel from "../components/panels/locationPanel";
 import IntroductionPanel from "../components/panels/introductionPanel";
 import TutorialDialog from "../components/dialogs/tutorialDialog";
-import GeolocationButton from "../components/map/geolocation/geolocationButton";
 import { getGeolocation, pulsingDot } from "../config/map";
+import { useLocationStore } from "../store/location.store";
+import { ILocation } from "../interfaces/location.interface";
+import DeviceNotSupportPanel from "../components/panels/deviceNotSupportPanel";
 
 const tutorialStorageKey = "tutorial";
 
@@ -24,6 +26,8 @@ const index: NextPage = () => {
     trigger: boolean;
     loading: boolean;
   }>({ trigger: false, loading: false });
+  const matchDesktop = useMediaQuery('(min-width:900px)')
+  const { setSelectedLocation } = useLocationStore()
 
   useLayoutEffect(() => {
     const viewStatus = localStorage.getItem(tutorialStorageKey) === "true";
@@ -74,6 +78,8 @@ const index: NextPage = () => {
         if (features.length) {
           setOpen(true);
           setFeatureSelected(features[0].properties);
+          console.log(features[0].properties)
+          setSelectedLocation(features[0].properties as ILocation)
           if (features[0].geometry.type === "Point") {
             e.target.easeTo({
               center: [
@@ -116,6 +122,7 @@ const index: NextPage = () => {
   return (
     <Fragment>
       <Meta title={"We Check"} />
+      {matchDesktop && <DeviceNotSupportPanel/>}
       <Box
         component={"div"}
         id="map-elec"
@@ -134,12 +141,7 @@ const index: NextPage = () => {
         />
         <TutorialDialog open={showTutorial} onClose={onCloseTutorial} />
         <LocationPanel open={open} onClose={onClose} />
-        <IntroductionPanel active={!open} />
-        <GeolocationButton
-          geolocate={geolocate.trigger}
-          load={geolocate.loading}
-          toggleGeolocate={toggleGeolocate}
-        />
+        <IntroductionPanel active={!open} locationLoading={geolocate.loading} onMyLocationTrigger={toggleGeolocate}/>
       </Box>
     </Fragment>
   );

@@ -4,8 +4,11 @@ import VolunteerInfoBar from "./volunteerInfoBar";
 import HorizontalLine from "../../horizontalLine";
 import IrregularInfoBar from "./irregularInfoBar";
 import IrregularBar from "./irregularBar";
+import { useLocationStore } from "@/src/store/location.store";
 
 const LocationInfoForm: FC= () => {
+  const { selectedLocation } = useLocationStore()
+
   function handleReportClick() {
     window.open('https://www.electionwatchth.org/public-election-report?unit=1234567890')
   }
@@ -21,10 +24,10 @@ const LocationInfoForm: FC= () => {
       justifyContent={"space-between"}>
       <Stack direction={"row"} justifyContent={"space-between"} padding={"1rem"} position={"relative"}>
         <Stack direction={"column"} justifyContent={"space-between"} maxWidth={"60%"}>
-          <Typography fontSize={"1.1rem"} sx={{ wordWrap: 'break-word' }}>อาคารประชุมใหญ่โรงเรียน xxx</Typography>
-          <Stack direction={"row"} fontSize="0.9rem" marginBottom={"1rem"}>
-            <Typography color="#A4A4A4">
-              อุทัยธานี เขต1 หน่วย 3
+          <Typography fontSize={"1.1rem"} sx={{ wordWrap: 'break-word' }}>{selectedLocation?.unit_name}</Typography>
+          <Stack direction={"row"} marginBottom={"1rem"}>
+            <Typography fontSize={"0.8rem"} color="#A4A4A4">
+              {`หน่วย ${selectedLocation?.unit_number} ${selectedLocation?.sub_district_name} เขต ${selectedLocation?.division_number} ${selectedLocation?.province_name}`}
             </Typography>
           </Stack>
         </Stack>
@@ -32,18 +35,20 @@ const LocationInfoForm: FC= () => {
           height: '80%',
           position: 'absolute',
           right: 0,
-          bottom: 0
+          bottom: 0,
+          transform: 'scaleX(-1)'
         }}>
           <img src="/assets/location-bg.png" width="auto" height="100%" alt="location"/>
         </div>
       </Stack>
       <Stack direction="column" justifyContent="space-between" alignItems="start">
         <HorizontalLine />
-        <IrregularInfoBar/>
         <HorizontalLine />
         <IrregularBar/>
         <HorizontalLine />
         <VolunteerInfoBar onNavigate={handleNavigateClick}/>
+        <HorizontalLine />
+        <IrregularInfoBar/>
         <HorizontalLine />
       </Stack>
 
