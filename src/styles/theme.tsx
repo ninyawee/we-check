@@ -23,13 +23,13 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#090909",
+      main: "#10C487",
     },
     secondary: {
       main: "#ffd542",
     },
     error: {
-      main: red.A400,
+      main: '#C10000',
     },
     background: {
       default: "#f1f5f4",

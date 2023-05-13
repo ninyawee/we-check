@@ -1,34 +1,60 @@
 import { NextPage } from "next";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import Meta from "../components/meta";
 import maplibreGl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useResizeDetector } from "react-resize-detector";
 import LabelVallaris from "../components/labelVallaris";
-import FormSubmit from "../components/formSubmit";
-import { AnimatePresence, motion } from "framer-motion";
-import TopNav from "../components/topNav"
-import BottomDrawer from "../components/bottomDrawer"
-import LocationInfoForm from "../components/forms/locationInfoForm";
+import LocationPanel from "../components/panels/locationPanel";
 import IntroductionPanel from "../components/panels/introductionPanel";
+import TutorialDialog from "../components/dialogs/tutorialDialog";
+import { getGeolocation, pulsingDot } from "../config/map";
+import { useLocationStore } from "../store/location.store";
+import { ILocation } from "../interfaces/location.interface";
+import DeviceNotSupportPanel from "../components/panels/deviceNotSupportPanel";
+
+const tutorialStorageKey = "tutorial";
 
 const index: NextPage = () => {
   const [map, setMap] = useState<maplibregl.Map | null>(null);
   const contain = useResizeDetector();
   const [open, setOpen] = useState<boolean>(false);
   const [featureSelected, setFeatureSelected] = useState<any>(null);
+  const [showTutorial, setShowTutorial] = useState<boolean>(false);
+  const [geolocate, setGeolocate] = useState<{
+    trigger: boolean;
+    loading: boolean;
+  }>({ trigger: false, loading: false });
+  const matchDesktop = useMediaQuery('(min-width:900px)')
+  const { setSelectedLocation } = useLocationStore()
+
+  useLayoutEffect(() => {
+    const viewStatus = localStorage.getItem(tutorialStorageKey) === "true";
+    setShowTutorial(!viewStatus);
+  }, []);
 
   useEffect(() => {
     const mapInit = new maplibreGl.Map({
       container: "map-elec",
       style:
-        "https://b-2.i-bitz.world/core/api/styles/1.0-beta/styles/645d06c156c910f59461af20?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
+        "https://cdn-cloud.vallarismaps.com/core/api/styles/1.0-beta/styles/645e436dfa69d95b2a30092a?api_key=o0rgkaoNFWud7dnI9DnF3HsWAo4RVTvsNW3PZMFMSwagqjJ7HaEXSB8mqTkr12OY",
       attributionControl: false,
-      bounds :[[96.526051,0.745161],[106.633472,22.875701]],
+      bounds: [
+        [96.526051, 0.745161],
+        [106.633472, 22.875701],
+      ],
     });
 
     setMap(mapInit);
+
+    mapInit.on("load", (e) => {
+      //pulsingDot add style for point of user geolocation
+      e.target.addImage("pulsing-dot", pulsingDot(e.target), { pixelRatio: 2 });
+
+      // if want first time coming trigger geolocation
+      //getGeolocation(e.target, geolocate.trigger, setGeolocate);
+    });
 
     mapInit.once("load", (e) => {
       e.target.resize();
@@ -39,10 +65,6 @@ const index: NextPage = () => {
     };
   }, []);
 
-  function easing(t: any) {
-    return t * (2 - t);
-  }
-
   useEffect(() => {
     if (map) {
       var deltaDistance = 200;
@@ -50,39 +72,37 @@ const index: NextPage = () => {
       // degrees the map rotates when the left or right arrow is clicked
       map.on("click", (e) => {
         const features = e.target.queryRenderedFeatures(e.point, {
-          layers: ["ELECT_PLACE_OLD_POI"],
+          layers: ["ELECT_PLACE_POI"],
         });
 
         if (features.length) {
           setOpen(true);
           setFeatureSelected(features[0].properties);
+          console.log(features[0].properties)
+          setSelectedLocation(features[0].properties as ILocation)
+          if (features[0].geometry.type === "Point") {
+            e.target.easeTo({
+              center: [
+                features[0].geometry.coordinates[0],
+                features[0].geometry.coordinates[1],
+              ],
+              zoom: 14,
+              duration: 800,
+              easing: function (t) {
+                return t;
+              },
 
-          e.target.easeTo({
-            center: [
-              features[0].properties.longitude,
-              features[0].properties.latitude,
-            ],
-            zoom: 14,
-            duration: 800,
-            easing: function (t) {
-              return t;
-            },
-
-            essential: true,
-            offset: [0, -deltaDistance],
-          });
+              essential: true,
+              offset: [0, -deltaDistance],
+            });
+          }
         } else {
           setOpen(false);
           setFeatureSelected(null);
         }
       });
-      // map.on("touchstart", (e) => {
-      //   console.log("touchj");
-      //   const features = e.target.queryRenderedFeatures(e.point);
-      //   console.log(features);
-      // });
     }
-    return () => { };
+    return () => {};
   }, [map]);
 
   const onClose = () => {
@@ -90,10 +110,19 @@ const index: NextPage = () => {
     setFeatureSelected(null);
   };
 
+  function onCloseTutorial() {
+    localStorage.setItem(tutorialStorageKey, "true");
+    setShowTutorial(false);
+  }
+
+  const toggleGeolocate = () => {
+    if (map) getGeolocation(map, geolocate.trigger, setGeolocate);
+  };
+
   return (
     <Fragment>
-      <TopNav />
-      <Meta title={"จับโกง 66"} />
+      <Meta title={"We Check"} />
+      {matchDesktop && <DeviceNotSupportPanel/>}
       <Box
         component={"div"}
         id="map-elec"
@@ -110,11 +139,9 @@ const index: NextPage = () => {
           contain={contain}
           color="black"
         />
-        <BottomDrawer open={open} onClose={onClose}>
-          <LocationInfoForm/>
-        </BottomDrawer>
-
-        <IntroductionPanel active={!open}/>
+        <TutorialDialog open={showTutorial} onClose={onCloseTutorial} />
+        <LocationPanel open={open} onClose={onClose} />
+        <IntroductionPanel active={!open} locationLoading={geolocate.loading} onMyLocationTrigger={toggleGeolocate}/>
       </Box>
     </Fragment>
   );
