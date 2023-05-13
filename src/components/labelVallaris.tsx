@@ -65,7 +65,7 @@ const LabelVallaris = ({
                   height: iconSize,
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
-                  marginRight: 4,
+                  margin: 8,
                 }}
               ></div>
             </div>
