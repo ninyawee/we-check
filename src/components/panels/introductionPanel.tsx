@@ -56,7 +56,7 @@ const IntroductionPanel: FC<{
             }}
           >
             <OSM />
-            <Typography fontSize={"0.8rem"} color="#A4A4A4" position="absolute" top={"-2.8rem"} left={"1rem"}>ข้อมูลจะอัปเดตทุก 1นาที</Typography>
+            <Typography fontSize={"0.8rem"} color="#A4A4A4" position="absolute" top={"-2.8rem"} left={"1rem"}>ข้อมูลจะอัปเดตทุก 5 นาที</Typography>
             <Stack direction={"row"} justifyContent={"space-between"}>
               <div
                 className="clickable"
