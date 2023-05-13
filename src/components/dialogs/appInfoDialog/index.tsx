@@ -59,7 +59,7 @@ const AppInfoDialog: FC<{
       </Stack>
     </DialogContent>
     <DialogActions>
-      <Stack direction="column" justifyContent="center" width={"100%"}>
+      <Stack direction="column" justifyContent="center" width={"100%"} padding="0 1rem">
         <Button fullWidth variant="contained" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handlePrimaryButton}>
           {infoState === 1 ? `ปิดหน้าต่าง` : 'ถัดไป'}
         </Button>

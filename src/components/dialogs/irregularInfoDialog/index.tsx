@@ -52,7 +52,7 @@ const IrregularInfoDialog: FC<{
       </Stack>
     </DialogContent>
     <DialogActions>
-      <Stack direction="column" justifyContent="center" width={"100%"}>
+      <Stack direction="column" justifyContent="center" width={"100%"} padding="0rem 1rem">
         <Button
           variant="contained"
           color="error"

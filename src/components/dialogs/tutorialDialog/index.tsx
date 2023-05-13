@@ -61,7 +61,7 @@ const TutorialDialog: FC<{
       </Stack>
     </DialogContent>
     <DialogActions>
-      <Stack direction="column" justifyContent="center" width={"100%"}>
+      <Stack direction="column" justifyContent="center" width={"100%"} padding="0 1rem">
         <Button fullWidth variant="contained" sx={{ color: 'white', height: '52px', fontSize: '1rem' }} onClick={handlePrimaryButton}>
           {tutorialState === 2 ? `ปิดหน้าต่าง` : 'ถัดไป'}
         </Button>
