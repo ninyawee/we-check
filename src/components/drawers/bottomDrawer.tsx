@@ -19,7 +19,7 @@ const BottomDrawer: FC<{
     onClose={onClose}>
     <Box sx={{
       display: 'flex',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
     }}>
       <IconButton onClick={onClose}>
         <Close sx={{ color: '#A4A4A4' }} />

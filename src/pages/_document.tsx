@@ -15,7 +15,7 @@ export default function Document() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="We Check : แผนที่จับตาเลือกตั้ง 66" />
         <meta property="og:description" content="ติดตาม และรายงานความผิดปกติในหน่วยเลือกตั้งทั่วประเทศไปกับเรา" />
-        <meta property="og:image" content="/assets/wecheck66.png" />
+        <meta property="og:image" content="/wecheck66.png" />
 
         <title>We Check 66</title>
       </Head>
