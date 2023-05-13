@@ -8,7 +8,6 @@ const BottomDrawer: FC<{
   onClose?: () => void
 }> = ({ children, open, onClose }) => {
   return <Drawer
-    hideBackdrop
     open={open}
     anchor="bottom"
     PaperProps={{
