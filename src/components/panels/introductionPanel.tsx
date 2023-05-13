@@ -53,7 +53,7 @@ const IntroductionPanel: FC<{ active?: boolean, locationLoading: boolean, onMyLo
               <Stack direction="row" alignItems="center" justifyContent="space-between" height="2rem">
                 <Stack direction="row" alignItems="center">
                   <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#10C487' }}></div>
-                  <Typography fontSize={"0.85rem"}>มีข้อมูลสถานการณ์ในหน่วย</Typography>
+                  <Typography fontSize={"0.85rem"}>ได้รับการรายงานแล้ว</Typography>
                 </Stack>
                 <Stack className="clickable" direction="row" alignItems="center" onClick={() => setAppInfoDialogOpen(true)}>
                   <Typography fontSize={"1rem"} margin={"0.25rem 0 0.5rem 1rem"} color="primary">เรียนรู้เพิ่มเติม</Typography>
@@ -62,11 +62,11 @@ const IntroductionPanel: FC<{ active?: boolean, locationLoading: boolean, onMyLo
               </Stack>
               <Stack direction="row" alignItems="center" height="2rem">
                 <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#C10000' }}></div>
-                <Typography fontSize={"0.85rem"}>ยังไม่มีข้อมูลสถานการณ์ในหน่วย</Typography>
+                <Typography fontSize={"0.85rem"}>ขาดการรายงาน</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" height="2rem" marginBottom={"1rem"}>
                 <div style={{ width: '18px', height: '18px', margin: '0 0.5rem 0 1rem', borderRadius: '100%', background: '#A4A4A4' }}></div>
-                <Typography fontSize={"0.85rem"}>หน่วยเลือกตั้งปิดเสร็จสมบูรณ์แล้ว</Typography>
+                <Typography fontSize={"0.85rem"}>รายงาน และนับคะแนนเสร็จสิ้น</Typography>
               </Stack>
               <div style={{
                 position: 'absolute',
