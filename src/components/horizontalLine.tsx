@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-const HorizontalLine: FC = () => {
+const HorizontalLine: FC<{ color?: string }> = ({ color }) => {
   return <div style={{
     width: '100%',
     height: '0.1rem',
-    background: '#272727'
+    background: color ? color : '#272727'
   }} />
 }
 

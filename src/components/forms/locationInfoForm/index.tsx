@@ -1,5 +1,5 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment } from "react";
 import VolunteerInfoBar from "./volunteerInfoBar";
 import HorizontalLine from "../../horizontalLine";
 import IrregularInfoBar from "./irregularInfoBar";
@@ -14,7 +14,7 @@ const LocationInfoForm: FC= () => {
   }
 
   function handleNavigateClick() {
-    window.open('https://www.google.co.th/maps/')
+    window.open(selectedLocation?.googleMapUrl)
   }
 
   return <Fragment>
@@ -24,10 +24,10 @@ const LocationInfoForm: FC= () => {
       justifyContent={"space-between"}>
       <Stack direction={"row"} justifyContent={"space-between"} padding={"1rem"} position={"relative"}>
         <Stack direction={"column"} justifyContent={"space-between"} maxWidth={"60%"}>
-          <Typography fontSize={"1.1rem"} sx={{ wordWrap: 'break-word' }}>{selectedLocation?.unit_name}</Typography>
+          <Typography fontSize={"1.1rem"} sx={{ wordWrap: 'break-word' }}>{selectedLocation?.unitName}</Typography>
           <Stack direction={"row"} marginBottom={"1rem"}>
             <Typography fontSize={"0.8rem"} color="#A4A4A4">
-              {`หน่วย ${selectedLocation?.unit_number} ${selectedLocation?.sub_district_name} เขต ${selectedLocation?.division_number} ${selectedLocation?.province_name}`}
+              {`หน่วย ${selectedLocation?.unitNumber} ${selectedLocation?.subDistrictName} เขต ${selectedLocation?.divisionNumber} ${selectedLocation?.provinceName}`}
             </Typography>
           </Stack>
         </Stack>
@@ -42,10 +42,7 @@ const LocationInfoForm: FC= () => {
         </div>
       </Stack>
       <Stack direction="column" justifyContent="space-between" alignItems="start">
-        <HorizontalLine />
-        <HorizontalLine />
         <IrregularBar/>
-        <HorizontalLine />
         <VolunteerInfoBar onNavigate={handleNavigateClick}/>
         <HorizontalLine />
         <IrregularInfoBar/>
@@ -58,7 +55,7 @@ const LocationInfoForm: FC= () => {
         size="large"
         sx={{ margin: "1rem 1.5rem", padding: "1rem 0.5rem" }}
         onClick={handleReportClick}>
-        รายงานสถานการณ์ทั่วไป
+        รายงานสถานการณ์
       </Button>
     </Stack>
   </Fragment>

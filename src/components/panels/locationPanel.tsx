@@ -3,6 +3,7 @@ import BottomDrawer from "../drawers/bottomDrawer"
 import LocationInfoForm from "../forms/locationInfoForm"
 import VolunteerRegisterForm from "../forms/volunteerRegisterForm.tsx"
 import { useMediaQuery } from "@mui/material"
+import { useLayoutStore } from "@/src/store/layout.store"
 
 enum LocationFormState {
   Location,
@@ -14,6 +15,7 @@ const LocationPanel: FC<{
   onClose: () => void
 }> = ({ open, onClose }) => {
   const [currentState, setCurrentState] = useState<LocationFormState>(LocationFormState.Location)
+  const { isDesktopConfirm } = useLayoutStore()
   const matchDesktop = useMediaQuery('(min-width:900px)')
 
   function handleRegisterClick() {
@@ -25,7 +27,7 @@ const LocationPanel: FC<{
   }
 
   return <Fragment>
-    {matchDesktop ?
+    {(matchDesktop && !isDesktopConfirm) ?
       <></> :
       <BottomDrawer open={open} onClose={onClose}>
         {currentState === LocationFormState.Location && <LocationInfoForm/>}

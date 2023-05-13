@@ -1,16 +1,21 @@
 import { Button, Dialog, DialogActions, DialogContent, Stack, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import IrregularEvent from "./irregularEvent";
 import HorizontalLine from "../../horizontalLine";
 import { NearMe } from "@mui/icons-material";
+import { useLocationStore } from "@/src/store/location.store";
 
 const IrregularInfoDialog: FC<{
   open: boolean,
   onClose: () => void
 }> = ({ open, onClose }) => {
+  const { selectedLocation } = useLocationStore()
+
   function handleNavigateClick() {
-    window.open('https://www.google.co.th/maps/')
+    window.open(selectedLocation?.googleMapUrl)
   }
+
+  const incidentList = selectedLocation?.incidentJson?.split(',') ?? []
 
   return <Dialog
     fullWidth
@@ -18,21 +23,31 @@ const IrregularInfoDialog: FC<{
     open={open}
     PaperProps={{ sx: { background: '#090909' } }}>
     <DialogContent sx={{ padding: 0 }}>
-      <Stack direction="column" justifyContent={"space-between"} maxHeight={"80%"}>
-        <Stack direction="column" position={"relative"} padding="1rem">
-          <Typography color="error" fontSize={"1.6rem"} fontWeight={"bold"}>ความผิดปกติ</Typography>
-          <Typography color="white" fontSize={"0.9rem"} marginBottom={"2rem"}>อุทัยธานี เขต 1 หน่วย 3</Typography>
+      <Stack direction="column" justifyContent={"space-between"}>
+        <Stack direction="row" position={"relative"} padding="1rem" width={"100%"}>
+          <Stack direction="column" position={"relative"} padding="1rem" maxWidth={"70%"}>
+            <Typography color="error" fontSize={"1.6rem"} fontWeight={"bold"}>ความผิดปกติ</Typography>
+            <Typography color="white" fontSize={"0.9rem"}>
+              {`${selectedLocation?.provinceName} เขต ${selectedLocation?.divisionNumber} หน่วย${selectedLocation?.unitNumber}`}</Typography>
+          </Stack>
           <div style={{
-            height: '80%',
+            width: '8rem',
             position: 'absolute',
             right: 0,
             top: 0
           }}>
-            <img src="/assets/irregular-bg.png" height={"100%"} width={"auto"} alt="Irregular" />
+            <img src="/assets/irregular-bg.png" height={"auto"} width={"100%"} alt="Irregular" />
           </div>
         </Stack>
-        <HorizontalLine />
-        <IrregularEvent />
+        {incidentList.length === 0 ? <Fragment>
+          <HorizontalLine />
+          <Stack direction="column" padding={"1rem"} alignItems={"center"}>
+            <Typography color="white" fontSize={"1.2rem"}>ยังไม่มีรายงานความผิดปกติ</Typography>
+          </Stack>
+        </Fragment> : incidentList.map((incident, index) => <Fragment key={index}>
+          <HorizontalLine />
+          <IrregularEvent info={incident} />
+        </Fragment>)}
       </Stack>
     </DialogContent>
     <DialogActions>
