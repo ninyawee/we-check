@@ -52,7 +52,14 @@ const LocationInfoForm: FC = () => {
       <Button
         variant="contained"
         color="primary"
-        sx={{ fontSize: '1.25rem', height: '52px', margin: "1rem 1.5rem", color: 'white' }}
+        sx={{
+          fontSize: '1.25rem',
+          height: '52px',
+          margin: "1rem 1.5rem",
+          color: 'white',
+          background: "url('/assets/dot.png') #10C487",
+          backgroundSize: 'cover'
+        }}
         onClick={handleReportClick}>
         รายงานสถานการณ์
       </Button>
