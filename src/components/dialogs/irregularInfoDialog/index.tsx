@@ -15,7 +15,7 @@ const IrregularInfoDialog: FC<{
     window.open(selectedLocation?.googleMapUrl)
   }
 
-  const incidentList = selectedLocation?.incidentStr?.split(',') ?? []
+  const incidentList = (selectedLocation?.incidentStr?.split(',') ?? []).filter(v => v.trim() !== '')
 
   return <Dialog
     fullWidth
