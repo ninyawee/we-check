@@ -17,7 +17,7 @@ const IrregularInfoBar: FC = () => {
 
   function updateTimePass() {
     const currentTime = new Date()
-    const timeDiffMs = currentTime.getTime() - (selectedLocation?.lastObservedTime?.getTime() ?? new Date().getTime())
+    const timeDiffMs = currentTime.getTime() - (selectedLocation?.lastObservedTime?.getTime?.() ?? new Date().getTime())
     const timeDiffMinute = Math.trunc(timeDiffMs / (60 * 1000))
     if (timeDiffMinute >= 60) {
       setTimePassText([Math.trunc(timeDiffMinute / 60).toString(), "ชั่วโมงที่แล้ว"])
