@@ -8,27 +8,7 @@ interface ILocationStore {
 }
 
 export const useLocationStore = create<ILocationStore>((set, get) => ({
-  selectedLocation: {
-    unitId: 1,
-    unitName: 'หอประชุม มหาวิทยาลัยศิลปากร ถนนมหาราช',
-    provinceName: 'อุทัยธานี',
-    divisionNumber: 1,
-    districtName: 'พระบรมมหาราชวัง',
-    subDistrictName: 'พระบรมมหาราชวัง',
-    unitNumber: 1,
-
-    color: 'green',
-    isObservationValid: true,
-
-    latitude: 123,
-    longitude: 123,
-
-    lastObservedTime: new Date(new Date().getTime() - (60 * 50 * 1000)),
-    incidentCount: 1,
-    incidentStr: 'A, B, C',
-    incidentJson: 'A, B, C',
-    googleMapUrl: 'https://www.google.co.th/maps'
-  },
+  selectedLocation: null,
 
   setSelectedLocation(selectedLocation) {
     console.log(selectedLocation)
