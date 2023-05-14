@@ -25,11 +25,13 @@ export const useLocationStore = create<ILocationStore>((set, get) => ({
 
     lastObservedTime: new Date(new Date().getTime() - (60 * 50 * 1000)),
     incidentCount: 1,
+    incidentStr: 'A, B, C',
     incidentJson: 'A, B, C',
     googleMapUrl: 'https://www.google.co.th/maps'
   },
 
   setSelectedLocation(selectedLocation) {
+    console.log(selectedLocation)
     set({ selectedLocation })
   }
 }))
