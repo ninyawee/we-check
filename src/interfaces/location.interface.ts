@@ -16,6 +16,7 @@ export interface ILocation {
   lastObservedTime: Date | null
   incidentCount: number
   incidentJson: string // Example "เปิดหน่วยเลือกตั้งช้า", "จนท คุกคามผู้ใช้สิทธิ์"
+  incidentStr: string // Example "เปิดหน่วยเลือกตั้งช้า", "จนท คุกคามผู้ใช้สิทธิ์"
   googleMapUrl: string
 }
 
