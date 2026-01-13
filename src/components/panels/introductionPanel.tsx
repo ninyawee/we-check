@@ -32,11 +32,14 @@ const IntroductionPanel: FC<{
   const [instructionDialogOpen, setInstructionDialogOpen] =
     useState<boolean>(false);
 
-  // showCounting is determined client-side from local device time.
-  // Initially false to avoid SSR/client hydration mismatch; will update in useEffect.
+  // Track if component has mounted to avoid SSR/client hydration mismatch.
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const [showCounting, setShowCounting] = useState<boolean>(false);
 
   useEffect(() => {
+    // Mark component as mounted on client-side
+    setIsMounted(true);
+
     function checkCounting() {
       try {
         const now = new Date();
@@ -48,9 +51,9 @@ const IntroductionPanel: FC<{
       }
     }
 
-    // run immediately then refresh every second
+    // Run immediately on mount, then check every minute
     checkCounting();
-    const id = setInterval(checkCounting, 1000);
+    const id = setInterval(checkCounting, 60000); // Check every 60 seconds instead of every second
     return () => clearInterval(id);
   }, []);
 
@@ -143,7 +146,7 @@ const IntroductionPanel: FC<{
                 <Stack direction="row" alignItems="flex-start" justifyContent="space-between" sx={{ gap: 1 }}>
                   <div>
                     <Stack direction="column">
-                      {STATUS_LEGEND.filter((s) => s.key !== "counting" || showCounting).map((s) => (
+                      {isMounted && STATUS_LEGEND.filter((s) => s.key !== "counting" || showCounting).map((s) => (
                         <div key={s.key}>
                           <StatusLegendItem color={s.color} label={s.label} small={s.small} compact />
                         </div>
