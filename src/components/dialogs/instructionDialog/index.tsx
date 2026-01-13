@@ -50,10 +50,10 @@ const InstructionDialog: FC<{
       maxWidth="sm"
       open={open}
       PaperProps={{
-        sx: { background: "#090909", m: 0, p: 0, width: "calc(100% - 2rem)" },
+        sx: { background: "#221e1f", m: 0, p: 0, width: "calc(100% - 1rem)" },
       }}
     >
-      <DialogContent sx={{ paddingBottom: 0 }}>
+      <DialogContent sx={{ overflowY: "visible" }}>
         <Stack
           direction="column"
           minHeight="30vh"

@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { FC } from "react";
+import StepPoint from "./stepPoint";
 
 const HowToInfo: FC = () => {
   return (
@@ -18,7 +19,100 @@ const HowToInfo: FC = () => {
           (วันที่ 1 และ 8 กุมภา 69)
         </Typography>
       </Typography>
-      <Box my={3}>sdfsdf</Box>
+      <Box
+        my={3}
+        sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
+        gap={2}
+      >
+        <StepPoint
+          imageSrc="/assets/storyboard_icon_1.png"
+          description={
+            <Typography color="#c1c0c0">
+              ใช้{" "}
+              <Typography fontWeight="bold" color="#01c07f" component="span">
+                We check
+              </Typography>{" "}
+              แล้วพบว่า หน่วยเลือกตั้งใกล้บ้าน{" "}
+              <Typography component="span" color="#FFF" fontWeight="bold">
+                สีขาว{" "}
+                <Typography component="span" fontWeight="normal">
+                  ( ขาดการรายงาน )
+                </Typography>
+              </Typography>
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageWidth={90}
+          imageSrc="/assets/storyboard_icon_2.png"
+          description={
+            <Typography color="#c1c0c0">
+              เดินทางไปยังหน่วยเหล่านั้นเพื่อ{" "}
+              <Typography fontWeight="bold" color="#01c07f" component="span">
+                รายงานสถารการณ์
+              </Typography>{" "}
+              แล้วพบว่า หน่วยเลือกตั้งใกล้บ้าน{" "}
+              <Typography component="span" color="#c1c0c0">
+                หรือ{" "}
+                <Typography component="span" fontWeight="bold" color="#ffcb4c">
+                  จับตาการนับคะแนน
+                </Typography>
+              </Typography>
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageHeight={100}
+          imageWidth={80}
+          imageSrc="/assets/storyboard_icon_3.png"
+          description={
+            <Typography color="#c1c0c0">
+              ช่วยให้การสังเกตการณ์ มี{" "}
+              <Typography fontWeight="bold" color="#01c07f" component="span">
+                ความครอบคลุม
+              </Typography>{" "}
+              มากยิ่งขึ้น
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageHeight={70}
+          imageWidth={70}
+          imageSrc="/assets/storyboard_icon_4.png"
+          description={
+            <Typography color="#c1c0c0">
+              พบเห็น{" "}
+              <Typography fontWeight="bold" color="#ff3131" component="span">
+                ความผิดปกติ
+              </Typography>{" "}
+              ในหน่วยเลือกตั้ง
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageHeight={100}
+          imageWidth={90}
+          imageSrc="/assets/storyboard_icon_5.png"
+          description={
+            <Typography color="#c1c0c0">
+              รายงานเหตุการณ์ ผ่าน{" "}
+              <Typography fontWeight="bold" color="#01c07f" component="span">
+                ความผิดปกติ
+              </Typography>
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageHeight={80}
+          imageWidth={130}
+          imageSrc="/assets/storyboard_icon_6.png"
+          description={
+            <Typography color="#c1c0c0">
+              องค์กรอิสระ / ประชาชน รับทราบ และช่วยกันเป็นหูเป็นตา
+            </Typography>
+          }
+        />
+      </Box>
       <Typography fontWeight="bold">สีสถานะของหน่วยเลือกตั้ง</Typography>
       <Stack direction="column" spacing={1} mb={3} mt={1}>
         <Stack direction="row" alignItems="center">

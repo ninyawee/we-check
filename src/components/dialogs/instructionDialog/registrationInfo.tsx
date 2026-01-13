@@ -21,7 +21,6 @@ const RegistrationInfo: FC = () => {
         sx={{
           padding: 1,
           borderRadius: "8px",
-          minWidth: "318px",
           overflow: "visible",
         }}
       >
@@ -73,7 +72,7 @@ const RegistrationInfo: FC = () => {
         >
           <Box
             sx={{
-              top: "-20px",
+              top: "-23px",
               right: "-16px",
               position: "absolute",
               backgroundColor: "#ffcb4c",
@@ -88,29 +87,54 @@ const RegistrationInfo: FC = () => {
           </Box>
         </Box>
         <Box>
-          <Stack direction="column">
-            <Typography component="div">
-              รายงาน
-              <Typography component="span" fontWeight="bold">
-                ครั้งเดียว
-              </Typography>
-              <br />
-              หรือ{" "}
-              <Typography component="span" fontWeight="bold">
-                ปักหลัก
-              </Typography>
-              ที่หน่วยทั้งวันก็ได้
-            </Typography>
-            <Typography component="div">
-              รายงานจาก
-              <Typography component="span" fontWeight="bold">
-                หน่วยเดียว
-              </Typography>{" "}
-              หรือเดินทางไป
-              <Typography component="span" fontWeight="bold">
-                หลายหน่วยก็ได้
-              </Typography>
-            </Typography>
+          <Stack direction="row" spacing={1}>
+            <Box sx={{ marginTop: "-14px" }}>
+              <img
+                width={100}
+                src="/assets/wewatch_icon_large.png"
+                alt="weWatch"
+              />
+            </Box>
+            <Box>
+              <Stack direction="row" spacing={1}>
+                <img
+                  width={40}
+                  height={30}
+                  src="/assets/checkbox_icon.png"
+                  alt="checkbox"
+                />
+                <Typography component="div">
+                  รายงาน
+                  <Typography component="span" fontWeight="bold">
+                    ครั้งเดียว
+                  </Typography>
+                  <br />
+                  หรือ{" "}
+                  <Typography component="span" fontWeight="bold">
+                    ปักหลัก
+                  </Typography>
+                  ที่หน่วยทั้งวันก็ได้
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={1}>
+                <img
+                  width={40}
+                  height={30}
+                  src="/assets/checkbox_icon.png"
+                  alt="checkbox"
+                />
+                <Typography component="div">
+                  รายงานจาก
+                  <Typography component="span" fontWeight="bold">
+                    หน่วยเดียว
+                  </Typography>{" "}
+                  หรือเดินทางไป
+                  <Typography component="span" fontWeight="bold">
+                    หลายหน่วยก็ได้
+                  </Typography>
+                </Typography>
+              </Stack>
+            </Box>
           </Stack>
         </Box>
         <Box mt={2} display="flex" justifyContent="flex-end">
@@ -133,7 +157,7 @@ const RegistrationInfo: FC = () => {
       >
         หรือ
       </Typography>
-      <Card sx={{ padding: 1, borderRadius: "8px", minWidth: "318px" }}>
+      <Card sx={{ padding: 1, borderRadius: "8px" }}>
         <Stack direction="row" spacing={1} alignItems="flex-start">
           <Box
             sx={{
@@ -171,31 +195,57 @@ const RegistrationInfo: FC = () => {
         </Stack>
         <Box borderTop="2px dotted #cccccc" sx={{ my: 1.5 }} />
         <Box>
-          <Stack direction="column">
-            <Typography component="div">
-              ไปที่หน่วยเลือกตั้ง
-              <Typography component="span" fontWeight="bold">
-                ในช่วงเย็น
-              </Typography>
-              เพื่อ
-              <Typography component="span" fontWeight="bold">
-                จับตาการนับคะแนนอย่างใกล้ชิด
-              </Typography>
-            </Typography>
-            <Typography component="div">
-              ต้องการอาสา{" "}
-              <Typography component="span" fontWeight="bold">
-                3 คน / หน่วย
-              </Typography>{" "}
-              เพื่อ นับ
-              <Typography component="span" fontWeight="bold">
-                คะแนนการเลือกตั้ง
-              </Typography>
-              และ
-              <Typography component="span" fontWeight="bold">
-                ประชามติ
-              </Typography>
-            </Typography>
+          <Stack direction="row" spacing={1}>
+            <Box sx={{ marginTop: "-14px" }}>
+              <img
+                width={120}
+                height={100}
+                src="/assets/vote62_icon_large.png"
+                alt="weWatch"
+              />
+            </Box>
+            <Box>
+              <Stack direction="row" spacing={1}>
+                <img
+                  width={40}
+                  height={30}
+                  src="/assets/checkbox_icon.png"
+                  alt="checkbox"
+                />
+                <Typography component="div">
+                  ไปที่หน่วยเลือกตั้ง
+                  <Typography component="span" fontWeight="bold">
+                    ในช่วงเย็น
+                  </Typography>
+                  เพื่อ
+                  <Typography component="span" fontWeight="bold">
+                    จับตาการนับคะแนนอย่างใกล้ชิด
+                  </Typography>
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={1}>
+                <img
+                  width={40}
+                  height={30}
+                  src="/assets/checkbox_icon.png"
+                  alt="checkbox"
+                />
+                <Typography component="div">
+                  ต้องการอาสา{" "}
+                  <Typography component="span" fontWeight="bold">
+                    3 คน / หน่วย
+                  </Typography>{" "}
+                  เพื่อ นับ
+                  <Typography component="span" fontWeight="bold">
+                    คะแนนการเลือกตั้ง
+                  </Typography>
+                  และ
+                  <Typography component="span" fontWeight="bold">
+                    ประชามติ
+                  </Typography>
+                </Typography>
+              </Stack>
+            </Box>
           </Stack>
         </Box>
         <Box mt={2} display="flex" justifyContent="flex-end">
