@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 
 const HowToInfo: FC = () => {
@@ -9,65 +9,71 @@ const HowToInfo: FC = () => {
       color={"white"}
       fontSize={"1rem"}
     >
-      <Typography
-        textAlign={"center"}
-        fontSize="1.25rem"
-        fontWeight={"bold"}
-        marginBottom={"1rem"}
-      >
-        ความหมายของสีหน่วยเลือกตั้ง
+      <Typography fontSize="32px" fontWeight="bold" color="#01c07f">
+        HOW TO
       </Typography>
-      <Stack direction="row" alignItems="center" margin={"1rem 0"}>
-        <div
-          style={{
-            width: "18px",
-            height: "18px",
-            margin: "0 0.5rem 0 0",
-            borderRadius: "100%",
-            background: "#10C487",
-          }}
-        ></div>
-        <Typography fontSize={"1rem"} fontWeight={"bold"}>
-          มีการรายงานสถานการณ์ในหน่วย
+      <Typography fontSize="20px">
+        สังเกตการณ์หน่วยเลือกตั้ง{" "}
+        <Typography fontSize="20px" fontWeight="bold" component="span">
+          (วันที่ 1 และ 8 กุมภา 69)
         </Typography>
-      </Stack>
-      <Stack direction="row" alignItems="center" margin={"1rem 0 0.25rem 0"}>
-        <div
-          style={{
-            width: "18px",
-            height: "18px",
-            margin: "0 0.5rem 0 0",
-            borderRadius: "100%",
-            background: "#C10000",
-          }}
-        ></div>
-        <Typography fontSize={"1rem"} fontWeight={"bold"}>
-          ขาดการรายงาน
-        </Typography>
-      </Stack>
-      <Typography color="#A4A4A4" fontSize={"0.875rem"}>
-        ซึ่งทุกคนสามารถเข้าไปที่หน่วย และช่วยส่งรายงานได้
-        หน่วยสีแดงจะเปลี่ยนเป็นสีเขียวหลังจากที่การรายงาน
-        ของท่านได้รับการยืนยันจากทีมงานแล้ว
-        และจะถูกรีเช็ตกลับเป็นสีแดงอีกครั้งในทุกๆ 2-3 ชม.
       </Typography>
-      <Stack direction="row" alignItems="center" margin={"1rem 0"}>
-        <div
-          style={{
-            width: "18px",
-            height: "18px",
-            margin: "0 0.5rem 0 0",
-            borderRadius: "100%",
-            background: "#A4A4A4",
-          }}
-        ></div>
-        <Typography
-          fontSize={"1rem"}
-          fontWeight={"bold"}
-          sx={{ wordBreak: "break-word", width: "80%" }}
-        >
-          รายงาน และนับคะแนนเสร็จสิ้น
-        </Typography>
+      <Box my={3}>sdfsdf</Box>
+      <Typography fontWeight="bold">สีสถานะของหน่วยเลือกตั้ง</Typography>
+      <Stack direction="column" spacing={1} mb={3} mt={1}>
+        <Stack direction="row" alignItems="center">
+          <div
+            style={{
+              width: "18px",
+              height: "18px",
+              margin: "0 0.5rem 0 0",
+              borderRadius: "100%",
+              background: "#10C487",
+            }}
+          />
+          <Typography>ได้รับการรายงานแล้ว</Typography>
+        </Stack>
+        <Box>
+          <Stack direction="row" alignItems="center">
+            <div
+              style={{
+                width: "18px",
+                height: "18px",
+                margin: "0 0.5rem 0 0",
+                borderRadius: "100%",
+                background: "#016b05",
+              }}
+            />
+            <Typography>ต้องการการรายงานซ้ำ</Typography>
+          </Stack>
+          <Typography color="#A4A4A4" fontSize={"0.875rem"}>
+            เราอยากให้ทุกหน่วยถูกรายงานซ้ำ ทุก ๆ 4 ชั่วโมง
+          </Typography>
+        </Box>
+        <Stack direction="row" alignItems="center">
+          <div
+            style={{
+              width: "18px",
+              height: "18px",
+              margin: "0 0.5rem 0 0",
+              borderRadius: "100%",
+              background: "#FFF",
+            }}
+          ></div>
+          <Typography>ขาดการรายงาน</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center">
+          <div
+            style={{
+              width: "18px",
+              height: "18px",
+              margin: "0 0.5rem 0 0",
+              borderRadius: "100%",
+              background: "#ffcb4c",
+            }}
+          ></div>
+          <Typography>มีอาสาฯ รอนับคะแนนแล้ว</Typography>
+        </Stack>
       </Stack>
     </Stack>
   );

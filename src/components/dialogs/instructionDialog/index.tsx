@@ -49,7 +49,9 @@ const InstructionDialog: FC<{
       fullWidth
       maxWidth="sm"
       open={open}
-      PaperProps={{ sx: { background: "#090909" } }}
+      PaperProps={{
+        sx: { background: "#090909", m: 0, p: 0, width: "calc(100% - 2rem)" },
+      }}
     >
       <DialogContent sx={{ paddingBottom: 0 }}>
         <Stack
@@ -58,20 +60,6 @@ const InstructionDialog: FC<{
           justifyContent={"space-between"}
         >
           <Stack direction="column">
-            <Stack direction="row" justifyContent="center" alignItems="center">
-              <div
-                style={{
-                  height: "44px",
-                }}
-              >
-                <img
-                  src="/assets/MainLogo.png"
-                  height="100%"
-                  width="auto"
-                  alt="WeCheck"
-                />
-              </div>
-            </Stack>
             {infoState === 0 && <HowToInfo />}
             {infoState === 1 && <RegistrationInfo />}
           </Stack>

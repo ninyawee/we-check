@@ -25,7 +25,7 @@ const RegistrationInfo: FC = () => {
           overflow: "visible",
         }}
       >
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={1} alignItems="flex-start">
           <Box
             sx={{
               flexShrink: 0,
@@ -34,22 +34,31 @@ const RegistrationInfo: FC = () => {
               alignItems: "center",
               borderRadius: "8px",
               backgroundColor: palette.primary.main,
-              width: "40px",
-              height: "40px",
+              width: "45px",
+              height: "45px",
             }}
           >
             A
           </Box>
-          <Typography>
+          <Typography fontSize="22px">
             ช่วยรายงาน
-            <Typography component="span" sx={{ fontWeight: "bold" }}>
+            <Typography
+              fontSize="22px"
+              component="span"
+              sx={{ fontWeight: "bold" }}
+            >
               กระบวนการเลือกตั้ง
             </Typography>
             และ
-            <Typography component="span" sx={{ fontWeight: "bold" }}>
+            <Typography
+              fontSize="22px"
+              component="span"
+              sx={{ fontWeight: "bold" }}
+            >
               เหตุการณ์
             </Typography>
             <Typography
+              fontSize="22px"
               component="span"
               sx={{ fontWeight: "bold", color: "#ff5757" }}
             >
@@ -73,7 +82,9 @@ const RegistrationInfo: FC = () => {
               borderRadius: "16px",
             }}
           >
-            <Typography fontWeight="bold">ใช้เวลาไม่เกิน 5 นาที</Typography>
+            <Typography fontSize="16px" fontWeight="bold">
+              ใช้เวลาไม่เกิน 5 นาที
+            </Typography>
           </Box>
         </Box>
         <Box>
@@ -117,13 +128,13 @@ const RegistrationInfo: FC = () => {
           my: 2,
           textAlign: "center",
           fontWeight: "bold",
-          fontSize: "1.25rem",
+          fontSize: "28px",
         }}
       >
         หรือ
       </Typography>
       <Card sx={{ padding: 1, borderRadius: "8px", minWidth: "318px" }}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={1} alignItems="flex-start">
           <Box
             sx={{
               flexShrink: 0,
@@ -132,19 +143,27 @@ const RegistrationInfo: FC = () => {
               alignItems: "center",
               borderRadius: "8px",
               backgroundColor: palette.primary.main,
-              width: "40px",
-              height: "40px",
+              width: "45px",
+              height: "45px",
             }}
           >
             B
           </Box>
-          <Typography>
+          <Typography fontSize="22px">
             ช่วยรายงาน
-            <Typography component="span" sx={{ fontWeight: "bold" }}>
+            <Typography
+              fontSize="22px"
+              component="span"
+              sx={{ fontWeight: "bold" }}
+            >
               การนับคะแนน
             </Typography>
             อย่าง
-            <Typography component="span" sx={{ fontWeight: "bold" }}>
+            <Typography
+              fontSize="22px"
+              component="span"
+              sx={{ fontWeight: "bold" }}
+            >
               ใกล้ชิด
             </Typography>
             หลังปิดหน่วยเลือกตั้ง
@@ -164,7 +183,7 @@ const RegistrationInfo: FC = () => {
               </Typography>
             </Typography>
             <Typography component="div">
-              ต้องการอาสา
+              ต้องการอาสา{" "}
               <Typography component="span" fontWeight="bold">
                 3 คน / หน่วย
               </Typography>{" "}
