@@ -81,20 +81,22 @@ const HowToInfo: FC = () => {
             borderBottom: "1px dotted rgba(255,255,255,0.12)",
           }}
         >
-          <StepPoint
-            imageHeight={70}
-            imageWidth={70}
-            imageSrc="/assets/storyboard_icon_4.png"
-            description={
-              <Typography color="#c1c0c0">
-                3. พบเห็น{" "}
-                <Typography fontWeight="bold" color="#ff3131" component="span">
-                  ความผิดปกติ
-                </Typography>{" "}
-                ในหน่วยเลือกตั้ง
-              </Typography>
-            }
-          />
+          <Box sx={{ "& img": { marginTop: "18px" } }}>
+            <StepPoint
+              imageHeight={70}
+              imageWidth={70}
+              imageSrc="/assets/storyboard_icon_4.png"
+              description={
+          <Typography color="#c1c0c0">
+            3. พบเห็น{" "}
+            <Typography fontWeight="bold" color="#ff3131" component="span">
+              ความผิดปกติ
+            </Typography>{" "}
+            ในหน่วยเลือกตั้ง
+          </Typography>
+              }
+            />
+          </Box>
 
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Typography fontSize={24} color="#c1c0c0" aria-hidden>
@@ -102,19 +104,21 @@ const HowToInfo: FC = () => {
             </Typography>
           </Box>
 
-          <StepPoint
-            imageHeight={100}
-            imageWidth={90}
-            imageSrc="/assets/storyboard_icon_5.png"
-            description={
-              <Typography color="#c1c0c0">
-                4. รายงานเหตุการณ์ ผ่าน{" "}
-                <Typography fontWeight="bold" color="#01c07f" component="span">
-                  We Check
-                </Typography>
-              </Typography>
-            }
-          />
+          <Box sx={{ "& img": { marginTop: "5px" } }}>
+            <StepPoint
+              imageHeight={100}
+              imageWidth={90}
+              imageSrc="/assets/storyboard_icon_5.png"
+              description={
+          <Typography color="#c1c0c0">
+            4. รายงานเหตุการณ์ ผ่าน{" "}
+            <Typography fontWeight="bold" color="#01c07f" component="span">
+              We Check
+            </Typography>
+          </Typography>
+              }
+            />
+          </Box>
         </Box>
 
         <Box
@@ -145,7 +149,7 @@ const HowToInfo: FC = () => {
 
           <StepPoint
             imageHeight={100}
-            imageWidth={80}
+            imageWidth={70}
             imageSrc="/assets/storyboard_icon_3.png"
             description={
               <Typography color="#c1c0c0">
