@@ -8,7 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { FC, Fragment, useState, useEffect } from "react";
+import { FC, Fragment, useState, useEffect, useMemo } from "react";
 import AppInfoDialog from "../dialogs/appInfoDialog";
 import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
 import InstructionDialog from "../dialogs/instructionDialog";
@@ -60,9 +60,10 @@ const IntroductionPanel: FC<{
   const { isDesktopConfirm } = useLayoutStore();
   const matchDesktop = useMediaQuery("(min-width:900px)");
 
-  // Filter legend items based on showCounting state
-  const visibleLegendItems = STATUS_LEGEND.filter(
-    (s) => s.key !== "counting" || showCounting
+  // Filter legend items based on showCounting state (memoized to avoid recalculation)
+  const visibleLegendItems = useMemo(
+    () => STATUS_LEGEND.filter((s) => s.key !== "counting" || showCounting),
+    [showCounting]
   );
 
   function reportLocationClick() {
