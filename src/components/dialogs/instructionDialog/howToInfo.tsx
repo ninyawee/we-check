@@ -153,7 +153,7 @@ const HowToInfo: FC = () => {
               borderRadius: "100%",
               background: "#FFF",
             }}
-          ></div>
+          />
           <Typography>ขาดการรายงาน</Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
@@ -165,7 +165,7 @@ const HowToInfo: FC = () => {
               borderRadius: "100%",
               background: "#ffcb4c",
             }}
-          ></div>
+          />
           <Typography>มีอาสาฯ รอนับคะแนนแล้ว</Typography>
         </Stack>
       </Stack>
