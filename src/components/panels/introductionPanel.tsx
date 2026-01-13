@@ -14,6 +14,10 @@ import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
 import InstructionDialog from "../dialogs/instructionDialog";
 import HorizontalLine from "../horizontalLine";
 import OSM from "../map/credit/osm";
+import STATUS_COLORS from "@/src/config/statusColors";
+import StatusDot from "@/src/components/statusDot";
+import StatusLegendItem from "@/src/components/statusLegendItem";
+import STATUS_LEGEND from "@/src/config/statusLegend";
 
 const IntroductionPanel: FC<{
   active?: boolean;
@@ -113,26 +117,16 @@ const IntroductionPanel: FC<{
                 justifyContent={"space-between"}
                 sx={{ position: "relative" }}
               >
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  height="2rem"
-                >
-                  <Stack direction="row" alignItems="center">
-                    <div
-                      style={{
-                        width: "18px",
-                        height: "18px",
-                        margin: "0 0.5rem 0 1rem",
-                        borderRadius: "100%",
-                        background: "#10C487",
-                      }}
-                    ></div>
-                    <Typography fontSize={"1rem"}>
-                      มีการรายงานสถานการณ์ในหน่วย
-                    </Typography>
-                  </Stack>
+                <Stack direction="row" alignItems="flex-start" justifyContent="space-between" sx={{ gap: 1 }}>
+                  <div>
+                    <Stack direction="column">
+                      {STATUS_LEGEND.map((s) => (
+                        <div key={s.key}>
+                          <StatusLegendItem color={s.color} label={s.label} small={s.small} />
+                        </div>
+                      ))}
+                    </Stack>
+                  </div>
                   <Stack
                     className="clickable"
                     direction="row"
@@ -151,37 +145,6 @@ const IntroductionPanel: FC<{
                       sx={{ marginRight: "0.5rem" }}
                     />
                   </Stack>
-                </Stack>
-                <Stack direction="row" alignItems="center" height="2rem">
-                  <div
-                    style={{
-                      width: "18px",
-                      height: "18px",
-                      margin: "0 0.5rem 0 1rem",
-                      borderRadius: "100%",
-                      background: "#C10000",
-                    }}
-                  ></div>
-                  <Typography fontSize={"1rem"}>ขาดการรายงาน</Typography>
-                </Stack>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  height="2rem"
-                  marginBottom={"1rem"}
-                >
-                  <div
-                    style={{
-                      width: "18px",
-                      height: "18px",
-                      margin: "0 0.5rem 0 1rem",
-                      borderRadius: "100%",
-                      background: "#A4A4A4",
-                    }}
-                  ></div>
-                  <Typography fontSize={"1rem"}>
-                    รายงาน และนับคะแนนเสร็จสิ้น
-                  </Typography>
                 </Stack>
                 <div
                   style={{
