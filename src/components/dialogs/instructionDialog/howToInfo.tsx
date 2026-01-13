@@ -28,11 +28,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_1.png"
           description={
             <Typography color="#c1c0c0">
-              1. ใช้{" "}
-              <Typography fontWeight="bold" color="#01c07f" component="span">
-                We check
-              </Typography>{" "}
-              แล้วพบว่า หน่วยเลือกตั้งใกล้บ้าน{" "}
+              1. คุณพบว่า หน่วยเลือกตั้งที่อยู่ใกล้ๆ เป็น{" "}
               <Typography component="span" color="#FFF" fontWeight="bold">
                 สีขาว{" "}
                 <Typography component="span" fontWeight="normal">
@@ -43,35 +39,20 @@ const HowToInfo: FC = () => {
           }
         />
         <StepPoint
-          imageWidth={90}
+          imageWidth={70}
           imageSrc="/assets/storyboard_icon_2.png"
           description={
             <Typography color="#c1c0c0">
-              2. เดินทางไปยังหน่วยเหล่านั้นเพื่อ{" "}
+              2. เดินทางไปยังหน่วยนั้นเพื่อ{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
-                รายงานสถารการณ์
+                รายงานสถารการณ์ 
               </Typography>{" "}
-              แล้วพบว่า หน่วยเลือกตั้งใกล้บ้าน{" "}
               <Typography component="span" color="#c1c0c0">
                 หรือ{" "}
                 <Typography component="span" fontWeight="bold" color="#ffcb4c">
-                  จับตาการนับคะแนน
+                  จับตาการนับคะแนน 
                 </Typography>
               </Typography>
-            </Typography>
-          }
-        />
-        <StepPoint
-          imageHeight={100}
-          imageWidth={80}
-          imageSrc="/assets/storyboard_icon_3.png"
-          description={
-            <Typography color="#c1c0c0">
-              3. ช่วยให้การสังเกตการณ์ มี{" "}
-              <Typography fontWeight="bold" color="#01c07f" component="span">
-                ความครอบคลุม
-              </Typography>{" "}
-              มากยิ่งขึ้น
             </Typography>
           }
         />
@@ -81,7 +62,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_4.png"
           description={
             <Typography color="#c1c0c0">
-              4. พบเห็น{" "}
+              3. พบเห็น{" "}
               <Typography fontWeight="bold" color="#ff3131" component="span">
                 ความผิดปกติ
               </Typography>{" "}
@@ -95,9 +76,9 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_5.png"
           description={
             <Typography color="#c1c0c0">
-              5. รายงานเหตุการณ์ ผ่าน{" "}
+              4. รายงานเหตุการณ์ ผ่าน{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
-                ความผิดปกติ
+                We Check
               </Typography>
             </Typography>
           }
@@ -108,7 +89,21 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_6.png"
           description={
             <Typography color="#c1c0c0">
-              6. องค์กรอิสระ / ประชาชน รับทราบ และช่วยกันเป็นหูเป็นตา
+              5. องค์กรอิสระ / ประชาชน รับทราบ และช่วยกันเป็นหูเป็นตา
+            </Typography>
+          }
+        />
+        <StepPoint
+          imageHeight={100}
+          imageWidth={80}
+          imageSrc="/assets/storyboard_icon_3.png"
+          description={
+            <Typography color="#c1c0c0">
+              6. ช่วยให้การสังเกตการณ์ มี{" "}
+              <Typography fontWeight="bold" color="#01c07f" component="span">
+                ความครอบคลุม
+              </Typography>{" "}
+              มากยิ่งขึ้น
             </Typography>
           }
         />
