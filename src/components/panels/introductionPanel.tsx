@@ -1,3 +1,5 @@
+import { useLayoutStore } from "@/src/store/layout.store";
+import { ArrowForwardIos } from "@mui/icons-material";
 import {
   Box,
   CircularProgress,
@@ -7,10 +9,9 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { FC, Fragment, useState } from "react";
-import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
 import AppInfoDialog from "../dialogs/appInfoDialog";
-import { useLayoutStore } from "@/src/store/layout.store";
-import { ArrowForwardIos } from "@mui/icons-material";
+import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
+import InstructionDialog from "../dialogs/instructionDialog";
 import HorizontalLine from "../horizontalLine";
 import OSM from "../map/credit/osm";
 
@@ -31,6 +32,7 @@ const IntroductionPanel: FC<{
 
   return (
     <Fragment>
+      <InstructionDialog open onClose={() => {}} />
       <AppInfoDialog
         open={appInfoDialogOpen}
         onClose={() => setAppInfoDialogOpen(false)}
@@ -56,7 +58,15 @@ const IntroductionPanel: FC<{
             }}
           >
             <OSM />
-            <Typography fontSize={"0.8rem"} color="#A4A4A4" position="absolute" top={"-2.8rem"} left={"1rem"}>ข้อมูลจะอัปเดตทุก 5 นาที</Typography>
+            <Typography
+              fontSize={"0.8rem"}
+              color="#A4A4A4"
+              position="absolute"
+              top={"-2.8rem"}
+              left={"1rem"}
+            >
+              ข้อมูลจะอัปเดตทุก 5 นาที
+            </Typography>
             <Stack direction={"row"} justifyContent={"space-between"}>
               <div
                 className="clickable"
@@ -80,7 +90,6 @@ const IntroductionPanel: FC<{
                 )}
               </div>
             </Stack>
-
             <Stack
               direction="column"
               justifyContent="space-between"
@@ -130,7 +139,10 @@ const IntroductionPanel: FC<{
                     >
                       เรียนรู้เพิ่มเติม
                     </Typography>
-                    <ArrowForwardIos color="primary" sx={{ marginRight: '0.5rem' }} />
+                    <ArrowForwardIos
+                      color="primary"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
                   </Stack>
                 </Stack>
                 <Stack direction="row" alignItems="center" height="2rem">
@@ -216,13 +228,11 @@ const IntroductionPanel: FC<{
                     />
                   </div>
                 </Stack>
-                <Stack
-                  className="clickable"
-                  direction="row">
+                <Stack className="clickable" direction="row">
                   <Typography onClick={reportLocationClick}>
                     แจ้งหน่วยผิด / ตกหล่น
                   </Typography>
-                  <ArrowForwardIos sx={{ color: '#A4A4A4' }} />
+                  <ArrowForwardIos sx={{ color: "#A4A4A4" }} />
                 </Stack>
               </Stack>
             </Stack>
