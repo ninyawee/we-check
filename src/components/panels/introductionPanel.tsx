@@ -8,7 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment, useState, useEffect } from "react";
 import AppInfoDialog from "../dialogs/appInfoDialog";
 import CoverageInfoDialog from "../dialogs/coverageInfoDialog";
 import InstructionDialog from "../dialogs/instructionDialog";
@@ -18,6 +18,7 @@ import STATUS_COLORS from "@/src/config/statusColors";
 import StatusDot from "@/src/components/statusDot";
 import StatusLegendItem from "@/src/components/statusLegendItem";
 import STATUS_LEGEND from "@/src/config/statusLegend";
+import { COUNTING_THRESHOLD } from "@/src/config/statusConfig";
 
 const IntroductionPanel: FC<{
   active?: boolean;
@@ -30,6 +31,28 @@ const IntroductionPanel: FC<{
 
   const [instructionDialogOpen, setInstructionDialogOpen] =
     useState<boolean>(false);
+
+  // showCounting is determined client-side from local device time.
+  // Initially false to avoid SSR/client hydration mismatch; will update in useEffect.
+  const [showCounting, setShowCounting] = useState<boolean>(false);
+
+  useEffect(() => {
+    function checkCounting() {
+      try {
+        const now = new Date();
+        const threshold = new Date();
+        threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
+        setShowCounting(now >= threshold);
+      } catch (e) {
+        setShowCounting(false);
+      }
+    }
+
+    // run immediately then refresh every second
+    checkCounting();
+    const id = setInterval(checkCounting, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const { isDesktopConfirm } = useLayoutStore();
   const matchDesktop = useMediaQuery("(min-width:900px)");
@@ -120,9 +143,9 @@ const IntroductionPanel: FC<{
                 <Stack direction="row" alignItems="flex-start" justifyContent="space-between" sx={{ gap: 1 }}>
                   <div>
                     <Stack direction="column">
-                      {STATUS_LEGEND.map((s) => (
+                      {STATUS_LEGEND.filter((s) => s.key !== "counting" || showCounting).map((s) => (
                         <div key={s.key}>
-                          <StatusLegendItem color={s.color} label={s.label} small={s.small} />
+                          <StatusLegendItem color={s.color} label={s.label} small={s.small} compact />
                         </div>
                       ))}
                     </Stack>
@@ -155,12 +178,6 @@ const IntroductionPanel: FC<{
                     zIndex: 2,
                   }}
                 >
-                  <img
-                    src="/assets/captain.png"
-                    height="100%"
-                    width="auto"
-                    alt="Captain"
-                  />
                 </div>
               </Stack>
               <HorizontalLine />
