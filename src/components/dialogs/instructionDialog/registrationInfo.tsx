@@ -35,9 +35,10 @@ const RegistrationInfo: FC = () => {
               backgroundColor: palette.primary.main,
               width: "45px",
               height: "45px",
+              color: "white",
             }}
           >
-            A
+            <Typography fontWeight="bold">A</Typography>
           </Box>
           <Typography fontSize="22px">
             ช่วยรายงาน
@@ -140,7 +141,12 @@ const RegistrationInfo: FC = () => {
         <Box mt={2} display="flex" justifyContent="flex-end">
           <Button
             variant="contained"
-            sx={{ boxShadow: "none", height: "40px", minWidth: "100px" }}
+            sx={{
+              boxShadow: "none",
+              height: "40px",
+              minWidth: "100px",
+              color: "white",
+            }}
             onClick={handleRegisterReporter}
           >
             สมัคร
@@ -169,9 +175,10 @@ const RegistrationInfo: FC = () => {
               backgroundColor: palette.primary.main,
               width: "45px",
               height: "45px",
+              color: "white",
             }}
           >
-            B
+            <Typography fontWeight="bold">B</Typography>
           </Box>
           <Typography fontSize="22px">
             ช่วยรายงาน
@@ -251,7 +258,12 @@ const RegistrationInfo: FC = () => {
         <Box mt={2} display="flex" justifyContent="flex-end">
           <Button
             variant="contained"
-            sx={{ boxShadow: "none", height: "40px", minWidth: "100px" }}
+            sx={{
+              boxShadow: "none",
+              height: "40px",
+              minWidth: "100px",
+              color: "white",
+            }}
             onClick={handleRegisterCountVote}
           >
             สมัคร

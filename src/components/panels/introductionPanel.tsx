@@ -23,6 +23,10 @@ const IntroductionPanel: FC<{
   const [coverageInfoDialogOpen, setCoverageInfoDialogOpen] =
     useState<boolean>(false);
   const [appInfoDialogOpen, setAppInfoDialogOpen] = useState<boolean>(false);
+
+  const [instructionDialogOpen, setInstructionDialogOpen] =
+    useState<boolean>(false);
+
   const { isDesktopConfirm } = useLayoutStore();
   const matchDesktop = useMediaQuery("(min-width:900px)");
 
@@ -32,7 +36,10 @@ const IntroductionPanel: FC<{
 
   return (
     <Fragment>
-      <InstructionDialog open onClose={() => {}} />
+      <InstructionDialog
+        open={instructionDialogOpen}
+        onClose={() => setInstructionDialogOpen(false)}
+      />
       <AppInfoDialog
         open={appInfoDialogOpen}
         onClose={() => setAppInfoDialogOpen(false)}
@@ -130,14 +137,14 @@ const IntroductionPanel: FC<{
                     className="clickable"
                     direction="row"
                     alignItems="center"
-                    onClick={() => setAppInfoDialogOpen(true)}
+                    onClick={() => setInstructionDialogOpen(true)}
                   >
                     <Typography
                       fontSize={"1rem"}
                       margin={"0.25rem 0 0.25rem 1rem"}
                       color="primary"
                     >
-                      เรียนรู้เพิ่มเติม
+                      วิธีใช้งาน
                     </Typography>
                     <ArrowForwardIos
                       color="primary"

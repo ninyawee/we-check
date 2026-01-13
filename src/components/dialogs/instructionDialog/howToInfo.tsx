@@ -28,7 +28,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_1.png"
           description={
             <Typography color="#c1c0c0">
-              ใช้{" "}
+              1. ใช้{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
                 We check
               </Typography>{" "}
@@ -47,7 +47,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_2.png"
           description={
             <Typography color="#c1c0c0">
-              เดินทางไปยังหน่วยเหล่านั้นเพื่อ{" "}
+              2. เดินทางไปยังหน่วยเหล่านั้นเพื่อ{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
                 รายงานสถารการณ์
               </Typography>{" "}
@@ -67,7 +67,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_3.png"
           description={
             <Typography color="#c1c0c0">
-              ช่วยให้การสังเกตการณ์ มี{" "}
+              3. ช่วยให้การสังเกตการณ์ มี{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
                 ความครอบคลุม
               </Typography>{" "}
@@ -81,7 +81,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_4.png"
           description={
             <Typography color="#c1c0c0">
-              พบเห็น{" "}
+              4. พบเห็น{" "}
               <Typography fontWeight="bold" color="#ff3131" component="span">
                 ความผิดปกติ
               </Typography>{" "}
@@ -95,7 +95,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_5.png"
           description={
             <Typography color="#c1c0c0">
-              รายงานเหตุการณ์ ผ่าน{" "}
+              5. รายงานเหตุการณ์ ผ่าน{" "}
               <Typography fontWeight="bold" color="#01c07f" component="span">
                 ความผิดปกติ
               </Typography>
@@ -108,7 +108,7 @@ const HowToInfo: FC = () => {
           imageSrc="/assets/storyboard_icon_6.png"
           description={
             <Typography color="#c1c0c0">
-              องค์กรอิสระ / ประชาชน รับทราบ และช่วยกันเป็นหูเป็นตา
+              6. องค์กรอิสระ / ประชาชน รับทราบ และช่วยกันเป็นหูเป็นตา
             </Typography>
           }
         />
