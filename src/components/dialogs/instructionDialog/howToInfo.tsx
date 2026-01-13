@@ -1,6 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import StepPoint from "./stepPoint";
+import STATUS_COLORS from "@/src/config/statusColors";
+import StatusLegendItem from "@/src/components/statusLegendItem";
+import STATUS_LEGEND from "@/src/config/statusLegend";
 
 const HowToInfo: FC = () => {
   return (
@@ -10,7 +13,7 @@ const HowToInfo: FC = () => {
       color={"white"}
       fontSize={"1rem"}
     >
-      <Typography fontSize="32px" fontWeight="bold" color="#01c07f">
+      <Typography fontSize="32px" fontWeight="bold" color={STATUS_COLORS.accent}>
         HOW TO
       </Typography>
       <Typography fontSize="20px">
@@ -35,7 +38,7 @@ const HowToInfo: FC = () => {
             description={
               <Typography color="#c1c0c0">
                 1. คุณพบว่า หน่วยเลือกตั้งที่อยู่ใกล้ๆ เป็น{" "}
-                <Typography component="span" color="#FFF" fontWeight="bold">
+                <Typography component="span" color={STATUS_COLORS.missing} fontWeight="bold">
                   สีขาว{" "}
                   <Typography component="span" fontWeight="normal">
                     ( ขาดการรายงาน )
@@ -57,12 +60,12 @@ const HowToInfo: FC = () => {
             description={
               <Typography color="#c1c0c0">
                 2. เดินทางไปยังหน่วยนั้นเพื่อ{" "}
-                <Typography fontWeight="bold" color="#01c07f" component="span">
+                <Typography fontWeight="bold" color={STATUS_COLORS.accent} component="span">
                   รายงานสถารการณ์
                 </Typography>{" "}
                 <Typography component="span" color="#c1c0c0">
                   หรือ{" "}
-                  <Typography component="span" fontWeight="bold" color="#ffcb4c">
+                  <Typography component="span" fontWeight="bold" color={STATUS_COLORS.counting}>
                     จับตาการนับคะแนน
                   </Typography>
                 </Typography>
@@ -89,7 +92,7 @@ const HowToInfo: FC = () => {
               description={
           <Typography color="#c1c0c0">
             3. พบเห็น{" "}
-            <Typography fontWeight="bold" color="#ff3131" component="span">
+            <Typography fontWeight="bold" color={STATUS_COLORS.abnormal} component="span">
               ความผิดปกติ
             </Typography>{" "}
             ในหน่วยเลือกตั้ง
@@ -112,7 +115,7 @@ const HowToInfo: FC = () => {
               description={
           <Typography color="#c1c0c0">
             4. รายงานเหตุการณ์ ผ่าน{" "}
-            <Typography fontWeight="bold" color="#01c07f" component="span">
+            <Typography fontWeight="bold" color={STATUS_COLORS.accent} component="span">
               We Check
             </Typography>
           </Typography>
@@ -154,7 +157,7 @@ const HowToInfo: FC = () => {
             description={
               <Typography color="#c1c0c0">
                 6. ช่วยให้การสังเกตการณ์ มี{" "}
-                <Typography fontWeight="bold" color="#01c07f" component="span">
+                <Typography fontWeight="bold" color={STATUS_COLORS.accent} component="span">
                   ความครอบคลุม
                 </Typography>{" "}
                 มากยิ่งขึ้น
@@ -164,61 +167,13 @@ const HowToInfo: FC = () => {
         </Box>
       </Box>
       <Typography fontWeight="bold">สีสถานะของหน่วยเลือกตั้ง</Typography>
-      <Stack direction="column" spacing={1} mb={3} mt={1}>
-        <Stack direction="row" alignItems="center">
-          <div
-            style={{
-              width: "18px",
-              height: "18px",
-              margin: "0 0.5rem 0 0",
-              borderRadius: "100%",
-              background: "#10C487",
-            }}
-          />
-          <Typography>ได้รับการรายงานแล้ว</Typography>
+        <Stack direction="column" spacing={1} mb={3} mt={1}>
+          {STATUS_LEGEND.map((s) => (
+            <div key={s.key}>
+              <StatusLegendItem color={s.color} label={s.label} small={s.small} />
+            </div>
+          ))}
         </Stack>
-        <Box>
-          <Stack direction="row" alignItems="center">
-            <div
-              style={{
-                width: "18px",
-                height: "18px",
-                margin: "0 0.5rem 0 0",
-                borderRadius: "100%",
-                background: "#016b05",
-              }}
-            />
-            <Typography>ต้องการการรายงานซ้ำ</Typography>
-          </Stack>
-          <Typography color="#A4A4A4" fontSize={"0.875rem"}>
-            เราอยากให้ทุกหน่วยถูกรายงานซ้ำ ทุก ๆ 4 ชั่วโมง
-          </Typography>
-        </Box>
-        <Stack direction="row" alignItems="center">
-          <div
-            style={{
-              width: "18px",
-              height: "18px",
-              margin: "0 0.5rem 0 0",
-              borderRadius: "100%",
-              background: "#FFF",
-            }}
-          />
-          <Typography>ขาดการรายงาน</Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center">
-          <div
-            style={{
-              width: "18px",
-              height: "18px",
-              margin: "0 0.5rem 0 0",
-              borderRadius: "100%",
-              background: "#ffcb4c",
-            }}
-          />
-          <Typography>มีอาสาฯ รอนับคะแนนแล้ว</Typography>
-        </Stack>
-      </Stack>
     </Stack>
   );
 };
