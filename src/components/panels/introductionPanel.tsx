@@ -51,14 +51,19 @@ const IntroductionPanel: FC<{
       }
     }
 
-    // Run immediately on mount, then check every minute
+    // Run immediately on mount, then check every 30 seconds
     checkCounting();
-    const id = setInterval(checkCounting, 60000); // Check every 60 seconds instead of every second
+    const id = setInterval(checkCounting, 30000); // Check every 30 seconds for responsive updates
     return () => clearInterval(id);
   }, []);
 
   const { isDesktopConfirm } = useLayoutStore();
   const matchDesktop = useMediaQuery("(min-width:900px)");
+
+  // Filter legend items based on showCounting state
+  const visibleLegendItems = STATUS_LEGEND.filter(
+    (s) => s.key !== "counting" || showCounting
+  );
 
   function reportLocationClick() {
     window.open("https://forms.gle/EpXbbrVfJdxbX6hv7");
@@ -146,7 +151,7 @@ const IntroductionPanel: FC<{
                 <Stack direction="row" alignItems="flex-start" justifyContent="space-between" sx={{ gap: 1 }}>
                   <div>
                     <Stack direction="column">
-                      {isMounted && STATUS_LEGEND.filter((s) => s.key !== "counting" || showCounting).map((s) => (
+                      {isMounted && visibleLegendItems.map((s) => (
                         <div key={s.key}>
                           <StatusLegendItem color={s.color} label={s.label} small={s.small} compact />
                         </div>
