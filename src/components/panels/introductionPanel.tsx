@@ -37,23 +37,17 @@ const IntroductionPanel: FC<{
   const [showCounting, setShowCounting] = useState<boolean>(false);
 
   useEffect(() => {
-    function checkCounting() {
-      const now = new Date();
-      const threshold = new Date();
-      threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
-      setShowCounting(now >= threshold);
+  const now = new Date();
+  const threshold = new Date();
+  threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
+  setShowCounting(now >= threshold);
 
-      // If before threshold, set timeout to exact time
-      if (now < threshold) {
-        const msUntilThreshold = threshold.getTime() - now.getTime();
-        return setTimeout(() => setShowCounting(true), msUntilThreshold);
-      }
-    }
-    const cleanup = checkCounting();
-    return () => {
-      if (cleanup) clearTimeout(cleanup);
-    };
-  }, []);
+  if (now < threshold) {
+    const msUntilThreshold = threshold.getTime() - now.getTime();
+    const timeoutId = setTimeout(() => setShowCounting(true), msUntilThreshold);
+    return () => clearTimeout(timeoutId);
+  }
+}, []);
 
   const { isDesktopConfirm } = useLayoutStore();
   const matchDesktop = useMediaQuery("(min-width:900px)");
