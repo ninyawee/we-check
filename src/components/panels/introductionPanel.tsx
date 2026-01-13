@@ -38,20 +38,21 @@ const IntroductionPanel: FC<{
 
   useEffect(() => {
     function checkCounting() {
-      try {
-        const now = new Date();
-        const threshold = new Date();
-        threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
-        setShowCounting(now >= threshold);
-      } catch (e) {
-        setShowCounting(false);
+      const now = new Date();
+      const threshold = new Date();
+      threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
+      setShowCounting(now >= threshold);
+
+      // If before threshold, set timeout to exact time
+      if (now < threshold) {
+        const msUntilThreshold = threshold.getTime() - now.getTime();
+        return setTimeout(() => setShowCounting(true), msUntilThreshold);
       }
     }
-
-    // run immediately then refresh every second
-    checkCounting();
-    const id = setInterval(checkCounting, 1000);
-    return () => clearInterval(id);
+    const cleanup = checkCounting();
+    return () => {
+      if (cleanup) clearTimeout(cleanup);
+    };
   }, []);
 
   const { isDesktopConfirm } = useLayoutStore();
