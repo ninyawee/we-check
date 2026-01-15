@@ -8,6 +8,7 @@ import LabelVallaris from "../components/labelVallaris";
 import LocationPanel from "../components/panels/locationPanel";
 import IntroductionPanel from "../components/panels/introductionPanel";
 import TutorialDialog from "../components/dialogs/tutorialDialog";
+import AvatarButton from "../components/avatarButton";
 import { getGeolocation, pulsingDot } from "../config/map";
 import { useLocationStore } from "../store/location.store";
 import { ILocation } from "../interfaces/location.interface";
@@ -26,9 +27,9 @@ const index: NextPage = () => {
     trigger: boolean;
     loading: boolean;
   }>({ trigger: false, loading: false });
-  const matchDesktop = useMediaQuery('(min-width:900px)')
-  const { setSelectedLocation } = useLocationStore()
-  const { isDesktopConfirm } = useLayoutStore()
+  const matchDesktop = useMediaQuery("(min-width:900px)");
+  const { setSelectedLocation } = useLocationStore();
+  const { isDesktopConfirm } = useLayoutStore();
 
   useLayoutEffect(() => {
     const viewStatus = localStorage.getItem(tutorialStorageKey) === "true";
@@ -79,7 +80,7 @@ const index: NextPage = () => {
         if (features.length) {
           setOpen(true);
           setFeatureSelected(features[0].properties);
-          setSelectedLocation(features[0].properties as ILocation)
+          setSelectedLocation(features[0].properties as ILocation);
           if (features[0].geometry.type === "Point") {
             e.target.easeTo({
               center: [
@@ -121,7 +122,7 @@ const index: NextPage = () => {
 
   return (
     <Fragment>
-      {(matchDesktop && !isDesktopConfirm) && <DeviceNotSupportPanel/>}
+      {matchDesktop && !isDesktopConfirm && <DeviceNotSupportPanel />}
       <Box
         component={"div"}
         id="map-elec"
@@ -138,9 +139,23 @@ const index: NextPage = () => {
           contain={contain}
           color="black"
         />
+        <Box
+          sx={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            zIndex: 10,
+          }}
+        >
+          <AvatarButton />
+        </Box>
         <TutorialDialog open={showTutorial} onClose={onCloseTutorial} />
         <LocationPanel open={open} onClose={onClose} />
-        <IntroductionPanel active={!open} locationLoading={geolocate.loading} onMyLocationTrigger={toggleGeolocate}/>
+        <IntroductionPanel
+          active={!open}
+          locationLoading={geolocate.loading}
+          onMyLocationTrigger={toggleGeolocate}
+        />
       </Box>
     </Fragment>
   );

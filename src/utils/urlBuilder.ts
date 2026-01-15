@@ -1,0 +1,132 @@
+import { ILocation } from "../interfaces/location.interface";
+import { UserProfile } from "../store/userProfile.store";
+
+/**
+ * Builds WeWatch Google Form URL with pre-filled parameters
+ * Switches between openUnitForm and closeUnitForm based on time
+ */
+export function buildWeWatchUrl(
+  profile: UserProfile | null,
+  location: ILocation,
+  currentTime: Date,
+): string {
+  // Determine which form based on time (17:00 is the cutoff)
+  // currentTime should already be in Bangkok timezone from time.store
+  const hour = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
+  const isCountingTime = hour >= 17;
+
+  // Format current time as HH:MM
+  const timeString = `${String(hour).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+
+  if (isCountingTime) {
+    // closeUnitForm - for counting period (17:00+)
+    const baseUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLSc6fqn-QCNl1fJbpS9-F0IjIWLQRrZVCtiR2GKkdv_v6j7OaQ/viewform";
+
+    const params = new URLSearchParams({
+      usp: "pp_url",
+    });
+
+    // Add profile data if available
+    if (profile) {
+      params.append("entry.914367438", profile.fullname);
+      params.append("entry.1339837169", profile.phone);
+      params.append("entry.1063152687", profile.contract ? "ยอมรับ" : "");
+      params.append("entry.1442150213", profile.gender);
+    }
+
+    // Add location data
+    params.append("entry.1289712015", location.provinceName);
+    params.append("entry.1335460006", location.districtName);
+    params.append("entry.531368750", location.subDistrictName);
+    params.append("entry.552451457", String(location.divisionNumber));
+    params.append("entry.1977709354", String(location.unitNumber));
+    params.append("entry.1537099240", location.unitName);
+    params.append("entry.523403712", timeString);
+
+    return `${baseUrl}?${params.toString()}`;
+  } else {
+    // openUnitForm - for voting period (before 17:00)
+    const baseUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfunOjsEf545OOE3IpBRw2wen94iAQ9F2NJ4lZgpQFtnUOH_A/viewform";
+
+    const params = new URLSearchParams({
+      usp: "pp_url",
+    });
+
+    // Add profile data if available
+    if (profile) {
+      params.append("entry.2021355207", profile.fullname);
+      params.append("entry.952897360", profile.phone);
+      params.append("entry.1360317965", profile.contract ? "ยอมรับ" : "");
+      params.append("entry.894194842", profile.gender);
+    }
+
+    // Add location data
+    params.append("entry.1727758919", location.provinceName);
+    params.append("entry.685831041", location.districtName);
+    params.append("entry.857868804", location.subDistrictName);
+    params.append("entry.1838097284", String(location.divisionNumber));
+    params.append("entry.1378064658", String(location.unitNumber));
+    params.append("entry.510655996", String(location.unitId));
+    params.append("entry.1684477210", timeString);
+
+    return `${baseUrl}?${params.toString()}`;
+  }
+}
+
+/**
+ * Builds Vote62 custom form URL with proper encoding
+ * Format: provinceName--districtName--subDistrictName--provinceName.divisionNumber--unitNumberunitName--
+ */
+export function buildVote62Url(location: ILocation): string {
+  const baseUrl = "https://www.vote62.com/66/check-in/polling-station/?id=";
+
+  // Zero-pad divisionNumber to 2 digits
+  const paddedDivision = String(location.divisionNumber).padStart(2, "0");
+
+  // Replace spaces with %20 in unitName
+  const encodedUnitName = location.unitName.replace(/ /g, "%20");
+
+  // unitNumber does NOT need zero-padding
+  const unitNumber = location.unitNumber;
+
+  // Build the id parameter
+  const id = [
+    location.provinceName,
+    `--${location.districtName}`,
+    `--${location.subDistrictName}`,
+    `--${location.provinceName}.${paddedDivision}`,
+    `--${unitNumber}${encodedUnitName}`,
+    `--`, // Empty code for now
+  ].join("");
+
+  return `${baseUrl}${id}`;
+}
+
+/**
+ * Validates if location has all required data for URL building
+ */
+export function validateLocationData(location: ILocation | null): {
+  valid: boolean;
+  message?: string;
+} {
+  if (!location) {
+    return { valid: false, message: "ไม่พบข้อมูลหน่วยเลือกตั้ง" };
+  }
+
+  if (
+    !location.provinceName ||
+    !location.districtName ||
+    !location.subDistrictName
+  ) {
+    return { valid: false, message: "ข้อมูลสถานที่ไม่ครบถ้วน" };
+  }
+
+  if (!location.unitName || location.unitNumber === undefined) {
+    return { valid: false, message: "ข้อมูลหน่วยเลือกตั้งไม่ครบถ้วน" };
+  }
+
+  return { valid: true };
+}
