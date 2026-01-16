@@ -64,6 +64,7 @@ const ProfileDialog: FC<{
       phone: "",
       contract: "",
       gender: "",
+      otherGender: "",
     };
 
     let isValid = true;
@@ -129,6 +130,7 @@ const ProfileDialog: FC<{
         phone: "",
         contract: false,
         gender: "",
+        otherGender: "",
       });
     }
     setErrors({
@@ -136,6 +138,7 @@ const ProfileDialog: FC<{
       phone: "",
       contract: "",
       gender: "",
+      otherGender: "",
     });
     onClose();
   };
