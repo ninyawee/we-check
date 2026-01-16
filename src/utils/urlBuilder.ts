@@ -62,12 +62,12 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.914367438", profile.fullname);
-      params.append("entry.1339837169", profile.phone);
-      params.append("entry.1063152687", profile.contract ? "ยอมรับ" : "");
+      params.append("entry.914367438", sanitizeParam(profile.fullname));
+      params.append("entry.1339837169", sanitizeParam(profile.phone));
+      params.append("entry.1063152687", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
       params.append(
         "entry.1442150213",
-        profile.gender === "Other" ? "__other_option__" : profile.gender
+        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
       );
       // If user provided an 'Other' gender text, include it as the other_option_response
       if (profile.otherGender && profile.otherGender.trim() !== "") {
@@ -99,12 +99,12 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.2021355207", profile.fullname);
-      params.append("entry.952897360", profile.phone);
-      params.append("entry.1360317965", profile.contract ? "ยอมรับ" : "");
+      params.append("entry.2021355207", sanitizeParam(profile.fullname));
+      params.append("entry.952897360", sanitizeParam(profile.phone));
+      params.append("entry.1360317965", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
       params.append(
         "entry.894194842",
-        profile.gender === "Other" ? "__other_option__" : profile.gender
+        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
       );
       // If user provided an 'Other' gender text, include it as the other_option_response
       if (profile.otherGender && profile.otherGender.trim() !== "") {
