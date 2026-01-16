@@ -18,7 +18,7 @@ import STATUS_COLORS from "@/src/config/statusColors";
 import StatusDot from "@/src/components/statusDot";
 import StatusLegendItem from "@/src/components/statusLegendItem";
 import STATUS_LEGEND from "@/src/config/statusLegend";
-import { COUNTING_THRESHOLD } from "@/src/config/statusConfig";
+import { VOTE62_SHOW_TIME } from "@/src/config/statusConfig";
 
 const IntroductionPanel: FC<{
   active?: boolean;
@@ -37,21 +37,17 @@ const IntroductionPanel: FC<{
   const [showCounting, setShowCounting] = useState<boolean>(false);
 
   useEffect(() => {
-  const now = new Date();
-  const threshold = new Date();
-  threshold.setHours(COUNTING_THRESHOLD.hour, COUNTING_THRESHOLD.minute, 0, 0);
-  setShowCounting(now >= threshold);
+    const now = new Date();
+    const threshold = new Date();
+    threshold.setHours(VOTE62_SHOW_TIME.hour, VOTE62_SHOW_TIME.minute, 0, 0);
+    setShowCounting(now >= threshold);
 
-  if (now < threshold) {
-    const msUntilThreshold = threshold.getTime() - now.getTime();
-    const timeoutId = setTimeout(() => setShowCounting(true), msUntilThreshold);
-    return () => clearTimeout(timeoutId);
-  }
-}, []);
-
-  const { isDesktopConfirm } = useLayoutStore();
-  const matchDesktop = useMediaQuery("(min-width:900px)");
-
+    if (now < threshold) {
+      const msUntilThreshold = threshold.getTime() - now.getTime();
+      const timeoutId = setTimeout(() => setShowCounting(true), msUntilThreshold);
+      return () => clearTimeout(timeoutId);
+    }
+  }, []);
   function reportLocationClick() {
     window.open("https://forms.gle/EpXbbrVfJdxbX6hv7");
   }
@@ -70,10 +66,7 @@ const IntroductionPanel: FC<{
         open={coverageInfoDialogOpen}
         onClose={() => setCoverageInfoDialogOpen(false)}
       />
-      {matchDesktop && !isDesktopConfirm ? (
-        <></>
-      ) : (
-        <Slide in={active} direction="up" mountOnEnter unmountOnExit>
+      <Slide in={active} direction="up" mountOnEnter unmountOnExit>
           <Box
             sx={{
               borderRadius: "5% 5% 0 0",
@@ -220,7 +213,6 @@ const IntroductionPanel: FC<{
             </Stack>
           </Box>
         </Slide>
-      )}
     </Fragment>
   );
 };

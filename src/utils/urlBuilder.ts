@@ -1,5 +1,32 @@
 import { ILocation } from "../interfaces/location.interface";
 import { UserProfile } from "../store/userProfile.store";
+import { START_COUNTING_TIME } from "../config/statusConfig";
+
+// Maximum length for free-text URL params to limit abuse/XSS surface
+const MAX_OTHER_GENDER_LENGTH = 100;
+
+/**
+ * Basic sanitization for free-text URL parameters.
+ * - trims whitespace
+ * - strips < and > and script tags
+ * - collapses repeated whitespace
+ * - enforces a max length
+ */
+function sanitizeParam(value: string | undefined | null, maxLength = MAX_OTHER_GENDER_LENGTH): string {
+  if (!value) return "";
+  let v = String(value).trim();
+  // Remove any script tags just in case
+  v = v.replace(/<\/?script[^>]*>/gi, "");
+  // Remove angle brackets and backticks to reduce HTML injection risk
+  v = v.replace(/[<>`]/g, "");
+  // Collapse multiple whitespace into single spaces
+  v = v.replace(/\s+/g, " ");
+  // Enforce max length
+  if (v.length > maxLength) {
+    v = v.slice(0, maxLength);
+  }
+  return v;
+}
 
 /**
  * Builds WeWatch Google Form URL with pre-filled parameters
@@ -14,7 +41,12 @@ export function buildWeWatchUrl(
   // currentTime should already be in Bangkok timezone from time.store
   const hour = currentTime.getHours();
   const minutes = currentTime.getMinutes();
-  const isCountingTime = hour >= 17;
+
+  // Use configured start counting time from statusConfig
+  const startHour = START_COUNTING_TIME.hour;
+  const startMinute = START_COUNTING_TIME.minute;
+  const isCountingTime =
+    hour > startHour || (hour === startHour && minutes >= startMinute);
 
   // Format current time as HH:MM
   const timeString = `${String(hour).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
@@ -30,10 +62,20 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.914367438", profile.fullname);
-      params.append("entry.1339837169", profile.phone);
-      params.append("entry.1063152687", profile.contract ? "ยอมรับ" : "");
-      params.append("entry.1442150213", profile.gender);
+      params.append("entry.914367438", sanitizeParam(profile.fullname));
+      params.append("entry.1339837169", sanitizeParam(profile.phone));
+      params.append("entry.1063152687", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
+      params.append(
+        "entry.1442150213",
+        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
+      );
+      // If user provided an 'Other' gender text, include it as the other_option_response
+      if (profile.otherGender && profile.otherGender.trim() !== "") {
+        params.append(
+          "entry.1442150213.other_option_response",
+          sanitizeParam(profile.otherGender)
+        );
+      }
     }
 
     // Add location data
@@ -57,10 +99,20 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.2021355207", profile.fullname);
-      params.append("entry.952897360", profile.phone);
-      params.append("entry.1360317965", profile.contract ? "ยอมรับ" : "");
-      params.append("entry.894194842", profile.gender);
+      params.append("entry.2021355207", sanitizeParam(profile.fullname));
+      params.append("entry.952897360", sanitizeParam(profile.phone));
+      params.append("entry.1360317965", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
+      params.append(
+        "entry.894194842",
+        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
+      );
+      // If user provided an 'Other' gender text, include it as the other_option_response
+      if (profile.otherGender && profile.otherGender.trim() !== "") {
+        params.append(
+          "entry.894194842.other_option_response",
+          sanitizeParam(profile.otherGender)
+        );
+      }
     }
 
     // Add location data

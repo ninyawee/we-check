@@ -1,9 +1,6 @@
 import { FC, useState, useEffect } from "react";
-import { IconButton, Badge } from "@mui/material";
-import { PersonAdd } from "@mui/icons-material";
-import { Avatar } from "@avatune/react";
-// @ts-ignore - avatune theme import
-import pacovqzz from "@avatune/pacovqzz-theme/react";
+import { IconButton, Badge, Avatar } from "@mui/material";
+import { PersonAdd, Person as PersonIcon } from "@mui/icons-material";
 import ProfileDialog from "./dialogs/profileDialog";
 import { useUserProfileStore } from "@/src/store/userProfile.store";
 
@@ -23,9 +20,6 @@ const AvatarButton: FC = () => {
     !profile.phone ||
     !profile.contract ||
     !profile.gender;
-
-  // Use phone number as seed if available, otherwise use a generic seed
-  const seed = profile?.phone || "guest-user";
 
   return (
     <>
@@ -49,7 +43,9 @@ const AvatarButton: FC = () => {
             horizontal: "right",
           }}
         >
-          <Avatar theme={pacovqzz} seed={seed} size={40} />
+          <Avatar sx={{ width: 40, height: 40, bgcolor: "primary.main" }}>
+            <PersonIcon sx={{ fontSize: 20, color: "common.white" }} />
+          </Avatar>
         </Badge>
       </IconButton>
 

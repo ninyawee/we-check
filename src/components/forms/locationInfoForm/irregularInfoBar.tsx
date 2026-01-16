@@ -2,8 +2,8 @@ import { useLocationStore } from "@/src/store/location.store";
 import { Stack, Typography } from "@mui/material";
 import { FC, Fragment, useLayoutEffect, useRef, useState } from "react";
 
-const IrregularInfoBar: FC = () => {
-  const { selectedLocation } = useLocationStore()
+const IrregularInfoBar: FC<{ isReportDay?: boolean }> = ({ isReportDay = true }) => {
+  const { selectedLocation } = useLocationStore();
   const timePassIntervalRef = useRef<any>()
   const [timePassText, setTimePassText] = useState<string[]>([])
 
@@ -28,13 +28,25 @@ const IrregularInfoBar: FC = () => {
     }
   }
 
+  // If it's not a report-accepting day, show the "ยังไม่ถึงวันเลือกตั้ง" message
+  if (!isReportDay) {
+    return (
+      <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
+        <Typography component={'span'} padding="0.5rem 1rem">
+          การรายงาน:
+          <Typography component={'span'} color="#A4A4A4">&ensp;ยังไม่ถึงวันเลือกตั้ง&ensp;</Typography>
+        </Typography>
+      </Stack>
+    )
+  }
+
   return <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
     <Typography component={'span'} padding="0.5rem 1rem">
-      การรายงาน
-      {selectedLocation?.isObservationValid ? <Typography component={'span'} color="primary">&ensp;ครบถ้วน&ensp;</Typography>
+      การรายงาน:
+      {selectedLocation?.isObservationValid ? <Typography component={'span'} color="primary">ครบถ้วน</Typography>
         : <Typography component={'span'} color="error">&ensp;ไม่ครบถ้วน&ensp;</Typography>}
       {timePassText?.length === 0 ?
-        <Typography component={'span'} color="#A4A4A4">( กำลังโหลดข้อมูล ... )</Typography> :
+        <Typography component={'span'} color="#A4A4A4">&ensp;กำลังโหลดข้อมูล ...&ensp;</Typography> :
         <Fragment>
           {selectedLocation?.lastObservedTime ? <>
             <Typography component={'span'} color="#A4A4A4">( ครั้งล่าสุด</Typography>

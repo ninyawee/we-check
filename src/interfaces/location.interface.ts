@@ -18,5 +18,9 @@ export interface ILocation {
   incidentJson: string // Example "เปิดหน่วยเลือกตั้งช้า", "จนท คุกคามผู้ใช้สิทธิ์"
   incidentStr: string // Example "เปิดหน่วยเลือกตั้งช้า", "จนท คุกคามผู้ใช้สิทธิ์"
   googleMapUrl: string
+
+  vote62VolunteerCount: number
+
+  year?: number
 }
 

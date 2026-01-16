@@ -1,4 +1,5 @@
 import { Box, Button, Card, Stack, Typography, useTheme } from "@mui/material";
+import STATUS_COLORS from "@/src/config/statusColors";
 import { FC } from "react";
 
 const REPORTER_REGISTRATION_URL = "https://forms.gle/LNLBcaCvbK9bZtSN8";
@@ -17,6 +18,9 @@ const RegistrationInfo: FC = () => {
 
   return (
     <Stack direction="column" mt="2rem" color="white">
+      <Typography fontSize="32px" fontWeight="bold" color={STATUS_COLORS.accent} sx={{ mb: 1 }}>
+        สมัครเป็นอาสา
+      </Typography>
       <Card
         sx={{
           padding: 1,

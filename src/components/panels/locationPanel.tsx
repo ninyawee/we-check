@@ -15,9 +15,6 @@ const LocationPanel: FC<{
   onClose: () => void
 }> = ({ open, onClose }) => {
   const [currentState, setCurrentState] = useState<LocationFormState>(LocationFormState.Location)
-  const { isDesktopConfirm } = useLayoutStore()
-  const matchDesktop = useMediaQuery('(min-width:900px)')
-
   function handleRegisterClick() {
     setCurrentState(LocationFormState.Register)
   }
@@ -27,8 +24,7 @@ const LocationPanel: FC<{
   }
 
   return <Fragment>
-    {(matchDesktop && !isDesktopConfirm) ?
-      <></> :
+    {
       <BottomDrawer open={open} onClose={onClose}>
         {currentState === LocationFormState.Location && <LocationInfoForm/>}
         {currentState === LocationFormState.Register && <VolunteerRegisterForm onBackToLocation={handleBackToLocationClick} />}
