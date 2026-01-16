@@ -62,19 +62,31 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.914367438", sanitizeParam(profile.fullname));
-      params.append("entry.1339837169", sanitizeParam(profile.phone));
-      params.append("entry.1063152687", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
-      params.append(
-        "entry.1442150213",
-        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
-      );
-      // If user provided an 'Other' gender text, include it as the other_option_response
-      if (profile.otherGender && profile.otherGender.trim() !== "") {
+      if (profile.fullname && profile.fullname.trim() !== "") {
+        params.append("entry.914367438", sanitizeParam(profile.fullname));
+      }
+
+      if (profile.phone && profile.phone.trim() !== "") {
+        params.append("entry.1339837169", sanitizeParam(profile.phone));
+      }
+
+      if (profile.email && profile.email.trim() !== "") {
+        params.append("entry.1063152687", sanitizeParam(profile.email));
+      }
+
+      if (profile.gender && profile.gender.trim() !== "") {
         params.append(
-          "entry.1442150213.other_option_response",
-          sanitizeParam(profile.otherGender)
+          "entry.1442150213",
+          profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
         );
+
+        // If user provided an 'Other' gender text, include it as the other_option_response
+        if (profile.gender === "Other" && profile.otherGender && profile.otherGender.trim() !== "") {
+          params.append(
+            "entry.1442150213.other_option_response",
+            sanitizeParam(profile.otherGender)
+          );
+        }
       }
     }
 
@@ -99,19 +111,31 @@ export function buildWeWatchUrl(
 
     // Add profile data if available
     if (profile) {
-      params.append("entry.2021355207", sanitizeParam(profile.fullname));
-      params.append("entry.952897360", sanitizeParam(profile.phone));
-      params.append("entry.1360317965", sanitizeParam(profile.contract ? "ยอมรับ" : ""));
-      params.append(
-        "entry.894194842",
-        profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
-      );
-      // If user provided an 'Other' gender text, include it as the other_option_response
-      if (profile.otherGender && profile.otherGender.trim() !== "") {
+      if (profile.fullname && profile.fullname.trim() !== "") {
+        params.append("entry.2021355207", sanitizeParam(profile.fullname));
+      }
+
+      if (profile.phone && profile.phone.trim() !== "") {
+        params.append("entry.952897360", sanitizeParam(profile.phone));
+      }
+
+      if (profile.email && profile.email.trim() !== "") {
+        params.append("entry.1360317965", sanitizeParam(profile.email));
+      }
+
+      if (profile.gender && profile.gender.trim() !== "") {
         params.append(
-          "entry.894194842.other_option_response",
-          sanitizeParam(profile.otherGender)
+          "entry.894194842",
+          profile.gender === "Other" ? "__other_option__" : sanitizeParam(profile.gender)
         );
+
+        // If user provided an 'Other' gender text, include it as the other_option_response
+        if (profile.gender === "Other" && profile.otherGender && profile.otherGender.trim() !== "") {
+          params.append(
+            "entry.894194842.other_option_response",
+            sanitizeParam(profile.otherGender)
+          );
+        }
       }
     }
 
@@ -121,7 +145,7 @@ export function buildWeWatchUrl(
     params.append("entry.857868804", location.subDistrictName);
     params.append("entry.1838097284", String(location.divisionNumber));
     params.append("entry.1378064658", String(location.unitNumber));
-    params.append("entry.510655996", String(location.unitId));
+    params.append("entry.510655996", String(location.unitName));
     params.append("entry.1684477210", timeString);
 
     return `${baseUrl}?${params.toString()}`;
