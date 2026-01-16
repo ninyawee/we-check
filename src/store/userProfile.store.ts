@@ -5,6 +5,7 @@ export interface UserProfile {
   phone: string
   contract: boolean
   gender: string
+  otherGender?: string
 }
 
 interface IUserProfileStore {
@@ -53,10 +54,20 @@ export const useUserProfileStore = create<IUserProfileStore>((set, get) => ({
 
   hasProfile() {
     const { profile } = get()
-    return profile !== null &&
-           profile.fullname !== "" &&
-           profile.phone !== "" &&
-           profile.contract &&
-           profile.gender !== ""
+    if (!profile) return false
+    if (
+      profile.fullname === "" ||
+      profile.phone === "" ||
+      !profile.contract ||
+      profile.gender === ""
+    ) {
+      return false
+    }
+
+    if (profile.gender === "Other") {
+      return !!profile.otherGender && profile.otherGender.trim() !== ""
+    }
+
+    return true
   }
 }))

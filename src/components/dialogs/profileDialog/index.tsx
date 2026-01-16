@@ -35,6 +35,7 @@ const ProfileDialog: FC<{
     phone: "",
     contract: false,
     gender: "",
+    otherGender: "",
   });
 
   const [errors, setErrors] = useState({
@@ -42,6 +43,7 @@ const ProfileDialog: FC<{
     phone: "",
     contract: "",
     gender: "",
+    otherGender: "",
   });
 
   // Load existing profile on mount
@@ -90,6 +92,14 @@ const ProfileDialog: FC<{
     if (!formData.gender) {
       newErrors.gender = "กรุณาเลือกเพศ";
       isValid = false;
+    }
+
+    // If gender is Other, require specification
+    if (formData.gender === "Other") {
+      if (!formData.otherGender || formData.otherGender.trim().length < 2) {
+        newErrors.otherGender = "กรุณาระบุเพศ (อย่างน้อย 2 ตัวอักษร)";
+        isValid = false;
+      }
     }
 
     setErrors(newErrors);
@@ -205,6 +215,23 @@ const ProfileDialog: FC<{
               </Typography>
             )}
           </FormControl>
+
+          {formData.gender === "Other" && (
+            <TextField
+              label="โปรดระบุเพศ"
+              fullWidth
+              value={formData.otherGender || ""}
+              onChange={(e) => setFormData({ ...formData, otherGender: e.target.value })}
+              error={!!errors.otherGender}
+              helperText={errors.otherGender}
+              required
+              variant="filled"
+              InputProps={{
+                sx: { backgroundColor: "rgba(255,255,255,0.03)", color: "inherit" },
+              }}
+              InputLabelProps={{ sx: { color: "rgba(255,255,255,0.6)" } }}
+            />
+          )}
 
           <FormControlLabel
             control={
