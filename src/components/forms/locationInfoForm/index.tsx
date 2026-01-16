@@ -45,26 +45,28 @@ const LocationInfoForm: FC = () => {
                 sx={{ wordWrap: "break-word", color: "#FFFFFF" }}
               >
                 {selectedLocation?.unitName}
+                {((selectedLocation?.year &&
+                  Number(selectedLocation.year) !== new Date().getFullYear()) ||
+                  !selectedLocation?.year) && (
+                  <Typography
+                    component="span"
+                    fontSize={"0.7rem"}
+                    sx={{
+                      backgroundColor: "#424242",
+                      color: "#FFF",
+                      padding: "0.125rem 0.5rem",
+                      borderRadius: "0.5rem",
+                      marginLeft: "0.5rem",
+                      display: "inline-block",
+                      verticalAlign: 'middle'
+                    }}
+                  >
+                    {selectedLocation?.year
+                      ? `ข้อมูลเก่าาปี ${selectedLocation.year}`
+                      : "ข้อมูลเก่า"}
+                  </Typography>
+                )}
               </Typography>
-              {((selectedLocation?.year &&
-                Number(selectedLocation.year) !== new Date().getFullYear()) ||
-                !selectedLocation?.year) && (
-                <Typography
-                  component="span"
-                  fontSize={"0.7rem"}
-                  sx={{
-                    backgroundColor: "#424242",
-                    color: "#FFF",
-                    padding: "0.125rem 0.5rem",
-                    borderRadius: "0.5rem",
-                    marginLeft: "0.5rem",
-                  }}
-                >
-                  {selectedLocation?.year
-                    ? `ข้อมูลเก่าปี ${selectedLocation.year}`
-                    : "ข้อมูลเก่า"}
-                </Typography>
-              )}
             </Stack>
             <Stack direction={"row"} marginBottom={"0.875rem"}>
               <Typography fontSize={"0.8rem"} color="#A4A4A4">
