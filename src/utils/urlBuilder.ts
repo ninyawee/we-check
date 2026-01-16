@@ -1,5 +1,6 @@
 import { ILocation } from "../interfaces/location.interface";
 import { UserProfile } from "../store/userProfile.store";
+import { START_COUNTING_TIME } from "../config/statusConfig";
 
 /**
  * Builds WeWatch Google Form URL with pre-filled parameters
@@ -14,7 +15,12 @@ export function buildWeWatchUrl(
   // currentTime should already be in Bangkok timezone from time.store
   const hour = currentTime.getHours();
   const minutes = currentTime.getMinutes();
-  const isCountingTime = hour >= 17;
+
+  // Use configured start counting time from statusConfig
+  const startHour = START_COUNTING_TIME.hour;
+  const startMinute = START_COUNTING_TIME.minute;
+  const isCountingTime =
+    hour > startHour || (hour === startHour && minutes >= startMinute);
 
   // Format current time as HH:MM
   const timeString = `${String(hour).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;

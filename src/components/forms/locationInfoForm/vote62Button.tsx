@@ -4,7 +4,7 @@ import { useCurrentTime } from "@/src/store/time.store";
 import { useLocationStore } from "@/src/store/location.store";
 import { buildVote62Url, validateLocationData } from "@/src/utils/urlBuilder";
 import { useSnackbar } from "notistack";
-import { targetVote62VolunteerCount, COUNTING_THRESHOLD } from "@/src/config/statusConfig";
+import { targetVote62VolunteerCount, VOTE62_SHOW_TIME } from "@/src/config/statusConfig";
 
 const Vote62Button: FC<{
   onClick: () => void;
@@ -24,7 +24,7 @@ const Vote62Button: FC<{
   const minute = currentTime.getMinutes();
 
   // Hide the button if current time is before the counting threshold
-  const { hour: thresholdHour, minute: thresholdMinute } = COUNTING_THRESHOLD;
+  const { hour: thresholdHour, minute: thresholdMinute } = VOTE62_SHOW_TIME;
   const isBeforeThreshold =
     hour < thresholdHour || (hour === thresholdHour && minute < thresholdMinute);
   if (isBeforeThreshold) return null;
