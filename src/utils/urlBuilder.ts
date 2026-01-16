@@ -33,7 +33,17 @@ export function buildWeWatchUrl(
       params.append("entry.914367438", profile.fullname);
       params.append("entry.1339837169", profile.phone);
       params.append("entry.1063152687", profile.contract ? "ยอมรับ" : "");
-      params.append("entry.1442150213", profile.gender);
+      params.append(
+        "entry.1442150213",
+        profile.gender === "Other" ? "__other_option__" : profile.gender
+      );
+      // If user provided an 'Other' gender text, include it as the other_option_response
+      if (profile.otherGender && profile.otherGender.trim() !== "") {
+        params.append(
+          "entry.1442150213.other_option_response",
+          profile.otherGender
+        );
+      }
     }
 
     // Add location data
@@ -60,7 +70,17 @@ export function buildWeWatchUrl(
       params.append("entry.2021355207", profile.fullname);
       params.append("entry.952897360", profile.phone);
       params.append("entry.1360317965", profile.contract ? "ยอมรับ" : "");
-      params.append("entry.894194842", profile.gender);
+      params.append(
+        "entry.894194842",
+        profile.gender === "Other" ? "__other_option__" : profile.gender
+      );
+      // If user provided an 'Other' gender text, include it as the other_option_response
+      if (profile.otherGender && profile.otherGender.trim() !== "") {
+        params.append(
+          "entry.894194842.other_option_response",
+          profile.otherGender
+        );
+      }
     }
 
     // Add location data
