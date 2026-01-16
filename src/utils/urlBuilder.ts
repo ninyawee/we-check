@@ -2,6 +2,32 @@ import { ILocation } from "../interfaces/location.interface";
 import { UserProfile } from "../store/userProfile.store";
 import { START_COUNTING_TIME } from "../config/statusConfig";
 
+// Maximum length for free-text URL params to limit abuse/XSS surface
+const MAX_OTHER_GENDER_LENGTH = 100;
+
+/**
+ * Basic sanitization for free-text URL parameters.
+ * - trims whitespace
+ * - strips < and > and script tags
+ * - collapses repeated whitespace
+ * - enforces a max length
+ */
+function sanitizeParam(value: string | undefined | null, maxLength = MAX_OTHER_GENDER_LENGTH): string {
+  if (!value) return "";
+  let v = String(value).trim();
+  // Remove any script tags just in case
+  v = v.replace(/<\/?script[^>]*>/gi, "");
+  // Remove angle brackets and backticks to reduce HTML injection risk
+  v = v.replace(/[<>`]/g, "");
+  // Collapse multiple whitespace into single spaces
+  v = v.replace(/\s+/g, " ");
+  // Enforce max length
+  if (v.length > maxLength) {
+    v = v.slice(0, maxLength);
+  }
+  return v;
+}
+
 /**
  * Builds WeWatch Google Form URL with pre-filled parameters
  * Switches between openUnitForm and closeUnitForm based on time
@@ -47,7 +73,7 @@ export function buildWeWatchUrl(
       if (profile.otherGender && profile.otherGender.trim() !== "") {
         params.append(
           "entry.1442150213.other_option_response",
-          profile.otherGender
+          sanitizeParam(profile.otherGender)
         );
       }
     }
@@ -84,7 +110,7 @@ export function buildWeWatchUrl(
       if (profile.otherGender && profile.otherGender.trim() !== "") {
         params.append(
           "entry.894194842.other_option_response",
-          profile.otherGender
+          sanitizeParam(profile.otherGender)
         );
       }
     }
