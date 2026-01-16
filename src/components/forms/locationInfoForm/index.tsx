@@ -96,7 +96,7 @@ const LocationInfoForm: FC = () => {
           <IrregularInfoBar isReportDay={isReportDay} />
         </Stack>
 
-        <FormButtons />
+        <FormButtons isReportDay={isReportDay} />
       </Stack>
     </Fragment>
   );
