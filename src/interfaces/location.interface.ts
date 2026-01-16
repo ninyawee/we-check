@@ -21,6 +21,6 @@ export interface ILocation {
 
   vote62VolunteerCount: number
 
-  year: number
+  year?: number
 }
 

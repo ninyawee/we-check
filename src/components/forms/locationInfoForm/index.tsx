@@ -62,7 +62,7 @@ const LocationInfoForm: FC = () => {
                     }}
                   >
                     {selectedLocation?.year
-                      ? `ข้อมูลเก่าาปี ${selectedLocation.year}`
+                      ? `ข้อมูลเก่าปี ${selectedLocation.year}`
                       : "ข้อมูลเก่า"}
                   </Typography>
                 )}
