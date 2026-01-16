@@ -74,16 +74,7 @@ const LocationInfoForm: FC = () => {
               </Typography>
             </Stack>
           </Stack>
-          <div
-            style={{
-              height: "50%",
-              position: "absolute",
-              right: 0,
-              bottom: 0,
-              transform: "scaleX(-1)",
-            }}
-          >
-          </div>
+          
         </Stack>
         <Stack
           direction="column"

@@ -66,8 +66,7 @@ const IntroductionPanel: FC<{
         open={coverageInfoDialogOpen}
         onClose={() => setCoverageInfoDialogOpen(false)}
       />
-      {(
-        <Slide in={active} direction="up" mountOnEnter unmountOnExit>
+      <Slide in={active} direction="up" mountOnEnter unmountOnExit>
           <Box
             sx={{
               borderRadius: "5% 5% 0 0",
@@ -214,7 +213,6 @@ const IntroductionPanel: FC<{
             </Stack>
           </Box>
         </Slide>
-      )}
     </Fragment>
   );
 };
