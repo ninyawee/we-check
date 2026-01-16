@@ -69,6 +69,8 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
     openExternalForm("vote62", false);
   };
 
+  const isGameAvailable = GAME_URL && GAME_URL.trim().length > 0;
+
   const handleConfirmYes = () => {
     setConfirmDialogOpen(false);
     setProfileDialogOpen(true);
@@ -112,10 +114,12 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
               color="primary"
               fullWidth
               sx={{ fontSize: "1rem", height: "52px", mt: 1 }}
-              onClick={() => window.open(GAME_URL, "_blank")}
+              onClick={() => {
+                if (isGameAvailable) window.open(GAME_URL, "_blank");
+              }}
             >
               <span style={{ fontWeight: 600 }}>เกมจับผิดหน่วยเลือกตั้ง</span>
-              <span style={{ marginLeft: 8, fontWeight: 300 }}>(coming soon)</span>
+              {isGameAvailable ? null : <span style={{ marginLeft: 8, fontWeight: 300 }}>(coming soon)</span>}
             </Button>
           </>
         )}
