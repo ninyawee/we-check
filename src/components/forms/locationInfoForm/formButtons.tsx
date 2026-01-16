@@ -16,6 +16,7 @@ import { useUserProfileStore } from "@/src/store/userProfile.store";
 import { useLocationStore } from "@/src/store/location.store";
 import { useCurrentTime } from "@/src/store/time.store";
 import { buildWeWatchUrl, buildVote62Url } from "@/src/utils/urlBuilder";
+import { REPORT_DATES } from "@/src/config/statusConfig";
 
 type FormType = "wewatch" | "vote62";
 
@@ -23,6 +24,10 @@ const FormButtons: FC = () => {
   const { profile, hasProfile } = useUserProfileStore();
   const { selectedLocation } = useLocationStore();
   const currentTime = useCurrentTime();
+
+  const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+  const todayIso = `${currentTime.getFullYear()}-${pad(currentTime.getMonth() + 1)}-${pad(currentTime.getDate())}`;
+  const isReportDay = REPORT_DATES.includes(todayIso);
 
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
@@ -90,7 +95,7 @@ const FormButtons: FC = () => {
   return (
     <>
       <Stack spacing={1.5} padding="1rem 1.5rem 1.5rem 1.5rem">
-        <WeWatchButton onClick={handleWeWatchClick} />
+        {isReportDay && <WeWatchButton onClick={handleWeWatchClick} />}
         <Vote62Button onClick={handleVote62Click} />
       </Stack>
 
