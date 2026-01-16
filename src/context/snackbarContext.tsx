@@ -8,11 +8,12 @@ import { MaterialDesignContent } from "notistack";
 const StyledMaterialDesignContent = styled(MaterialDesignContent)(
   ({ theme }) => ({
     "&.notistack-MuiContent": {
-      backgroundColor: theme.palette.background.paper,
+      backgroundColor: "rgba(18,18,18,0.98)",
       borderRadius: "16px",
-      boxShadow: `0px 5px 40px rgba(0, 0, 0, 0.2)`,
-      color: theme.palette.text.primary,
+      boxShadow: `0px 5px 40px rgba(0, 0, 0, 0.6)`,
+      color: "rgba(255,255,255,0.87)",
       padding: `${6}px 16px`,
+      border: `1px solid rgba(255,255,255,0.04)`,
     },
   })
 );
@@ -55,8 +56,9 @@ export default function NotistackProvider({ children }: Props) {
             size="small"
             sx={{
               borderRadius: "10px",
-              bgcolor: alpha(theme.palette.info.main, 0.1),
-              "&:hover": { bgcolor: alpha(theme.palette.info.dark, 0.1) },
+              bgcolor: "rgba(255,255,255,0.04)",
+              color: "rgba(255,255,255,0.9)",
+              "&:hover": { bgcolor: "rgba(255,255,255,0.06)" },
               py: 0.5,
             }}
             onClick={onClose(key)}
