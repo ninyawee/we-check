@@ -48,10 +48,6 @@ const IntroductionPanel: FC<{
     return () => clearTimeout(timeoutId);
   }
 }, []);
-
-  const { isDesktopConfirm } = useLayoutStore();
-  const matchDesktop = useMediaQuery("(min-width:900px)");
-
   function reportLocationClick() {
     window.open("https://forms.gle/EpXbbrVfJdxbX6hv7");
   }
@@ -70,9 +66,7 @@ const IntroductionPanel: FC<{
         open={coverageInfoDialogOpen}
         onClose={() => setCoverageInfoDialogOpen(false)}
       />
-      {matchDesktop && !isDesktopConfirm ? (
-        <></>
-      ) : (
+      {(
         <Slide in={active} direction="up" mountOnEnter unmountOnExit>
           <Box
             sx={{

@@ -12,7 +12,6 @@ import AvatarButton from "../components/avatarButton";
 import { getGeolocation, pulsingDot } from "../config/map";
 import { useLocationStore } from "../store/location.store";
 import { ILocation } from "../interfaces/location.interface";
-import DeviceNotSupportPanel from "../components/panels/deviceNotSupportPanel";
 import { useLayoutStore } from "../store/layout.store";
 
 const tutorialStorageKey = "tutorial";
@@ -29,7 +28,7 @@ const index: NextPage = () => {
   }>({ trigger: false, loading: false });
   const matchDesktop = useMediaQuery("(min-width:900px)");
   const { setSelectedLocation } = useLocationStore();
-  const { isDesktopConfirm } = useLayoutStore();
+  // layout store not required here after removing device-not-support panel
 
   useLayoutEffect(() => {
     const viewStatus = localStorage.getItem(tutorialStorageKey) === "true";
@@ -122,7 +121,6 @@ const index: NextPage = () => {
 
   return (
     <Fragment>
-      {matchDesktop && !isDesktopConfirm && <DeviceNotSupportPanel />}
       <Box
         component={"div"}
         id="map-elec"
