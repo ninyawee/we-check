@@ -14,12 +14,9 @@ const WeWatchButton: FC<{
   const { profile } = useUserProfileStore()
   const { enqueueSnackbar } = useSnackbar()
 
-  // Determine button text based on time
+  // Determine button state based on time
   const hour = currentTime.getHours()
   const isCountingTime = hour >= 17
-  const buttonText = isCountingTime
-    ? "รายงานสถานการณ์ (ช่วงนับคะแนน)"
-    : "รายงานสถานการณ์ (ช่วงลงคะแนน)"
 
   const handleClick = () => {
     // Validate location data
@@ -47,7 +44,7 @@ const WeWatchButton: FC<{
       }}
       onClick={handleClick}
     >
-      {buttonText}
+      <span style={{ fontWeight: 600 }}>รายงานสถานการณ์</span>{' '}
     </Button>
   )
 }

@@ -4,4 +4,7 @@ export const COUNTING_THRESHOLD = {
   minute: 30,
 };
 
+// Target number of volunteers desired for Vote62 at a location
+export const targetVote62VolunteerCount = 2;
+
 export default COUNTING_THRESHOLD;

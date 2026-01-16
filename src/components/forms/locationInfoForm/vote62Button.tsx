@@ -4,6 +4,7 @@ import { useCurrentTime } from "@/src/store/time.store";
 import { useLocationStore } from "@/src/store/location.store";
 import { buildVote62Url, validateLocationData } from "@/src/utils/urlBuilder";
 import { useSnackbar } from "notistack";
+import { targetVote62VolunteerCount } from "@/src/config/statusConfig";
 
 const Vote62Button: FC<{
   onClick: () => void;
@@ -12,14 +13,18 @@ const Vote62Button: FC<{
   const { selectedLocation } = useLocationStore();
   const { enqueueSnackbar } = useSnackbar();
 
+  const currentVote62Volunteers = selectedLocation?.vote62VolunteerCount ?? 0;
+  const remainingVote62Volunteers = Math.max(
+    0,
+    targetVote62VolunteerCount - currentVote62Volunteers
+  );
+
   // Check if Vote62 is enabled (16:30 onwards)
   const hour = currentTime.getHours();
   const minute = currentTime.getMinutes();
-  const isEnabled = hour > 16 || (hour === 16 && minute >= 30);
-
+  
   const handleClick = () => {
-    if (!isEnabled) return;
-
+    
     // Validate location data
     const validation = validateLocationData(selectedLocation);
     if (!validation.valid) {
@@ -38,30 +43,20 @@ const Vote62Button: FC<{
       variant="contained"
       color="secondary"
       fullWidth
-      disabled={!isEnabled}
       sx={{
         fontSize: "1.25rem",
         height: "52px",
-        color: "white",
-        "&.Mui-disabled": {
-          bgcolor: "rgba(164, 164, 164, 0.3)",
-          color: "rgba(255, 255, 255, 0.5)",
-        },
+        color: "white"
       }}
       onClick={handleClick}
     >
-      นับคะแนน Vote62
+      <span style={{ fontWeight: 600 }}>นับคะแนน Vote62</span>
+      <span style={{ marginLeft: "0.5rem" }}>{" "}</span>
+      {remainingVote62Volunteers > 0 && (
+        <span style={{ fontWeight: 300 }}>{`(ต้องการอีก ${remainingVote62Volunteers} คน)`}</span>
+      )}
     </Button>
   );
-
-  // Wrap with tooltip when disabled
-  if (!isEnabled) {
-    return (
-      <Tooltip title="เปิดใช้งานตั้งแต่ 16:30 น." placement="top">
-        <span style={{ width: "100%" }}>{button}</span>
-      </Tooltip>
-    );
-  }
 
   return button;
 };
