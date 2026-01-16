@@ -22,7 +22,7 @@ import { buildWeWatchUrl, buildVote62Url } from "@/src/utils/urlBuilder";
 type FormType = "wewatch" | "vote62";
 
 const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
-  const { hasProfile } = useUserProfileStore();
+  const { hasProfile, hasAnyProfile } = useUserProfileStore();
   const { selectedLocation } = useLocationStore();
   const currentTime = useCurrentTime();
 
@@ -55,10 +55,14 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
 
   const handleWeWatchClick = () => {
     if (hasProfile()) {
-      // Has profile, open form directly with pre-filled data
+      // Has complete profile, open form directly with pre-filled data
+      openExternalForm("wewatch", true);
+    } else if (hasAnyProfile()) {
+      // User has entered some profile fields; skip the confirmation dialog
+      // and open the form using whatever data is present.
       openExternalForm("wewatch", true);
     } else {
-      // No profile, show confirmation dialog
+      // No profile data at all, show confirmation dialog to prompt saving profile
       setPendingFormType("wewatch");
       setConfirmDialogOpen(true);
     }
@@ -69,7 +73,8 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
     openExternalForm("vote62", false);
   };
 
-  const isGameAvailable = GAME_URL && GAME_URL.trim().length > 0;
+  const isGameAvailable =
+    typeof GAME_URL === "string" && GAME_URL.trim().length > 0;
 
   const handleConfirmYes = () => {
     setConfirmDialogOpen(false);

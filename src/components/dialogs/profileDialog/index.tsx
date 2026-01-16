@@ -33,7 +33,7 @@ const ProfileDialog: FC<{
   const [formData, setFormData] = useState<UserProfile>({
     fullname: "",
     phone: "",
-    contract: false,
+    email: "",
     gender: "",
     otherGender: "",
   });
@@ -41,7 +41,7 @@ const ProfileDialog: FC<{
   const [errors, setErrors] = useState({
     fullname: "",
     phone: "",
-    contract: "",
+    email: "",
     gender: "",
     otherGender: "",
   });
@@ -62,7 +62,7 @@ const ProfileDialog: FC<{
     const newErrors = {
       fullname: "",
       phone: "",
-      contract: "",
+      email: "",
       gender: "",
       otherGender: "",
     };
@@ -70,34 +70,46 @@ const ProfileDialog: FC<{
     let isValid = true;
 
     // Validate fullname
-    if (!formData.fullname || formData.fullname.trim().length < 2) {
-      newErrors.fullname = "กรุณากรอกชื่อ-นามสกุล (อย่างน้อย 2 ตัวอักษร)";
-      isValid = false;
+    if (formData.fullname && formData.fullname.trim().length > 0) {
+      if (formData.fullname.trim().length < 2) {
+        newErrors.fullname = "กรุณากรอกชื่อ-นามสกุล (อย่างน้อย 2 ตัวอักษร)";
+        isValid = false;
+      }
     }
 
     // Validate phone (Thai format: 10 digits starting with 0)
     const phoneRegex = /^0\d{9}$/;
-    if (!formData.phone || !phoneRegex.test(formData.phone)) {
-      newErrors.phone =
-        "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (10 หลัก เริ่มต้นด้วย 0)";
-      isValid = false;
+    if (formData.phone && formData.phone.trim().length > 0) {
+      if (!phoneRegex.test(formData.phone)) {
+        newErrors.phone =
+          "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (10 หลัก เริ่มต้นด้วย 0)";
+        isValid = false;
+      }
     }
 
-    // Validate contract
-    if (!formData.contract) {
-      newErrors.contract = "กรุณายอมรับเงื่อนไข";
-      isValid = false;
+    // Validate email only if provided
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && formData.email.trim().length > 0) {
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "กรุณากรอกอีเมล์ที่ถูกต้อง";
+        isValid = false;
+      }
     }
 
-    // Validate gender
-    if (!formData.gender) {
-      newErrors.gender = "กรุณาเลือกเพศ";
-      isValid = false;
-    }
-
-    // If gender is Other, require specification
-    if (formData.gender === "Other") {
-      if (!formData.otherGender || formData.otherGender.trim().length < 2) {
+    // Validate gender only if provided
+    if (formData.gender && formData.gender.trim().length > 0) {
+      // If gender is Other and otherGender provided, validate length
+      if (formData.gender === "Other") {
+        if (formData.otherGender && formData.otherGender.trim().length > 0) {
+          if (formData.otherGender.trim().length < 2) {
+            newErrors.otherGender = "กรุณาระบุเพศ (อย่างน้อย 2 ตัวอักษร)";
+            isValid = false;
+          }
+        }
+      }
+    } else if (formData.otherGender && formData.otherGender.trim().length > 0) {
+      // If gender not provided but otherGender supplied, validate otherGender length
+      if (formData.otherGender.trim().length < 2) {
         newErrors.otherGender = "กรุณาระบุเพศ (อย่างน้อย 2 ตัวอักษร)";
         isValid = false;
       }
@@ -128,7 +140,7 @@ const ProfileDialog: FC<{
       setFormData({
         fullname: "",
         phone: "",
-        contract: false,
+        email: "",
         gender: "",
         otherGender: "",
       });
@@ -136,7 +148,7 @@ const ProfileDialog: FC<{
     setErrors({
       fullname: "",
       phone: "",
-      contract: "",
+      email: "",
       gender: "",
       otherGender: "",
     });
@@ -174,7 +186,6 @@ const ProfileDialog: FC<{
             }
             error={!!errors.fullname}
             helperText={errors.fullname}
-            required
             variant="filled"
             InputProps={{
               sx: { backgroundColor: "rgba(255,255,255,0.03)", color: "inherit" },
@@ -190,7 +201,6 @@ const ProfileDialog: FC<{
             error={!!errors.phone}
             helperText={errors.phone}
             placeholder="0812345678"
-            required
             variant="filled"
             InputProps={{
               sx: { backgroundColor: "rgba(255,255,255,0.03)", color: "inherit" },
@@ -198,7 +208,7 @@ const ProfileDialog: FC<{
             InputLabelProps={{ sx: { color: "rgba(255,255,255,0.6)" } }}
           />
 
-          <FormControl fullWidth error={!!errors.gender} required variant="filled">
+          <FormControl fullWidth error={!!errors.gender} variant="filled">
             <InputLabel sx={{ color: "rgba(255,255,255,0.6)" }}>เพศ</InputLabel>
             <Select
               value={formData.gender}
@@ -227,7 +237,6 @@ const ProfileDialog: FC<{
               onChange={(e) => setFormData({ ...formData, otherGender: e.target.value })}
               error={!!errors.otherGender}
               helperText={errors.otherGender}
-              required
               variant="filled"
               InputProps={{
                 sx: { backgroundColor: "rgba(255,255,255,0.03)", color: "inherit" },
@@ -235,23 +244,20 @@ const ProfileDialog: FC<{
               InputLabelProps={{ sx: { color: "rgba(255,255,255,0.6)" } }}
             />
           )}
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={formData.contract}
-                onChange={(e) => setFormData({ ...formData, contract: e.target.checked })}
-                sx={{ color: "rgba(255,255,255,0.87)" }}
-              />
-            }
-            label="ยินดีให้ WeWatch ติดต่อกลับเพื่อสอบถามข้อมูลเพิ่มเติม"
-            sx={{ color: "rgba(255,255,255,0.9)" }}
+          <TextField
+            label="อีเมล์"
+            fullWidth
+            value={formData.email || ""}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            error={!!errors.email}
+            helperText={errors.email || "ยินดีให้ WeWatch ติดต่อกลับเพื่อสอบถามข้อมูลเพิ่มเติม"}
+            placeholder="name@example.com"
+            variant="filled"
+            InputProps={{
+              sx: { backgroundColor: "rgba(255,255,255,0.03)", color: "inherit" },
+            }}
+            InputLabelProps={{ sx: { color: "rgba(255,255,255,0.6)" } }}
           />
-          {errors.contract && (
-            <Typography variant="caption" color="error" marginLeft={1.75}>
-              {errors.contract}
-            </Typography>
-          )}
         </Stack>
       </DialogContent>
 

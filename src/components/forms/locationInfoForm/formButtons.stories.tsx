@@ -51,7 +51,7 @@ const withStoreSetup = (
       useUserProfileStore.getState().saveProfile({
         fullname: "สมชาย ใจดี",
         phone: "0812345678",
-        contract: true,
+        email: "somchai@example.com",
         gender: "ชาย",
       });
     } else {

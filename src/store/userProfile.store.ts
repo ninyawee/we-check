@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
 export interface UserProfile {
-  fullname: string
-  phone: string
-  contract: boolean
-  gender: string
+  fullname?: string
+  phone?: string
+  // อีเมล์: optional contact email used instead of the previous boolean contract
+  email?: string
+  gender?: string
   otherGender?: string
 }
 
@@ -15,6 +16,7 @@ interface IUserProfileStore {
   loadProfile: () => void
   clearProfile: () => void
   hasProfile: () => boolean
+  hasAnyProfile: () => boolean
 }
 
 const STORAGE_KEY = "wecheck_user_profile"
@@ -55,11 +57,12 @@ export const useUserProfileStore = create<IUserProfileStore>((set, get) => ({
   hasProfile() {
     const { profile } = get()
     if (!profile) return false
+    // Ensure required fields are present and non-empty
     if (
-      profile.fullname === "" ||
-      profile.phone === "" ||
-      !profile.contract ||
-      profile.gender === ""
+      !profile.fullname || profile.fullname.trim() === "" ||
+      !profile.phone || profile.phone.trim() === "" ||
+      !profile.email || profile.email.trim() === "" ||
+      !profile.gender || profile.gender.trim() === ""
     ) {
       return false
     }
@@ -69,5 +72,18 @@ export const useUserProfileStore = create<IUserProfileStore>((set, get) => ({
     }
 
     return true
+  },
+
+  hasAnyProfile() {
+    const { profile } = get()
+    if (!profile) return false
+
+    const anyField = !!(
+      (profile.fullname && profile.fullname.trim() !== "") ||
+      (profile.phone && profile.phone.trim() !== "") ||
+      (profile.email && profile.email.trim() !== "")
+    )
+
+    return anyField
   }
 }))

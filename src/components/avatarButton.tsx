@@ -18,7 +18,7 @@ const AvatarButton: FC = () => {
     !profile ||
     !profile.fullname ||
     !profile.phone ||
-    !profile.contract ||
+    !profile.email ||
     !profile.gender;
 
   return (
