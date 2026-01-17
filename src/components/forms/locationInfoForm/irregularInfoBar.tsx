@@ -28,18 +28,6 @@ const IrregularInfoBar: FC<{ isReportDay?: boolean }> = ({ isReportDay = true })
     }
   }
 
-  // If it's not a report-accepting day, show the "ยังไม่ถึงวันเลือกตั้ง" message
-  if (!isReportDay) {
-    return (
-      <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
-        <Typography component={'span'} padding="0.5rem 1rem">
-          การรายงาน:
-          <Typography component={'span'} color="#A4A4A4">&ensp;ยังไม่ถึงวันเลือกตั้ง&ensp;</Typography>
-        </Typography>
-      </Stack>
-    )
-  }
-
   return <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
     <Typography component={'span'} padding="0.5rem 1rem">
       การรายงาน:
