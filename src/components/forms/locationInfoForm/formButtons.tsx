@@ -101,7 +101,10 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
     <>
       <Stack spacing={1.5} padding="1rem 1.5rem 1.5rem 1.5rem">
         {isReportDay ? (
-          <WeWatchButton onClick={handleWeWatchClick} />
+          <>
+            <WeWatchButton onClick={handleWeWatchClick} />
+            <Vote62Button onClick={handleVote62Click} />
+          </>
         ) : (
           <>
             <Button
@@ -128,7 +131,6 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
             </Button>
           </>
         )}
-        <Vote62Button onClick={handleVote62Click} />
       </Stack>
 
       {/* Confirmation Dialog */}
