@@ -4,5 +4,15 @@ package-lock.json
 pnpm-lock.yaml
 .DS_Store
 
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# ESLint config (generated)
+.eslintrc.json
+
+# Test files (for manual testing only)
+test-webstate.js
+webstate-test.html
+
 # Storybook
 storybook-static/
