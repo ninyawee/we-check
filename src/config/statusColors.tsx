@@ -4,7 +4,8 @@ const STATUS_COLORS = {
   // Status dots
   reported: "#10C487",
   needsRepeat: "#016b05",
-  missing: "#FFFFFF",
+  missing: "#adadadff",
+  ended: "#535353ff",
   counting: "#ffcb4c",
   // Special-purpose
   abnormal: "#ff3131",
