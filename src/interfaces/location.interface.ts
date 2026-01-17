@@ -20,7 +20,6 @@ export interface ILocation {
   googleMapUrl: string
 
   vote62VolunteerCount: number
-
   year?: number
 }
 

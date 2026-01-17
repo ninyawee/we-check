@@ -50,17 +50,16 @@ const Vote62Button: FC<{
       color="secondary"
       fullWidth
       sx={{
-        fontSize: "1.25rem",
-        height: "52px",
-        color: "white"
+      fontSize: "1.25rem",
+      height: "52px",
+      color: "white"
       }}
       onClick={handleClick}
     >
       <span style={{ fontWeight: 600 }}>นับคะแนน Vote62</span>
-      <span style={{ marginLeft: "0.5rem" }}>{" "}</span>
-      {remainingVote62Volunteers > 0 && (
-        <span style={{ fontWeight: 300 }}>{`(ต้องการอีก ${remainingVote62Volunteers} คน)`}</span>
-      )}
+      {remainingVote62Volunteers > 0 ? (
+      <span style={{ marginLeft: "0.5rem", fontWeight: 300 }}>{`(ต้องการอีก ${remainingVote62Volunteers} คน)`}</span>
+      ) : null}
     </Button>
   );
 
