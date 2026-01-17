@@ -25,7 +25,7 @@ const LocationInfoForm: FC = () => {
   }
 
   function handleNavigateClick() {
-    window.open(selectedLocation?.placeId);
+    window.open(selectedLocation?.googleMapUrl);
   }
 
   return (
@@ -121,9 +121,9 @@ const LocationInfoForm: FC = () => {
           alignItems="start"
         >
           {isReportDay && <IrregularBar />}
-          {isReportDay && <VolunteerInfoBar onNavigate={handleNavigateClick} />}
-          {isReportDay && <HorizontalLine />}
-          <IrregularInfoBar isReportDay={isReportDay} />
+          {<VolunteerInfoBar onNavigate={handleNavigateClick} />}
+          {<HorizontalLine />}
+          {isReportDay && <IrregularInfoBar isReportDay={isReportDay} />}
         </Stack>
 
         <FormButtons isReportDay={isReportDay} />
