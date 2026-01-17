@@ -4,5 +4,11 @@ package-lock.json
 pnpm-lock.yaml
 .DS_Store
 
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# ESLint config (generated)
+.eslintrc.json
+
 # Storybook
 storybook-static/
