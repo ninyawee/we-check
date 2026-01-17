@@ -19,6 +19,7 @@ import StatusDot from "@/src/components/statusDot";
 import StatusLegendItem from "@/src/components/statusLegendItem";
 import STATUS_LEGEND from "@/src/config/statusLegend";
 import { getWebStateManager } from "@/src/utils/webState";
+import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
 
 const IntroductionPanel: FC<{
   active?: boolean;
@@ -51,7 +52,7 @@ const IntroductionPanel: FC<{
   }, []);
   
   function reportLocationClick() {
-    window.open("https://forms.gle/EpXbbrVfJdxbX6hv7");
+    window.open(REPORT_LOCATION_URL);
   }
 
   return (
