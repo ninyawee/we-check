@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
 import { FC, Fragment } from "react";
 import VolunteerInfoBar from "./volunteerInfoBar";
 import HorizontalLine from "../../horizontalLine";
@@ -15,8 +15,17 @@ const LocationInfoForm: FC = () => {
   const webStateManager = getWebStateManager();
   const isReportDay = webStateManager.isReportDay();
 
+  // Map locationGrade (which may contain letters) to a short Thai label and colors
+  const rawGrade = (selectedLocation?.locationGrade || "D").toString();
+  let gradeLabel = "ต่ำ"; 
+  let gradeColor = "#cf9100ff"; 
+  if (rawGrade.includes("A")) {
+    gradeLabel = "สูง"; // short Thai for excellent
+    gradeColor = "#30a766ff"; // green
+  }
+
   function handleNavigateClick() {
-    window.open(selectedLocation?.googleMapUrl);
+    window.open(selectedLocation?.placeId);
   }
 
   return (
@@ -29,6 +38,7 @@ const LocationInfoForm: FC = () => {
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
+          alignItems={"flex-start"}
           padding={"1rem"}
           position={"relative"}
         >
@@ -72,7 +82,38 @@ const LocationInfoForm: FC = () => {
               </Typography>
             </Stack>
           </Stack>
-          
+          {/* Location grade badge on the top-right */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#000000",
+              color: "#000",
+              width: "3.5rem",
+              height: "3.5rem",
+              borderRadius: "0.5rem",
+              padding: "0.25rem",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+              border: `1px solid ${gradeColor}`,
+            }}
+          >
+            <Typography
+              fontSize={"0.75rem"}
+              fontWeight={200}
+              sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
+            >
+              แม่นยำ
+            </Typography>
+            <Typography
+              fontSize={"1.25rem"}
+              fontWeight={700}
+              sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
+            >
+              {gradeLabel}
+            </Typography>
+          </Box>
         </Stack>
         <Stack
           direction="column"
