@@ -250,7 +250,6 @@ const ProfileDialog: FC<{
             value={formData.email || ""}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             error={!!errors.email}
-            helperText={errors.email || "ยินดีให้ WeWatch ติดต่อกลับเพื่อสอบถามข้อมูลเพิ่มเติม"}
             placeholder="name@example.com"
             variant="filled"
             InputProps={{
