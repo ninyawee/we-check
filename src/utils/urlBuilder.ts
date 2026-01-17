@@ -169,7 +169,7 @@ export function buildVote62Url(location: ILocation): string {
     `--${location.districtName}`,
     `--${location.subDistrictName}`,
     `--${location.provinceName}.${paddedDivision}`,
-    `--${unitNumber}${encodedUnitName}`,
+    `--${unitNumber}%20${encodedUnitName}`,
     `--`, // Empty code for now
   ].join("");
 
