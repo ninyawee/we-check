@@ -6,16 +6,14 @@ import IrregularInfoBar from "./irregularInfoBar";
 import IrregularBar from "./irregularBar";
 import FormButtons from "./formButtons";
 import { useLocationStore } from "@/src/store/location.store";
-import { useCurrentTime } from "@/src/store/time.store";
-import { REPORT_DATES } from "@/src/config/statusConfig";
+import { getWebStateManager } from "@/src/utils/webState";
 
 const LocationInfoForm: FC = () => {
   const { selectedLocation } = useLocationStore();
-  const currentTime = useCurrentTime();
 
-  const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
-  const todayIso = `${currentTime.getFullYear()}-${pad(currentTime.getMonth() + 1)}-${pad(currentTime.getDate())}`;
-  const isReportDay = REPORT_DATES.includes(todayIso);
+  // Use WebState manager to check if it's a report day
+  const webStateManager = getWebStateManager();
+  const isReportDay = webStateManager.isReportDay();
 
   function handleNavigateClick() {
     window.open(selectedLocation?.googleMapUrl);

@@ -18,7 +18,7 @@ import STATUS_COLORS from "@/src/config/statusColors";
 import StatusDot from "@/src/components/statusDot";
 import StatusLegendItem from "@/src/components/statusLegendItem";
 import STATUS_LEGEND from "@/src/config/statusLegend";
-import { VOTE62_SHOW_TIME } from "@/src/config/statusConfig";
+import { getWebStateManager } from "@/src/utils/webState";
 
 const IntroductionPanel: FC<{
   active?: boolean;
@@ -32,22 +32,24 @@ const IntroductionPanel: FC<{
   const [instructionDialogOpen, setInstructionDialogOpen] =
     useState<boolean>(false);
 
-  // showCounting is determined client-side from local device time.
+  // showCounting is determined client-side using WebState manager.
   // Initially false to avoid SSR/client hydration mismatch; will update in useEffect.
   const [showCounting, setShowCounting] = useState<boolean>(false);
 
   useEffect(() => {
-    const now = new Date();
-    const threshold = new Date();
-    threshold.setHours(VOTE62_SHOW_TIME.hour, VOTE62_SHOW_TIME.minute, 0, 0);
-    setShowCounting(now >= threshold);
+    const webStateManager = getWebStateManager();
+    const shouldShow = webStateManager.shouldShowVote62();
+    setShowCounting(shouldShow);
 
-    if (now < threshold) {
-      const msUntilThreshold = threshold.getTime() - now.getTime();
-      const timeoutId = setTimeout(() => setShowCounting(true), msUntilThreshold);
-      return () => clearTimeout(timeoutId);
-    }
+    // Set up interval to check every minute if state should change
+    const interval = setInterval(() => {
+      const shouldShowNow = webStateManager.shouldShowVote62();
+      setShowCounting(shouldShowNow);
+    }, 60000); // Check every minute
+
+    return () => clearInterval(interval);
   }, []);
+  
   function reportLocationClick() {
     window.open("https://forms.gle/EpXbbrVfJdxbX6hv7");
   }

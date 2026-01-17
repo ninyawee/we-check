@@ -1,6 +1,6 @@
 import { ILocation } from "../interfaces/location.interface";
 import { UserProfile } from "../store/userProfile.store";
-import { START_COUNTING_TIME } from "../config/statusConfig";
+import { getWebStateManager } from "./webState";
 
 // Maximum length for free-text URL params to limit abuse/XSS surface
 const MAX_OTHER_GENDER_LENGTH = 100;
@@ -37,18 +37,13 @@ export function buildWeWatchUrl(
   location: ILocation,
   currentTime: Date,
 ): string {
-  // Determine which form based on time (17:00 is the cutoff)
-  // currentTime should already be in Bangkok timezone from time.store
-  const hour = currentTime.getHours();
-  const minutes = currentTime.getMinutes();
-
-  // Use configured start counting time from statusConfig
-  const startHour = START_COUNTING_TIME.hour;
-  const startMinute = START_COUNTING_TIME.minute;
-  const isCountingTime =
-    hour > startHour || (hour === startHour && minutes >= startMinute);
+  // Use WebState manager to determine if we're in counting time
+  const webStateManager = getWebStateManager();
+  const isCountingTime = webStateManager.isCountingTime();
 
   // Format current time as HH:MM
+  const hour = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
   const timeString = `${String(hour).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
   if (isCountingTime) {

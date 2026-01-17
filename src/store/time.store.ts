@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { useEffect, useState } from "react";
+import { getWebStateManager } from "../utils/webState";
 
 interface ITimeStore {
   mockTime: Date | null;
@@ -18,18 +19,16 @@ export const useTimeStore = create<ITimeStore>((set, get) => ({
     const { mockTime } = get();
     if (mockTime) return mockTime;
 
-    // Always return Bangkok time (Asia/Bangkok, UTC+7)
-    // Get current time in Bangkok timezone
-    const bangkokTime = new Date(
-      new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }),
-    );
-    return bangkokTime;
+    // Use WebState manager to get current time (respects debug state)
+    const webStateManager = getWebStateManager();
+    return webStateManager.getCurrentTime();
   },
 }));
 
 /**
  * Hook that returns current time and updates every minute
  * Respects mock time from store for testing/Storybook
+ * Also respects WebState debug parameters if enabled
  */
 export const useCurrentTime = (): Date => {
   const { getCurrentTime } = useTimeStore();

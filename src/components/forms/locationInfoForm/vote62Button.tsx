@@ -4,7 +4,8 @@ import { useCurrentTime } from "@/src/store/time.store";
 import { useLocationStore } from "@/src/store/location.store";
 import { buildVote62Url, validateLocationData } from "@/src/utils/urlBuilder";
 import { useSnackbar } from "notistack";
-import { targetVote62VolunteerCount, VOTE62_SHOW_TIME } from "@/src/config/statusConfig";
+import { targetVote62VolunteerCount } from "@/src/config/statusConfig";
+import { getWebStateManager } from "@/src/utils/webState";
 
 const Vote62Button: FC<{
   onClick: () => void;
@@ -19,15 +20,11 @@ const Vote62Button: FC<{
     targetVote62VolunteerCount - currentVote62Volunteers
   );
 
-  // Check if Vote62 is enabled (configured threshold)
-  const hour = currentTime.getHours();
-  const minute = currentTime.getMinutes();
-
-  // Hide the button if current time is before the counting threshold
-  const { hour: thresholdHour, minute: thresholdMinute } = VOTE62_SHOW_TIME;
-  const isBeforeThreshold =
-    hour < thresholdHour || (hour === thresholdHour && minute < thresholdMinute);
-  if (isBeforeThreshold) return null;
+  // Use WebState manager to check if Vote62 should be shown
+  const webStateManager = getWebStateManager();
+  const shouldShow = webStateManager.shouldShowVote62();
+  
+  if (!shouldShow) return null;
   
   const handleClick = () => {
     

@@ -21,3 +21,7 @@ export const targetVote62VolunteerCount = 3;
 // List of dates (local device) when locations should accept situation reports.
 // Use ISO date strings `YYYY-MM-DD`. Example: ['2026-01-17', '2026-01-18']
 export const REPORT_DATES: string[] = ['2026-02-01' , '2026-02-08'];
+
+// Allow debugging via query parameters (e.g., ?webState=vote62ShowTime)
+// Set to false in production to prevent unauthorized state simulation
+export const isAllowParamDebugging = false;
