@@ -7,6 +7,8 @@ import IrregularBar from "./irregularBar";
 import FormButtons from "./formButtons";
 import { useLocationStore } from "@/src/store/location.store";
 import { getWebStateManager } from "@/src/utils/webState";
+import { ArrowForwardIos } from "@mui/icons-material";
+import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
 
 const LocationInfoForm: FC = () => {
   const { selectedLocation } = useLocationStore();
@@ -26,6 +28,10 @@ const LocationInfoForm: FC = () => {
 
   function handleNavigateClick() {
     window.open(selectedLocation?.googleMapUrl);
+  }
+
+  function reportLocationClick(): void {
+    window.open(REPORT_LOCATION_URL);
   }
 
   return (
@@ -127,6 +133,21 @@ const LocationInfoForm: FC = () => {
         </Stack>
 
         <FormButtons isReportDay={isReportDay} />
+        <HorizontalLine />
+              <Stack
+                direction="row"
+                margin="0.6rem 1rem 1rem 1.5rem"
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Stack direction="row"></Stack>
+                <Stack className="clickable" direction="row">
+                  <Typography onClick={reportLocationClick}>
+                    แจ้งตำแหน่งหน่วยผิด
+                  </Typography>
+                  <ArrowForwardIos sx={{ color: "#A4A4A4" }} />
+                </Stack>
+              </Stack>
       </Stack>
     </Fragment>
   );
