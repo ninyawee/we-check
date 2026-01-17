@@ -258,6 +258,19 @@ const ProfileDialog: FC<{
             }}
             InputLabelProps={{ sx: { color: "rgba(255,255,255,0.6)" } }}
           />
+          <Typography
+            variant="subtitle2"
+            fontWeight={600}
+            sx={{ color: "rgba(255,255,255,0.9)", marginTop: 1 }}
+          >
+            นโยบายความเป็นส่วนตัว
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{ color: "rgba(255,255,255,0.6)", marginTop: 0.5 }}
+          >
+            ข้อมูลจะถูกบันทึกลงในอุปกรณ์ของท่านชั่วคราวในรูปแบบของ Browser Cache เท่านั้น และจะถูกใช้ก็ต่อเมื่อรายงานสถานการณ์กับ We Watch
+          </Typography>
         </Stack>
       </DialogContent>
 
