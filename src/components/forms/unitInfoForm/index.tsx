@@ -8,8 +8,8 @@ import FormButtons from "./formButtons";
 import { useLocationStore } from "@/src/store/location.store";
 import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { getWebStateManager } from "@/src/utils/webState";
-import { ArrowForwardIos, ArrowBackIosNew } from "@mui/icons-material";
-import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
+import { ArrowBackIosNew } from "@mui/icons-material";
+import ReportLocationLink from "@/src/components/reportLocationLink";
 import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 import LocationHeader from "@/src/components/locationHeader";
 
@@ -26,9 +26,7 @@ const UnitInfoForm: FC = () => {
         window.open(buildGoogleMapUrl(selectedLocation));
   }
 
-  function reportLocationClick(): void {
-    window.open(REPORT_LOCATION_URL);
-  }
+ 
 
   return (
     <Fragment>
@@ -44,26 +42,27 @@ const UnitInfoForm: FC = () => {
           padding={"1rem"}
           position={"relative"}
         >
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" flex={2}>
             <IconButton
+              size="small"
               onClick={() => {
                 // close unit form and clear selection to go back to unit list
                 setOpenUnitInfoForm(false);
                 setSelectedUnitData(null as any);
               }}
-              sx={{ color: "#A4A4A4", marginRight: "0.5rem" }}
+              sx={{ color: "#A4A4A4", marginRight: "0.25rem", marginLeft: "-0.25rem" }}
             >
               <ArrowBackIosNew />
             </IconButton>
             {selectedUnitData && <LocationHeader data={selectedUnitData} />}
           </Stack>
-          {/* badge moved into the left header (before unit name) */}
         </Stack>
         <Stack
           direction="column"
           justifyContent="space-between"
           alignItems="start"
         >
+          <HorizontalLine />
           {isReportDay && <IrregularBar />}
           {<VolunteerInfoBar onNavigate={handleNavigateClick} />}
           {<HorizontalLine />}
@@ -72,20 +71,7 @@ const UnitInfoForm: FC = () => {
 
         <FormButtons isReportDay={isReportDay} />
         <HorizontalLine />
-              <Stack
-                direction="row"
-                margin="0.6rem 1rem 1rem 1.5rem"
-                justifyContent={"space-between"}
-                alignItems={"center"}
-              >
-                <Stack direction="row"></Stack>
-                <Stack className="clickable" direction="row">
-                  <Typography onClick={reportLocationClick}>
-                    แจ้งตำแหน่งหน่วยผิด
-                  </Typography>
-                  <ArrowForwardIos sx={{ color: "#A4A4A4" }} />
-                </Stack>
-              </Stack>
+        <ReportLocationLink />
       </Stack>
     </Fragment>
   );

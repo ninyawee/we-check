@@ -4,6 +4,7 @@ import { IUnitData } from "@/src/interfaces/UnitData.interface";
 import { ILocation } from "@/src/interfaces/location.interface";
 import TwoLineBadge from "./twoLineBadge";
 import STATUS_COLORS from "../config/statusColors";
+import HorizontalLine from "./horizontalLine";
 
 type Props = {
   data?: IUnitData | ILocation;

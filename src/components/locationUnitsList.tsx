@@ -3,6 +3,8 @@ import { Stack, Button, Typography } from "@mui/material";
 import { useLocationStore } from "@/src/store/location.store";
 import { useUnitDataStore } from "@/src/store/UnitData.store";
 import LocationHeader from "@/src/components/locationHeader";
+import HorizontalLine from "./horizontalLine";
+import ReportLocationLink from "@/src/components/reportLocationLink";
 
 const LocationUnitsList: FC = () => {
   const { selectedLocation } = useLocationStore();
@@ -41,6 +43,8 @@ const LocationUnitsList: FC = () => {
     setOpenUnitInfoForm(true);
   }
 
+    
+
   return (
     <>
       <Stack width={"100%"} direction={"column"} justifyContent={"space-between"}>
@@ -53,7 +57,7 @@ const LocationUnitsList: FC = () => {
         >
           <LocationHeader data={selectedLocation} locationGrade={selectedLocation.locationGrade} />
         </Stack>
-
+        <HorizontalLine />
         <Stack direction="column" spacing={1} padding="1rem">
           <Typography fontSize="0.9rem" sx={{ color: "#A4A4A4" }}>
             หน่วยในตำแหน่งนี้
@@ -87,6 +91,8 @@ const LocationUnitsList: FC = () => {
               </Button>
             ))}
           </Stack>
+          <HorizontalLine />
+          <ReportLocationLink />
         </Stack>
       </Stack>
     </>
