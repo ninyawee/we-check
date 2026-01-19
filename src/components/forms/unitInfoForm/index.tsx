@@ -55,7 +55,7 @@ const UnitInfoForm: FC = () => {
             >
               <ArrowBackIosNew />
             </IconButton>
-            {selectedUnitData && <LocationHeader data={selectedUnitData} showAccuracy={false} />}
+            {selectedUnitData && <LocationHeader data={selectedUnitData} />}
           </Stack>
           {/* badge moved into the left header (before unit name) */}
         </Stack>
