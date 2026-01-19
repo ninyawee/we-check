@@ -22,7 +22,7 @@ const VolunteerInfoBar: FC = () => {
         </Stack>
       ) : (
         <Stack direction="row" alignItems={"center"}>
-          <Warning sx={{ color: "#F3DD13", marginRight: "0.5rem" }} />
+          <Warning sx={{ color: "#f35e13ff", marginRight: "0.5rem" }} />
           <Typography fontSize={"1rem"}>ต้องการคนสังเกตการณ์ที่นี่</Typography>
         </Stack>
       )}
