@@ -17,7 +17,7 @@ const VolunteerInfoBar: FC<{
         </Stack> :
         <Stack direction="row" alignItems={"center"}>
           <Warning sx={{ color: '#F3DD13', marginRight: '0.5rem' }} />
-          <Typography fontSize={"1rem"}>ต้องการคนสังเกตการณ์ที่หน่วยนี้</Typography>
+          <Typography fontSize={"1rem"}>ต้องการคนสังเกตการณ์ที่นี่</Typography>
         </Stack>
     }
     <Stack className="clickable" direction="row" alignItems={"center"} color={"#0FAD77"} onClick={onNavigate}>
