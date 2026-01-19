@@ -1,6 +1,6 @@
 import { FC, Fragment, useState } from "react"
 import BottomDrawer from "../drawers/bottomDrawer"
-import LocationInfoForm from "../forms/locationInfoForm"
+import LocationUnitsList from "@/src/components/locationUnitsList"
 import VolunteerRegisterForm from "../forms/volunteerRegisterForm.tsx"
 import { useMediaQuery } from "@mui/material"
 import { useLayoutStore } from "@/src/store/layout.store"
@@ -26,7 +26,7 @@ const LocationPanel: FC<{
   return <Fragment>
     {
       <BottomDrawer open={open} onClose={onClose}>
-        {currentState === LocationFormState.Location && <LocationInfoForm/>}
+        {currentState === LocationFormState.Location && <LocationUnitsList/>}
         {currentState === LocationFormState.Register && <VolunteerRegisterForm onBackToLocation={handleBackToLocationClick} />}
       </BottomDrawer>
     }

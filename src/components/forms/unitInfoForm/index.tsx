@@ -13,7 +13,7 @@ import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
 import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 import LocationHeader from "@/src/components/locationHeader";
 
-const LocationInfoForm: FC = () => {
+const UnitInfoForm: FC = () => {
   const { selectedUnitData } = useUnitDataStore();
   const { selectedLocation } = useLocationStore();
 
@@ -90,4 +90,4 @@ const LocationInfoForm: FC = () => {
   );
 };
 
-export default LocationInfoForm;
+export default UnitInfoForm;
