@@ -1,30 +1,37 @@
 import { useUnitDataStore } from "@/src/store/UnitData.store";
+import { useLocationStore } from "@/src/store/location.store";
 import { ArrowForwardIos, Check, Warning } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
+import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 
-const VolunteerInfoBar: FC<{
-  onNavigate: () => void
-}> = ({ onNavigate }) => {
-  const { selectedUnitData } = useUnitDataStore()
+const VolunteerInfoBar: FC = () => {
+  const { selectedUnitData } = useUnitDataStore();
+  const { selectedLocation } = useLocationStore();
 
-  return <Stack direction="row" width={"100%"} justifyContent={"space-between"} padding={"1rem"}>
-    {
-      selectedUnitData?.status === 'reported' || selectedUnitData?.status === 'counting' ?
+  function handleNavigate() {
+    if (selectedLocation) window.open(buildGoogleMapUrl(selectedLocation));
+  }
+
+  return (
+    <Stack direction="row" width={"100%"} justifyContent={"space-between"} padding={"1rem"}>
+      {selectedUnitData?.status === "reported" || selectedUnitData?.status === "counting" ? (
         <Stack direction="row" alignItems={"center"}>
-          <Check color="primary" sx={{ marginRight: '0.5rem' }} />
+          <Check color="primary" sx={{ marginRight: "0.5rem" }} />
           <Typography fontSize={"1rem"}>มีคนติดตามสถานการณ์ที่หน่วยแล้ว</Typography>
-        </Stack> :
+        </Stack>
+      ) : (
         <Stack direction="row" alignItems={"center"}>
-          <Warning sx={{ color: '#F3DD13', marginRight: '0.5rem' }} />
+          <Warning sx={{ color: "#F3DD13", marginRight: "0.5rem" }} />
           <Typography fontSize={"1rem"}>ต้องการคนสังเกตการณ์ที่นี่</Typography>
         </Stack>
-    }
-    <Stack className="clickable" direction="row" alignItems={"center"} color={"#0FAD77"} onClick={onNavigate}>
-      <Typography fontSize={"1rem"}>พาฉันไปที่นี่</Typography>
-      <ArrowForwardIos />
+      )}
+      <Stack className="clickable" direction="row" alignItems={"center"} color={"#0FAD77"} onClick={handleNavigate}>
+        <Typography fontSize={"1rem"}>พาฉันไปที่นี่</Typography>
+        <ArrowForwardIos />
+      </Stack>
     </Stack>
-  </Stack>
-}
+  );
+};
 
-export default VolunteerInfoBar
+export default VolunteerInfoBar;

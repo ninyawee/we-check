@@ -7,7 +7,6 @@ import HorizontalLine from "./horizontalLine";
 import ReportLocationLink from "@/src/components/reportLocationLink";
 import STATUS_COLORS from "@/src/config/statusColors";
 import VolunteerInfoBar from "./forms/unitInfoForm/volunteerInfoBar";
-import { buildGoogleMapUrl } from "../utils/urlBuilder";
 
 const LocationUnitsList: FC = () => {
   const { selectedLocation } = useLocationStore();
@@ -69,10 +68,7 @@ const LocationUnitsList: FC = () => {
     setOpenUnitInfoForm(true);
   }
 
-    function handleNavigateClick(): void {
-        if (selectedLocation)
-                window.open(buildGoogleMapUrl(selectedLocation));
-    }
+    
 
   return (
     <>
@@ -87,7 +83,7 @@ const LocationUnitsList: FC = () => {
           <LocationHeader data={selectedLocation} locationGrade={selectedLocation.locationGrade} />
         </Stack>
         <HorizontalLine />
-          {<VolunteerInfoBar onNavigate={handleNavigateClick} />}
+          {<VolunteerInfoBar />}
         <HorizontalLine />
 
         <Stack direction="column" spacing={1} padding="1rem">
