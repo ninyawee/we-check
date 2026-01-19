@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Stack, Button, Typography } from "@mui/material";
+import { Check, Warning } from "@mui/icons-material";
 import STATUS_COLORS from "@/src/config/statusColors";
 
 type Props = {
@@ -28,7 +29,12 @@ const parseUnitKey = (key: string) => {
 
 const UnitButton: FC<Props> = ({ unitKey, statusKey = "", onSelect }) => {
   const p = parseUnitKey(unitKey);
+  if (statusKey == "")
+    statusKey = "missing";
+
   const color = statusKey ? (STATUS_COLORS as any)[statusKey] : (STATUS_COLORS as any).missing;
+  const showWarning = statusKey === "missing" || statusKey === "needsRepeat";
+  const showCheck = statusKey === "counting" || statusKey === "reported";
 
   return (
     <Button
@@ -43,14 +49,16 @@ const UnitButton: FC<Props> = ({ unitKey, statusKey = "", onSelect }) => {
         color: "inherit",
         py: 1.5,
         px: 2,
-        minHeight: 50,
+        minHeight: 35,
         '&:hover': { borderColor: color || undefined },
       }}
     >
       <Stack direction="row" width="100%" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <Typography fontSize="1.1rem" sx={{ textAlign: "center" }}>{`หน่วย ${p.unitNumber}`}</Typography>
-          <Typography component="span" fontSize="1.15rem" sx={{ textAlign: "left", fontWeight: 500, color: color || 'inherit' }}>{p.unitName}</Typography>
+        <Stack direction="row" alignItems="center" spacing={0.75}>
+          {showWarning && <Warning sx={{ color: "#f35e13ff", marginRight: "0.25rem", maxWidth: "1rem" }} />}
+          {showCheck && <Check sx={{ color: color || undefined, marginRight: "0.25rem", maxWidth: "1rem" }} />}
+          <Typography fontSize="0.75rem" sx={{ textAlign: "center" }}>{`หน่วย ${p.unitNumber}`}</Typography>
+          <Typography component="span" fontSize="0.9rem" sx={{ textAlign: "left", fontWeight: 500, color: color || 'inherit' }}>{p.unitName}</Typography>
         </Stack>
       </Stack>
     </Button>
