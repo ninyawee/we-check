@@ -51,20 +51,41 @@ const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
           marginRight: "0.75rem",
         }}
       >
-        <Typography
-          fontSize={"0.75rem"}
-          fontWeight={200}
-          sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
-        >
-          แม่นยำ
-        </Typography>
-        <Typography
-          fontSize={"1.25rem"}
-          fontWeight={700}
-          sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
-        >
-          {gradeLabel}
-        </Typography>
+          {isUnitData(data) ? (
+          <>
+            <Typography
+              fontSize={"0.75rem"}
+              fontWeight={200}
+              sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
+            >
+              แม่นยำ
+            </Typography>
+            <Typography
+              fontSize={"1.25rem"}
+              fontWeight={700}
+              sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
+            >
+              {gradeLabel}
+            </Typography>
+          </>
+        ) : (
+          <>
+            <Typography
+              fontSize={"0.75rem"}
+              fontWeight={200}
+              sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
+            >
+              แม่นยำ
+            </Typography>
+            <Typography
+              fontSize={"1.25rem"}
+              fontWeight={700}
+              sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
+            >
+              {gradeLabel}
+            </Typography>
+          </>
+        )}
       </Box>
 
       <Stack direction={"column"} justifyContent={"space-between"} flex={1}>
@@ -89,6 +110,8 @@ const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
               </Typography>
             )}
           </Typography>
+
+          
         </Stack>
         <Stack direction={"row"} marginBottom={"0.875rem"}>
           <Typography fontSize={"0.8rem"} color="#A4A4A4">
