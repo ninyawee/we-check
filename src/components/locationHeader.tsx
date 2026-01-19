@@ -1,7 +1,9 @@
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { IUnitData } from "@/src/interfaces/UnitData.interface";
 import { ILocation } from "@/src/interfaces/location.interface";
+import TwoLineBadge from "./twoLineBadge";
+import STATUS_COLORS from "../config/statusColors";
 
 type Props = {
   data?: IUnitData | ILocation;
@@ -25,44 +27,17 @@ const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
   const showOldBadge = isUnitData && ((year && Number(year) !== new Date().getFullYear()) || !year);
 
   const address = isUnitData
-    ? `หน่วย ${(data as IUnitData).unitNumber} ${(data as IUnitData).subDistrictName} เขต ${(data as IUnitData).divisionNumber} ${(data as IUnitData).districtName} ${(data as IUnitData).provinceName}`
+    ? `เขตเลือกตั้งที่ ${(data as IUnitData).divisionNumber} ${(data as IUnitData).subDistrictName} ${(data as IUnitData).districtName} ${(data as IUnitData).provinceName}`
     : `${(data as ILocation).subDistrictName} ${(data as ILocation).districtName} ${(data as ILocation).provinceName}`;
+
+  const statusColor: string = isUnitData
+    ? (STATUS_COLORS[(data as IUnitData).status as keyof typeof STATUS_COLORS] ?? STATUS_COLORS.missing)
+    : "#000000";
 
   return (
     <Stack direction={"row"} alignItems={"flex-start"} maxWidth={"80%"}>
-      {isUnitData === true ? null : (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#000000",
-            color: "#000",
-            width: "3.5rem",
-            height: "3.5rem",
-            borderRadius: "0.5rem",
-            padding: "0.25rem",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-            border: `1px solid ${gradeColor}`,
-            marginRight: "0.75rem",
-          }}
-        >
-          <Typography
-            fontSize={"0.75rem"}
-            fontWeight={200}
-            sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
-          >
-            แม่นยำ
-          </Typography>
-          <Typography
-            fontSize={"1.25rem"}
-            fontWeight={700}
-            sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
-          >
-            {gradeLabel}
-          </Typography>
-        </Box>
+      {isUnitData === true ? <TwoLineBadge upperText={"หน่วยที่"} mainText={(data as IUnitData).unitNumber.toString()} color={statusColor} /> : (
+        <TwoLineBadge upperText={"แม่นยำ"} mainText={gradeLabel} color={gradeColor} />
       )}
 
       <Stack direction={"column"} justifyContent={"space-between"} flex={1}>
