@@ -62,8 +62,7 @@ const UnitInfoForm: FC = () => {
           justifyContent="space-between"
           alignItems="start"
         >
-          <HorizontalLine />
-          {isReportDay && <IrregularBar />}
+          {!isReportDay ? <HorizontalLine /> : <IrregularBar />}
           {<VolunteerInfoBar onNavigate={handleNavigateClick} />}
           {<HorizontalLine />}
           {isReportDay && <IrregularInfoBar isReportDay={isReportDay} />}
