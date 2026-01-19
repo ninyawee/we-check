@@ -10,7 +10,6 @@ import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { getWebStateManager } from "@/src/utils/webState";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import ReportLocationLink from "@/src/components/reportLocationLink";
-import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 import LocationHeader from "@/src/components/locationHeader";
 
 const UnitInfoForm: FC = () => {
@@ -21,10 +20,6 @@ const UnitInfoForm: FC = () => {
   const webStateManager = getWebStateManager();
   const isReportDay = webStateManager.isReportDay();
 
-  function handleNavigateClick() {
-    if (selectedLocation)
-        window.open(buildGoogleMapUrl(selectedLocation));
-  }
 
  
 
@@ -63,7 +58,7 @@ const UnitInfoForm: FC = () => {
           alignItems="start"
         >
           {!isReportDay ? <HorizontalLine /> : <IrregularBar />}
-          {<VolunteerInfoBar onNavigate={handleNavigateClick} />}
+          {<VolunteerInfoBar />}
           {<HorizontalLine />}
           {isReportDay && <IrregularInfoBar isReportDay={isReportDay} />}
         </Stack>
