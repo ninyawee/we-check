@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Stack, Button, Typography } from "@mui/material";
+import { Stack, Button } from "@mui/material";
+import UnitButton from "@/src/components/unitButton";
 import { useLocationStore } from "@/src/store/location.store";
 import { useUnitDataStore } from "@/src/store/UnitData.store";
 import LocationHeader from "@/src/components/locationHeader";
@@ -99,37 +100,8 @@ const LocationUnitsList: FC = () => {
           )}
           <Stack direction="column" spacing={1} alignItems="stretch">
             {keys.map((k, idx) => {
-              const p = parseUnitKey(k);
-              const rightLabel = `เขตเลือกตั้ง ${p.divisionNumber}`;
               const statusKey = statuses[idx] || "";
-              const color = statusKey ? (STATUS_COLORS as any)[statusKey] : STATUS_COLORS.missing;
-              return (
-                <Button
-                  key={k}
-                  variant="outlined"
-                  size="large"
-                  fullWidth
-                  onClick={() => handleSelectUnit(k)}
-                  sx={{
-                    justifyContent: "space-between",
-                    textTransform: "none",
-                    borderColor: color || undefined,
-                    color: "inherit",
-                    py: 1.5,
-                    px: 2,
-                    minHeight: 50,
-                    '&:hover': { borderColor: color || undefined },
-                  }}
-                >
-                  <Stack direction="row" width="100%" justifyContent="space-between" alignItems="center">
-                    <Stack direction="row" alignItems="center" spacing={2}>
-                      <Typography fontSize="1.1rem" sx={{ textAlign: "center" }}>{`หน่วย ${p.unitNumber}`}</Typography>
-                      <Typography component="span" fontSize="1.15rem" sx={{ textAlign: "left", fontWeight: 500, color: color || 'inherit' }}>{p.unitName}</Typography>
-                    </Stack>
-                    <Typography fontSize="0.95rem" sx={{ color: "#8c8fa1ff" }}>{rightLabel}</Typography>
-                  </Stack>
-                </Button>
-              );
+              return <UnitButton key={k} unitKey={k} statusKey={statusKey} onSelect={handleSelectUnit} />;
             })}
           </Stack>
           <HorizontalLine />
