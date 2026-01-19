@@ -4,18 +4,22 @@ import IrregularEvent from "./irregularEvent";
 import HorizontalLine from "../../horizontalLine";
 import { NearMe } from "@mui/icons-material";
 import { useLocationStore } from "@/src/store/location.store";
+import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 
 const IrregularInfoDialog: FC<{
   open: boolean,
   onClose: () => void
 }> = ({ open, onClose }) => {
+  const { selectedUnitData } = useUnitDataStore()
   const { selectedLocation } = useLocationStore()
 
   function handleNavigateClick() {
-    window.open(selectedLocation?.googleMapUrl)
+     if (selectedLocation)
+          window.open(buildGoogleMapUrl(selectedLocation));
   }
 
-  const incidentList = (selectedLocation?.incidentStr?.split(',') ?? []).filter(v => v.trim() !== '')
+  const incidentList = (selectedUnitData?.incidentStr?.split(',') ?? []).filter(v => v.trim() !== '')
 
   return <Dialog
     fullWidth
@@ -28,7 +32,7 @@ const IrregularInfoDialog: FC<{
           <Stack direction="column" position={"relative"} padding="1rem" maxWidth={"70%"}>
             <Typography color="error" fontSize={"1.6rem"} fontWeight={"bold"}>ความผิดปกติ</Typography>
             <Typography color="white" fontSize={"0.9rem"}>
-              {`${selectedLocation?.provinceName} เขต ${selectedLocation?.divisionNumber} หน่วย ${selectedLocation?.unitNumber}`}</Typography>
+              {`${selectedUnitData?.provinceName} เขต ${selectedUnitData?.divisionNumber} หน่วย ${selectedUnitData?.unitNumber}`}</Typography>
           </Stack>
           <div style={{
             width: '8rem',

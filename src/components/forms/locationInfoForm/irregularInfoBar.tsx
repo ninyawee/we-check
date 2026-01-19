@@ -1,9 +1,9 @@
-import { useLocationStore } from "@/src/store/location.store";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { Stack, Typography } from "@mui/material";
 import { FC, Fragment, useLayoutEffect, useRef, useState } from "react";
 
 const IrregularInfoBar: FC<{ isReportDay?: boolean }> = ({ isReportDay = true }) => {
-  const { selectedLocation } = useLocationStore();
+  const { selectedUnitData } = useUnitDataStore();
   const timePassIntervalRef = useRef<any>()
   const [timePassText, setTimePassText] = useState<string[]>([])
 
@@ -17,7 +17,7 @@ const IrregularInfoBar: FC<{ isReportDay?: boolean }> = ({ isReportDay = true })
 
   function updateTimePass() {
     const currentTime = new Date()
-    const lastObservedDate = selectedLocation?.lastObservedTime ? new Date(selectedLocation?.lastObservedTime) : new Date()
+    const lastObservedDate = selectedUnitData?.lastObservedTime ? new Date(selectedUnitData?.lastObservedTime) : new Date()
     const timeDiffMs = currentTime.getTime() - lastObservedDate.getTime()
     const timeDiffMinute = Math.trunc(timeDiffMs / (60 * 1000))
     if (timeDiffMinute >= 60) {
@@ -31,12 +31,12 @@ const IrregularInfoBar: FC<{ isReportDay?: boolean }> = ({ isReportDay = true })
   return <Stack direction="row" fontSize={"0.5rem"} color="white" justifyContent={'center'} width={"100%"}>
     <Typography component={'span'} padding="0.5rem 1rem">
       การรายงาน:
-      {selectedLocation?.isObservationValid ? <Typography component={'span'} color="primary">ครบถ้วน</Typography>
+      {selectedUnitData?.isObservationValid ? <Typography component={'span'} color="primary">ครบถ้วน</Typography>
         : <Typography component={'span'} color="error">&ensp;ไม่ครบถ้วน&ensp;</Typography>}
       {timePassText?.length === 0 ?
         <Typography component={'span'} color="#A4A4A4">&ensp;กำลังโหลดข้อมูล ...&ensp;</Typography> :
         <Fragment>
-          {selectedLocation?.lastObservedTime ? <>
+          {selectedUnitData?.lastObservedTime ? <>
             <Typography component={'span'} color="#A4A4A4">( ครั้งล่าสุด</Typography>
             <Typography component={'span'} fontWeight={"bold"} color="#A4A4A4">&ensp;{timePassText?.[0]}&ensp;</Typography>
             <Typography component={'span'} color="#A4A4A4">{timePassText?.[1]} )</Typography>

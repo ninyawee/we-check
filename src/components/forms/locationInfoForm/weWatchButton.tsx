@@ -1,16 +1,16 @@
 import { Button } from "@mui/material";
 import { FC } from "react";
 import { useCurrentTime } from "@/src/store/time.store";
-import { useLocationStore } from "@/src/store/location.store";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { useUserProfileStore } from "@/src/store/userProfile.store";
-import { buildWeWatchUrl, validateLocationData } from "@/src/utils/urlBuilder";
+import { buildWeWatchUrl, validateUnitData as validateUnitData } from "@/src/utils/urlBuilder";
 import { useSnackbar } from "notistack";
 
 const WeWatchButton: FC<{
   onClick: () => void
 }> = ({ onClick }) => {
   const currentTime = useCurrentTime()
-  const { selectedLocation } = useLocationStore()
+  const { selectedUnitData } = useUnitDataStore()
   const { profile } = useUserProfileStore()
   const { enqueueSnackbar } = useSnackbar()
 
@@ -20,7 +20,7 @@ const WeWatchButton: FC<{
 
   const handleClick = () => {
     // Validate location data
-    const validation = validateLocationData(selectedLocation)
+    const validation = validateUnitData(selectedUnitData)
     if (!validation.valid) {
       enqueueSnackbar(validation.message || "ข้อมูลหน่วยเลือกตั้งไม่ครบถ้วน", { variant: "error" })
       return

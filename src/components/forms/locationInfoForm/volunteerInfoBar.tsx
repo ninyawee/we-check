@@ -1,4 +1,4 @@
-import { useLocationStore } from "@/src/store/location.store";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { ArrowForwardIos, Check, Warning } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
@@ -6,11 +6,11 @@ import { FC } from "react";
 const VolunteerInfoBar: FC<{
   onNavigate: () => void
 }> = ({ onNavigate }) => {
-  const { selectedLocation } = useLocationStore()
+  const { selectedUnitData } = useUnitDataStore()
 
   return <Stack direction="row" width={"100%"} justifyContent={"space-between"} padding={"1rem"}>
     {
-      selectedLocation?.color === 'green' ?
+      selectedUnitData?.status === 'reported' || selectedUnitData?.status === 'counting' ?
         <Stack direction="row" alignItems={"center"}>
           <Check color="primary" sx={{ marginRight: '0.5rem' }} />
           <Typography fontSize={"1rem"}>มีคนติดตามสถานการณ์ที่หน่วยแล้ว</Typography>

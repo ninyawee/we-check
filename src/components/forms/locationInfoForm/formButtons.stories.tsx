@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import FormButtons from "./formButtons";
-import { useTimeStore } from "@/src/store/time.store";
-import { useLocationStore } from "@/src/store/location.store";
-import { useUserProfileStore } from "@/src/store/userProfile.store";
+import { useTimeStore } from "../../../store/time.store";
+import { useLocationStore } from "../../../store/location.store";
+import { useUserProfileStore } from "../../../store/userProfile.store";
 import { useEffect } from "react";
-import { ILocation } from "@/src/interfaces/location.interface";
+import { ILocation } from "../../../interfaces/location.interface";
 
 const meta: Meta<typeof FormButtons> = {
   title: "Forms/FormButtons",
@@ -19,22 +19,17 @@ export default meta;
 type Story = StoryObj<typeof FormButtons>;
 
 const mockLocation: ILocation = {
-  unitId: 12345,
-  unitName: "โรงเรียนทีปังกรวิทยาพัฒน์ (วัดโบสถ์) ถนนสามเสน",
+  locationName: "โรงเรียนทีปังกรวิทยาพัฒน์ (วัดโบสถ์) ถนนสามเสน",
   provinceName: "กรุงเทพมหานคร",
-  divisionNumber: 1,
   districtName: "เขตดุสิต",
   subDistrictName: "ดุสิต",
-  unitNumber: 1,
-  color: "green",
-  isObservationValid: true,
+  locationStatus: "counting",
   latitude: 13.7563,
   longitude: 100.5018,
-  lastObservedTime: "2024-01-20T10:30:00",
-  incidentCount: 0,
-  incidentJson: "",
-  incidentStr: "",
-  googleMapUrl: "https://maps.google.com/?q=13.7563,100.5018",
+  placeId: "ChIJL_P_CXMEDTkRw0ZdG-0GVvw",
+  locationGrade: "A",
+  unitKeyList: "1101,1102,1103",
+  unitStatusList: "reported,reported,reported",
 };
 
 // Decorator to setup stores - sets state synchronously before render

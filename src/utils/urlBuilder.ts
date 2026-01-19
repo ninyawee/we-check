@@ -1,4 +1,5 @@
 import { ILocation } from "../interfaces/location.interface";
+import { IUnitData } from "../interfaces/UnitData.interface";
 import { UserProfile } from "../store/userProfile.store";
 import { getWebStateManager } from "./webState";
 
@@ -34,7 +35,7 @@ function sanitizeParam(value: string | undefined | null, maxLength = MAX_OTHER_G
  */
 export function buildWeWatchUrl(
   profile: UserProfile | null,
-  location: ILocation,
+  unitData: IUnitData,
   currentTime: Date,
 ): string {
   // Use WebState manager to determine if we're in counting time
@@ -86,12 +87,12 @@ export function buildWeWatchUrl(
     }
 
     // Add location data
-    params.append("entry.1289712015", location.provinceName);
-    params.append("entry.1335460006", location.districtName);
-    params.append("entry.531368750", location.subDistrictName);
-    params.append("entry.552451457", String(location.divisionNumber));
-    params.append("entry.1977709354", String(location.unitNumber));
-    params.append("entry.1537099240", location.unitName);
+    params.append("entry.1289712015", unitData.provinceName);
+    params.append("entry.1335460006", unitData.districtName);
+    params.append("entry.531368750", unitData.subDistrictName);
+    params.append("entry.552451457", String(unitData.divisionNumber));
+    params.append("entry.1977709354", String(unitData.unitNumber));
+    params.append("entry.1537099240", unitData.unitName);
     params.append("entry.523403712", timeString);
 
     return `${baseUrl}?${params.toString()}`;
@@ -135,12 +136,12 @@ export function buildWeWatchUrl(
     }
 
     // Add location data
-    params.append("entry.1727758919", location.provinceName);
-    params.append("entry.685831041", location.districtName);
-    params.append("entry.857868804", location.subDistrictName);
-    params.append("entry.1838097284", String(location.divisionNumber));
-    params.append("entry.1378064658", String(location.unitNumber));
-    params.append("entry.510655996", String(location.unitName));
+    params.append("entry.1727758919", unitData.provinceName);
+    params.append("entry.685831041", unitData.districtName);
+    params.append("entry.857868804", unitData.subDistrictName);
+    params.append("entry.1838097284", String(unitData.divisionNumber));
+    params.append("entry.1378064658", String(unitData.unitNumber));
+    params.append("entry.510655996", String(unitData.unitName));
     params.append("entry.1684477210", timeString);
 
     return `${baseUrl}?${params.toString()}`;
@@ -151,24 +152,23 @@ export function buildWeWatchUrl(
  * Builds Vote62 custom form URL with proper encoding
  * Format: provinceName--districtName--subDistrictName--provinceName.divisionNumber--unitNumberunitName--
  */
-export function buildVote62Url(location: ILocation): string {
+export function buildVote62Url(unitData: IUnitData): string {
   const baseUrl = "https://www.vote62.com/66/check-in/polling-station/?id=";
 
   // Zero-pad divisionNumber to 2 digits
-  const paddedDivision = String(location.divisionNumber).padStart(2, "0");
-
+  const paddedDivision = String(unitData.divisionNumber).padStart(2, "0");
   // Replace spaces with %20 in unitName
-  const encodedUnitName = location.unitName.replace(/ /g, "%20");
+  const encodedUnitName = unitData.unitName.replace(/ /g, "%20");
 
   // unitNumber does NOT need zero-padding
-  const unitNumber = location.unitNumber;
+  const unitNumber = unitData.unitNumber;
 
   // Build the id parameter
   const id = [
-    location.provinceName,
-    `--${location.districtName}`,
-    `--${location.subDistrictName}`,
-    `--${location.provinceName}.${paddedDivision}`,
+    unitData.provinceName,
+    `--${unitData.districtName}`,
+    `--${unitData.subDistrictName}`,
+    `--${unitData.provinceName}.${paddedDivision}`,
     `--${unitNumber}%20${encodedUnitName}`,
     `--`, // Empty code for now
   ].join("");
@@ -179,25 +179,39 @@ export function buildVote62Url(location: ILocation): string {
 /**
  * Validates if location has all required data for URL building
  */
-export function validateLocationData(location: ILocation | null): {
+export function validateUnitData(unitData: IUnitData | null): {
   valid: boolean;
   message?: string;
 } {
-  if (!location) {
+  if (!unitData) {
     return { valid: false, message: "ไม่พบข้อมูลหน่วยเลือกตั้ง" };
   }
 
   if (
-    !location.provinceName ||
-    !location.districtName ||
-    !location.subDistrictName
+    !unitData.provinceName ||
+    !unitData.districtName ||
+    !unitData.subDistrictName
   ) {
     return { valid: false, message: "ข้อมูลสถานที่ไม่ครบถ้วน" };
   }
 
-  if (!location.unitName || location.unitNumber === undefined) {
+  if (!unitData.unitName || unitData.unitNumber === undefined) {
     return { valid: false, message: "ข้อมูลหน่วยเลือกตั้งไม่ครบถ้วน" };
   }
 
   return { valid: true };
+}
+
+export function buildGoogleMapUrl(location: ILocation): string {
+  const baseUrl = "https://www.google.com/maps/search/?api=1";
+
+  const params = new URLSearchParams({
+    query: `${location.latitude},${location.longitude}`,
+  });
+
+  if (location.placeId && String(location.placeId).trim() !== "") {
+      params.append("query_place_id", String(location.placeId));
+  }
+
+  return `${baseUrl}&${params.toString()}`;
 }

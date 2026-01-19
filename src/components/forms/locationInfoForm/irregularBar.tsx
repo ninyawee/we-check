@@ -2,14 +2,14 @@ import { ArrowForwardIos, Check, Warning } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { FC, Fragment, useState } from "react";
 import IrregularInfoDialog from "../../dialogs/irregularInfoDialog";
-import { useLocationStore } from "@/src/store/location.store";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 import HorizontalLine from "../../horizontalLine";
 
 const IrregularBar: FC = () => {
-  const { selectedLocation } = useLocationStore()
+  const { selectedUnitData } = useUnitDataStore()
   const [showIrregularInfoDialog, setIrregularInfoDialog] = useState<boolean>(false)
 
-  const hasIncident = (selectedLocation?.incidentCount ?? 0) > 0 && (selectedLocation?.incidentStr ?? '') !== ''
+  const hasIncident = (selectedUnitData?.incidentCount ?? 0) > 0 && (selectedUnitData?.incidentStr ?? '') !== ''
 
   return <Fragment>
     <IrregularInfoDialog open={showIrregularInfoDialog} onClose={() => setIrregularInfoDialog(false)} />
@@ -18,7 +18,7 @@ const IrregularBar: FC = () => {
       {hasIncident ?
         < Stack direction="row">
           <Warning sx={{ color: '#F3DD13', marginRight: '0.5rem' }} />
-          <Typography fontSize={"1rem"}>ความผิดปกติ: {(selectedLocation?.incidentCount ?? 0)}</Typography>
+          <Typography fontSize={"1rem"}>ความผิดปกติ: {(selectedUnitData?.incidentCount ?? 0)}</Typography>
         </Stack>
         :
         <Stack direction="row">
