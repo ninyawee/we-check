@@ -6,6 +6,7 @@ import LocationHeader from "@/src/components/locationHeader";
 
 const LocationUnitsList: FC = () => {
   const { selectedLocation } = useLocationStore();
+  const { mockUnitKeys } = useLocationStore();
   const { setSelectedUnitData } = useUnitDataStore();
 
   if (!selectedLocation) return null;
@@ -54,6 +55,16 @@ const LocationUnitsList: FC = () => {
           <Typography fontSize="0.9rem" sx={{ color: "#A4A4A4" }}>
             หน่วยในตำแหน่งนี้
           </Typography>
+          {process.env.NODE_ENV !== "production" && (
+            <Button
+              variant="text"
+              size="small"
+              onClick={() => mockUnitKeys()}
+              sx={{ justifyContent: "flex-start", paddingLeft: 0 }}
+            >
+              Mock units for testing
+            </Button>
+          )}
           {keys.length === 0 && (
             <Typography fontSize="0.9rem" color="#777">
               ไม่มีข้อมูลหน่วย
