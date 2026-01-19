@@ -1,8 +1,8 @@
 import { Button, Tooltip } from "@mui/material";
 import { FC } from "react";
 import { useCurrentTime } from "@/src/store/time.store";
-import { useLocationStore } from "@/src/store/location.store";
-import { buildVote62Url, validateLocationData } from "@/src/utils/urlBuilder";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
+import { validateUnitData } from "@/src/utils/urlBuilder";
 import { useSnackbar } from "notistack";
 import { targetVote62VolunteerCount } from "@/src/config/statusConfig";
 import { getWebStateManager } from "@/src/utils/webState";
@@ -11,10 +11,10 @@ const Vote62Button: FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   const currentTime = useCurrentTime();
-  const { selectedLocation } = useLocationStore();
+  const { selectedUnitData } = useUnitDataStore();
   const { enqueueSnackbar } = useSnackbar();
 
-  const currentVote62Volunteers = selectedLocation?.vote62VolunteerCount ?? 0;
+  const currentVote62Volunteers = selectedUnitData?.vote62VolunteerCount ?? 0;
   const remainingVote62Volunteers = Math.max(
     0,
     targetVote62VolunteerCount - currentVote62Volunteers
@@ -29,7 +29,7 @@ const Vote62Button: FC<{
   const handleClick = () => {
     
     // Validate location data
-    const validation = validateLocationData(selectedLocation);
+    const validation = validateUnitData(selectedUnitData);
     if (!validation.valid) {
       enqueueSnackbar(validation.message || "ข้อมูลหน่วยเลือกตั้งไม่ครบถ้วน", {
         variant: "error",

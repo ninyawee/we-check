@@ -15,3 +15,5 @@ export const useLocationStore = create<ILocationStore>((set, get) => ({
     set({ selectedLocation })
   }
 }))
+
+

@@ -15,15 +15,15 @@ import RegistrationInfo from "@/src/components/dialogs/instructionDialog/registr
 import { GAME_URL } from "@/src/config/externalLinks";
 import ProfileDialog from "../../dialogs/profileDialog";
 import { useUserProfileStore } from "@/src/store/userProfile.store";
-import { useLocationStore } from "@/src/store/location.store";
 import { useCurrentTime } from "@/src/store/time.store";
 import { buildWeWatchUrl, buildVote62Url } from "@/src/utils/urlBuilder";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 
 type FormType = "wewatch" | "vote62";
 
 const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
   const { hasProfile, hasAnyProfile } = useUserProfileStore();
-  const { selectedLocation } = useLocationStore();
+  const { selectedUnitData } = useUnitDataStore();
   const currentTime = useCurrentTime();
 
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
@@ -32,7 +32,7 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
   const [pendingFormType, setPendingFormType] = useState<FormType | null>(null);
 
   const openExternalForm = (formType: FormType, withProfile: boolean) => {
-    if (!selectedLocation) return;
+    if (!selectedUnitData) return;
 
     // Get fresh profile from store to ensure we have the latest data
     const currentProfile = useUserProfileStore.getState().profile;
@@ -42,12 +42,12 @@ const FormButtons: FC<{ isReportDay: boolean }> = ({ isReportDay }) => {
     if (formType === "wewatch") {
       url = buildWeWatchUrl(
         withProfile ? currentProfile : null,
-        selectedLocation,
+        selectedUnitData,
         currentTime,
       );
     } else {
       // Vote62 doesn't use profile data
-      url = buildVote62Url(selectedLocation);
+      url = buildVote62Url(selectedUnitData);
     }
 
     window.open(url, "_blank");

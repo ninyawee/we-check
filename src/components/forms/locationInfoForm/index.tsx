@@ -6,11 +6,14 @@ import IrregularInfoBar from "./irregularInfoBar";
 import IrregularBar from "./irregularBar";
 import FormButtons from "./formButtons";
 import { useLocationStore } from "@/src/store/location.store";
+import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { getWebStateManager } from "@/src/utils/webState";
 import { ArrowForwardIos } from "@mui/icons-material";
 import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
+import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 
 const LocationInfoForm: FC = () => {
+  const { selectedUnitData } = useUnitDataStore();
   const { selectedLocation } = useLocationStore();
 
   // Use WebState manager to check if it's a report day
@@ -27,7 +30,8 @@ const LocationInfoForm: FC = () => {
   }
 
   function handleNavigateClick() {
-    window.open(selectedLocation?.googleMapUrl);
+    if (selectedLocation)
+        window.open(buildGoogleMapUrl(selectedLocation));
   }
 
   function reportLocationClick(): void {
@@ -88,10 +92,10 @@ const LocationInfoForm: FC = () => {
                   fontSize={"1.125rem"}
                   sx={{ wordWrap: "break-word", color: "#FFFFFF" }}
                 >
-                  {selectedLocation?.unitName}
-                  {((selectedLocation?.year &&
-                    Number(selectedLocation.year) !== new Date().getFullYear()) ||
-                    !selectedLocation?.year) && (
+                  {selectedUnitData?.unitName}
+                  {((selectedUnitData?.year &&
+                    Number(selectedUnitData.year) !== new Date().getFullYear()) ||
+                    !selectedUnitData?.year) && (
                     <Typography
                       component="span"
                       fontSize={"0.7rem"}
@@ -105,8 +109,8 @@ const LocationInfoForm: FC = () => {
                         verticalAlign: 'middle'
                       }}
                     >
-                      {selectedLocation?.year
-                        ? `ข้อมูลเก่าปี ${selectedLocation.year}`
+                      {selectedUnitData?.year
+                        ? `ข้อมูลเก่าปี ${selectedUnitData.year}`
                         : "ข้อมูลเก่า"}
                     </Typography>
                   )}
@@ -114,7 +118,7 @@ const LocationInfoForm: FC = () => {
               </Stack>
               <Stack direction={"row"} marginBottom={"0.875rem"}>
                 <Typography fontSize={"0.8rem"} color="#A4A4A4">
-                  {`หน่วย ${selectedLocation?.unitNumber} ${selectedLocation?.subDistrictName} เขต ${selectedLocation?.divisionNumber} ${selectedLocation?.provinceName}`}
+                  {`หน่วย ${selectedUnitData?.unitNumber} ${selectedUnitData?.subDistrictName} เขต ${selectedUnitData?.divisionNumber} ${selectedUnitData?.provinceName}`}
                 </Typography>
               </Stack>
             </Stack>
