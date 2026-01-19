@@ -8,6 +8,7 @@ const LocationUnitsList: FC = () => {
   const { selectedLocation } = useLocationStore();
   const { mockUnitKeys } = useLocationStore();
   const { setSelectedUnitData } = useUnitDataStore();
+  const { setOpenUnitInfoForm } = useUnitDataStore();
 
   if (!selectedLocation) return null;
 
@@ -36,6 +37,8 @@ const LocationUnitsList: FC = () => {
     } as any;
 
     setSelectedUnitData(unitData);
+    // open the unit info form on top of the location list
+    setOpenUnitInfoForm(true);
   }
 
   return (

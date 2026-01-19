@@ -1,4 +1,4 @@
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography, Box, IconButton } from "@mui/material";
 import { FC, Fragment } from "react";
 import VolunteerInfoBar from "./volunteerInfoBar";
 import HorizontalLine from "../../horizontalLine";
@@ -8,27 +8,18 @@ import FormButtons from "./formButtons";
 import { useLocationStore } from "@/src/store/location.store";
 import { useUnitDataStore } from "@/src/store/UnitData.store";
 import { getWebStateManager } from "@/src/utils/webState";
-import { ArrowForwardIos } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowBackIosNew } from "@mui/icons-material";
 import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
 import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 import LocationHeader from "@/src/components/locationHeader";
 
 const UnitInfoForm: FC = () => {
-  const { selectedUnitData } = useUnitDataStore();
+  const { selectedUnitData, setSelectedUnitData, setOpenUnitInfoForm } = useUnitDataStore();
   const { selectedLocation } = useLocationStore();
 
   // Use WebState manager to check if it's a report day
   const webStateManager = getWebStateManager();
   const isReportDay = webStateManager.isReportDay();
-
-  // Map locationGrade (which may contain letters) to a short Thai label and colors
-  const rawGrade = (selectedLocation?.locationGrade || "D").toString();
-  let gradeLabel = "ต่ำ"; 
-  let gradeColor = "#cf9100ff"; 
-  if (rawGrade.includes("A")) {
-    gradeLabel = "สูง"; // short Thai for excellent
-    gradeColor = "#30a766ff"; // green
-  }
 
   function handleNavigateClick() {
     if (selectedLocation)
@@ -53,9 +44,19 @@ const UnitInfoForm: FC = () => {
           padding={"1rem"}
           position={"relative"}
         >
-          {selectedUnitData && (
-            <LocationHeader data={selectedUnitData}/>
-          )}
+          <Stack direction="row" alignItems="center">
+            <IconButton
+              onClick={() => {
+                // close unit form and clear selection to go back to unit list
+                setOpenUnitInfoForm(false);
+                setSelectedUnitData(null as any);
+              }}
+              sx={{ color: "#A4A4A4", marginRight: "0.5rem" }}
+            >
+              <ArrowBackIosNew />
+            </IconButton>
+            {selectedUnitData && <LocationHeader data={selectedUnitData} showAccuracy={false} />}
+          </Stack>
           {/* badge moved into the left header (before unit name) */}
         </Stack>
         <Stack
