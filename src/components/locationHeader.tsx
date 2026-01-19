@@ -6,9 +6,10 @@ import { ILocation } from "@/src/interfaces/location.interface";
 type Props = {
   data?: IUnitData | ILocation;
   locationGrade?: string;
+  showAccuracy?: boolean;
 };
 
-const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
+const LocationHeader: FC<Props> = ({ data, locationGrade, showAccuracy }) => {
   if (!data) return null;
 
   const isUnitData = (d: any): d is IUnitData => d && typeof d.unitName === "string";
@@ -34,59 +35,40 @@ const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
 
   return (
     <Stack direction={"row"} alignItems={"flex-start"} maxWidth={"80%"}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#000000",
-          color: "#000",
-          width: "3.5rem",
-          height: "3.5rem",
-          borderRadius: "0.5rem",
-          padding: "0.25rem",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-          border: `1px solid ${gradeColor}`,
-          marginRight: "0.75rem",
-        }}
-      >
-          {isUnitData(data) ? (
-          <>
-            <Typography
-              fontSize={"0.75rem"}
-              fontWeight={200}
-              sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
-            >
-              แม่นยำ
-            </Typography>
-            <Typography
-              fontSize={"1.25rem"}
-              fontWeight={700}
-              sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
-            >
-              {gradeLabel}
-            </Typography>
-          </>
-        ) : (
-          <>
-            <Typography
-              fontSize={"0.75rem"}
-              fontWeight={200}
-              sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
-            >
-              แม่นยำ
-            </Typography>
-            <Typography
-              fontSize={"1.25rem"}
-              fontWeight={700}
-              sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
-            >
-              {gradeLabel}
-            </Typography>
-          </>
-        )}
-      </Box>
+      {showAccuracy === false ? null : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#000000",
+            color: "#000",
+            width: "3.5rem",
+            height: "3.5rem",
+            borderRadius: "0.5rem",
+            padding: "0.25rem",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+            border: `1px solid ${gradeColor}`,
+            marginRight: "0.75rem",
+          }}
+        >
+          <Typography
+            fontSize={"0.75rem"}
+            fontWeight={200}
+            sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
+          >
+            แม่นยำ
+          </Typography>
+          <Typography
+            fontSize={"1.25rem"}
+            fontWeight={700}
+            sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
+          >
+            {gradeLabel}
+          </Typography>
+        </Box>
+      )}
 
       <Stack direction={"column"} justifyContent={"space-between"} flex={1}>
         <Stack direction={"row"} alignItems={"center"}>
