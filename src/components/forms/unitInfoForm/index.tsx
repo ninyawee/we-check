@@ -54,7 +54,7 @@ const UnitInfoForm: FC = () => {
           position={"relative"}
         >
           {selectedUnitData && (
-            <LocationHeader data={selectedUnitData} locationGrade={selectedLocation?.locationGrade} />
+            <LocationHeader data={selectedUnitData}/>
           )}
           {/* badge moved into the left header (before unit name) */}
         </Stack>
