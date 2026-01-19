@@ -6,36 +6,31 @@ import { ILocation } from "@/src/interfaces/location.interface";
 type Props = {
   data?: IUnitData | ILocation;
   locationGrade?: string;
-  showAccuracy?: boolean;
 };
 
-const LocationHeader: FC<Props> = ({ data, locationGrade, showAccuracy }) => {
+const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
   if (!data) return null;
 
-  const isUnitData = (d: any): d is IUnitData => d && typeof d.unitName === "string";
-
-  const rawGrade = (
-    (isUnitData(data) ? locationGrade : (data as ILocation).locationGrade) || "D"
-  ).toString();
-
+  const isUnitData = locationGrade === undefined;
+  
   let gradeLabel = "ต่ำ";
   let gradeColor = "#cf9100ff";
-  if (rawGrade.includes("A")) {
+  if (locationGrade?.includes("A")) {
     gradeLabel = "สูง";
     gradeColor = "#30a766ff";
   }
 
-  const name = isUnitData(data) ? data.unitName : (data as ILocation).locationName;
-  const year = isUnitData(data) ? (data as IUnitData).year : undefined;
-  const showOldBadge = isUnitData(data) && ((year && Number(year) !== new Date().getFullYear()) || !year);
+  const name = isUnitData ? (data as IUnitData).unitName : (data as ILocation).locationName;
+  const year = isUnitData ? (data as IUnitData).year : undefined;
+  const showOldBadge = isUnitData && ((year && Number(year) !== new Date().getFullYear()) || !year);
 
-  const address = isUnitData(data)
-    ? `หน่วย ${data.unitNumber} ${data.subDistrictName} เขต ${data.divisionNumber} ${data.provinceName}`
-    : `${(data as ILocation).subDistrictName} ${(data as ILocation).provinceName}`;
+  const address = isUnitData
+    ? `หน่วย ${(data as IUnitData).unitNumber} ${(data as IUnitData).subDistrictName} เขต ${(data as IUnitData).divisionNumber} ${(data as IUnitData).districtName} ${(data as IUnitData).provinceName}`
+    : `${(data as ILocation).subDistrictName} ${(data as ILocation).districtName} ${(data as ILocation).provinceName}`;
 
   return (
     <Stack direction={"row"} alignItems={"flex-start"} maxWidth={"80%"}>
-      {showAccuracy === false ? null : (
+      {isUnitData === true ? null : (
         <Box
           sx={{
             display: "flex",
