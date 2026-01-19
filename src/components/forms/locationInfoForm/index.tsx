@@ -11,6 +11,7 @@ import { getWebStateManager } from "@/src/utils/webState";
 import { ArrowForwardIos } from "@mui/icons-material";
 import { REPORT_LOCATION_URL } from "@/src/config/externalLinks";
 import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
+import LocationHeader from "@/src/components/locationHeader";
 
 const LocationInfoForm: FC = () => {
   const { selectedUnitData } = useUnitDataStore();
@@ -52,77 +53,9 @@ const LocationInfoForm: FC = () => {
           padding={"1rem"}
           position={"relative"}
         >
-          <Stack direction={"row"} alignItems={"flex-start"} maxWidth={"80%"}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "#000000",
-                color: "#000",
-                width: "3.5rem",
-                height: "3.5rem",
-                borderRadius: "0.5rem",
-                padding: "0.25rem",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                border: `1px solid ${gradeColor}`,
-                marginRight: "0.75rem",
-              }}
-            >
-              <Typography
-                fontSize={"0.75rem"}
-                fontWeight={200}
-                sx={{ lineHeight: 1, textAlign: "center", color: gradeColor }}
-              >
-                แม่นยำ
-              </Typography>
-              <Typography
-                fontSize={"1.25rem"}
-                fontWeight={700}
-                sx={{ lineHeight: 1, marginTop: "0.3rem", textAlign: "center", color: gradeColor }}
-              >
-                {gradeLabel}
-              </Typography>
-            </Box>
-
-            <Stack direction={"column"} justifyContent={"space-between"} flex={1}>
-              <Stack direction={"row"} alignItems={"center"}>
-                <Typography
-                  fontSize={"1.125rem"}
-                  sx={{ wordWrap: "break-word", color: "#FFFFFF" }}
-                >
-                  {selectedUnitData?.unitName}
-                  {((selectedUnitData?.year &&
-                    Number(selectedUnitData.year) !== new Date().getFullYear()) ||
-                    !selectedUnitData?.year) && (
-                    <Typography
-                      component="span"
-                      fontSize={"0.7rem"}
-                      sx={{
-                        backgroundColor: "#424242",
-                        color: "#FFF",
-                        padding: "0.125rem 0.5rem",
-                        borderRadius: "0.5rem",
-                        marginLeft: "0.5rem",
-                        display: "inline-block",
-                        verticalAlign: 'middle'
-                      }}
-                    >
-                      {selectedUnitData?.year
-                        ? `ข้อมูลเก่าปี ${selectedUnitData.year}`
-                        : "ข้อมูลเก่า"}
-                    </Typography>
-                  )}
-                </Typography>
-              </Stack>
-              <Stack direction={"row"} marginBottom={"0.875rem"}>
-                <Typography fontSize={"0.8rem"} color="#A4A4A4">
-                  {`หน่วย ${selectedUnitData?.unitNumber} ${selectedUnitData?.subDistrictName} เขต ${selectedUnitData?.divisionNumber} ${selectedUnitData?.provinceName}`}
-                </Typography>
-              </Stack>
-            </Stack>
-          </Stack>
+          {selectedUnitData && (
+            <LocationHeader data={selectedUnitData} locationGrade={selectedLocation?.locationGrade} />
+          )}
           {/* badge moved into the left header (before unit name) */}
         </Stack>
         <Stack
