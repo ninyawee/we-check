@@ -20,6 +20,8 @@ const LocationUnitsList: FC = () => {
   const keys = (selectedLocation.unitKeyList || "").split(",").map((k) => k.trim()).filter(Boolean);
   const statuses = (selectedLocation.unitStatusList || "").split(",").map((s) => s.trim()).filter(Boolean);
   const missingCount = statuses.filter((s) => s === "missing").length;
+  const needsRepeatCount = statuses.filter((s) => s === "needsRepeat").length;
+  const invalidCount = missingCount + needsRepeatCount;
   
   // Parse a unit key of the form:
   // province_divisionNumber_district_subDistrict_unitNumber_unitName
@@ -84,7 +86,7 @@ const LocationUnitsList: FC = () => {
           <LocationHeader data={selectedLocation} locationGrade={selectedLocation.locationGrade} />
         </Stack>
         <HorizontalLine />
-          {<VolunteerInfoBar />}
+          {<VolunteerInfoBar extraText={ invalidCount == 0 ? undefined : `( ${invalidCount} หน่วย )`}/>}
         <HorizontalLine />
 
         <Stack direction="column" spacing={1} padding="1rem">

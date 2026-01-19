@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { Stack, Button, Typography } from "@mui/material";
-import { Check, Warning } from "@mui/icons-material";
+import { Check, Warning, ArrowForwardIos } from "@mui/icons-material";
 import STATUS_COLORS from "@/src/config/statusColors";
 
 type Props = {
   unitKey: string;
   statusKey?: string;
   onSelect?: (key: string) => void;
+  showIosArrow?: boolean;
 };
 
 const parseUnitKey = (key: string) => {
@@ -27,7 +28,7 @@ const parseUnitKey = (key: string) => {
   return { provinceName: parts[0] || "", divisionNumber: 0, districtName: "", subDistrictName: "", unitNumber, unitName };
 };
 
-const UnitButton: FC<Props> = ({ unitKey, statusKey = "", onSelect }) => {
+const UnitButton: FC<Props> = ({ unitKey, statusKey = "", onSelect}) => {
   const p = parseUnitKey(unitKey);
   if (statusKey == "")
     statusKey = "missing";
@@ -57,9 +58,10 @@ const UnitButton: FC<Props> = ({ unitKey, statusKey = "", onSelect }) => {
         <Stack direction="row" alignItems="center" spacing={0.75}>
           {showWarning && <Warning sx={{ color: "#f35e13ff", marginRight: "0.25rem", maxWidth: "1rem" }} />}
           {showCheck && <Check sx={{ color: color || undefined, marginRight: "0.25rem", maxWidth: "1rem" }} />}
-          <Typography fontSize="0.75rem" sx={{ textAlign: "center" }}>{`หน่วย ${p.unitNumber}`}</Typography>
-          <Typography component="span" fontSize="0.9rem" sx={{ textAlign: "left", fontWeight: 500, color: color || 'inherit' }}>{p.unitName}</Typography>
+          <Typography fontSize="0.75rem" color="#A4A4A4" sx={{ textAlign: "center" }}>{`หน่วย ${p.unitNumber}`}</Typography>
+          <Typography component="span" fontSize="0.9rem" sx={{ textAlign: "left", fontWeight: 500, color: "#ffffffff"}}>{p.unitName}</Typography>
         </Stack>
+          <ArrowForwardIos sx={{ verticalAlign: "middle", fontSize: "1rem", color: color || 'inherit' }} />
       </Stack>
     </Button>
   );
