@@ -20,7 +20,7 @@ export const useLocationStore = create<ILocationStore>((set, get) => ({
   mockUnitKeys(keys?: string) {
     const { selectedLocation } = get();
 
-    const defaultKeys = keys ?? [1, 2, 3, 4, 5].map((n) => `${n}`).join(",");
+    const defaultKeys = keys ?? ["อาคารเรียน 017 โรงเรียนบ้านบางนอน โรงเรียนบ้านบางนอน", "อาคารเรียน 018 โรงเรียนบ้านบางนอน", "อาคารเรียน 019 โรงเรียนบ้านบางนอน", "อาคารเรียน 020 โรงเรียนบ้านบางนอน", "อาคารเรียน 021 โรงเรียนบ้านบางนอน"].map((n) => `${n}`).join(",");
 
     if (!selectedLocation) {
       // create a minimal mock ILocation object for testing
