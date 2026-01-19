@@ -28,7 +28,7 @@ const LocationHeader: FC<Props> = ({ data, locationGrade }) => {
   const showOldBadge = isUnitData && ((year && Number(year) !== new Date().getFullYear()) || !year);
 
   const address = isUnitData
-    ? `${(data as IUnitData).subDistrictName} ${(data as IUnitData).districtName} ${(data as IUnitData).provinceName}`
+    ? `เขตเลือกตั้งที่ ${(data as IUnitData).divisionNumber} ${(data as IUnitData).subDistrictName} ${(data as IUnitData).districtName} ${(data as IUnitData).provinceName}`
     : `${(data as ILocation).subDistrictName} ${(data as ILocation).districtName} ${(data as ILocation).provinceName}`;
 
   const statusColor: string = isUnitData
