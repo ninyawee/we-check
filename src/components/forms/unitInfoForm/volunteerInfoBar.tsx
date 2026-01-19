@@ -5,7 +5,7 @@ import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { buildGoogleMapUrl } from "@/src/utils/urlBuilder";
 
-const VolunteerInfoBar: FC = () => {
+const VolunteerInfoBar: FC<{ extraText?: string }> = ({ extraText }) => {
   const { selectedUnitData } = useUnitDataStore();
   const { selectedLocation } = useLocationStore();
 
@@ -18,12 +18,12 @@ const VolunteerInfoBar: FC = () => {
       {selectedUnitData?.status === "reported" || selectedUnitData?.status === "counting" ? (
         <Stack direction="row" alignItems={"center"}>
           <Check color="primary" sx={{ marginRight: "0.5rem" }} />
-          <Typography fontSize={"1rem"}>มีคนติดตามสถานการณ์ที่หน่วยแล้ว</Typography>
+          <Typography fontSize={"1rem"}>{`มีคนสังเกตการณ์แล้ว${extraText ? ' ' + extraText : ''}`}</Typography>
         </Stack>
       ) : (
         <Stack direction="row" alignItems={"center"}>
           <Warning sx={{ color: "#f35e13ff", marginRight: "0.5rem" }} />
-          <Typography fontSize={"1rem"}>ต้องการคนสังเกตการณ์ที่นี่</Typography>
+          <Typography fontSize={"1rem"}>{`ต้องการคนสังเกตการณ์ที่นี่${extraText ? ' ' + extraText : ''}`}</Typography>
         </Stack>
       )}
       <Stack className="clickable" direction="row" alignItems={"center"} color={"#0FAD77"} onClick={handleNavigate}>
