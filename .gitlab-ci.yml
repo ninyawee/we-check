@@ -11,9 +11,11 @@ build_image:
     - when: on_success
   script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
-    - echo "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
-    - docker build -t "$CI_REGISTRY_IMAGE:latest" .
+    - SHORT_SHA=$(echo "$CI_COMMIT_SHA" | cut -c1-8)
+    - BRANCH_OR_TAG=$(if [ -n "$CI_COMMIT_TAG" ]; then echo "$CI_COMMIT_TAG"; else echo "$CI_COMMIT_REF_SLUG"; fi)
+    - echo "$CI_REGISTRY_IMAGE:$BRANCH_OR_TAG-$SHORT_SHA"
+    - docker build -t "$CI_REGISTRY_IMAGE:$BRANCH_OR_TAG-$SHORT_SHA" .
+    - docker build -t "$CI_REGISTRY_IMAGE:$BRANCH_OR_TAG-latest" .
 
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    - docker push "$CI_REGISTRY_IMAGE:latest"
+    - docker push "$CI_REGISTRY_IMAGE:$BRANCH_OR_TAG-$SHORT_SHA"
+    - docker push "$CI_REGISTRY_IMAGE:$BRANCH_OR_TAG-latest"
